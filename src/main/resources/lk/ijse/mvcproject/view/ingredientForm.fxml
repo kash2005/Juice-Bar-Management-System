@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.IngredientFormController">
+   <children>
+      <Text fill="ORANGE" layoutX="83.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ingredient">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <Circle fill="#f4f4f4" layoutX="258.0" layoutY="489.0" opacity="0.37" radius="297.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Pane layoutX="-110.0" layoutY="184.0" prefHeight="605.0" prefWidth="455.0" style="-fx-background-color: #f4f4f4;">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="50.0" layoutX="324.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-customers-100%20(5).png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Ingredient Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="197.0" opacity="0.39" promptText="Ingredient Description" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="287.0" opacity="0.39" promptText="Ingredient Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="467.0" opacity="0.39" promptText="Ingredient Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="377.0" opacity="0.39" promptText="Ingredient Weight" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+      <JFXButton layoutX="350.0" layoutY="505.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="350.0" layoutY="413.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <TableView layoutX="599.0" layoutY="181.0" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+         <columns>
+            <TableColumn prefWidth="75.0" text="Id" />
+            <TableColumn prefWidth="104.0" text="Name" />
+            <TableColumn prefWidth="113.0" text="Address" />
+            <TableColumn prefWidth="100.0" text="Contact" />
+            <TableColumn prefWidth="145.0" text="Email" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="302.0" fitWidth="370.0" layoutX="852.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="783.0" layoutY="76.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1091.0" layoutY="85.0" opacity="0.39" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-search-64.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="1080.0" layoutY="77.0" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

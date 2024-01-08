@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="452.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.LoginPageFormController">
+   <children>
+      <ImageView fitHeight="263.0" fitWidth="311.0" layoutX="472.0" layoutY="-80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+      <Circle fill="ORANGE" layoutX="262.0" layoutY="226.0" radius="226.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="ORANGE" layoutX="237.0" layoutY="226.0" radius="226.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Circle fill="ORANGE" layoutX="213.0" layoutY="226.0" radius="226.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Circle fill="ORANGE" layoutX="193.0" layoutY="226.0" radius="226.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="ORANGE" height="452.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="263.0" />
+      <Text fill="ORANGE" layoutX="578.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drink">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <Text fill="ORANGE" layoutX="578.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Juice">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <Text fill="ORANGE" layoutX="578.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="stay">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <Text fill="ORANGE" layoutX="558.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fresh">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <Label layoutX="146.0" layoutY="71.0" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Book Antiqua" size="34.0" />
+         </font>
+      </Label>
+      <TextField layoutX="98.0" layoutY="174.0" promptText="user name">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="98.0" layoutY="245.0" promptText="password">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <JFXButton fx:id="loginBtn" layoutX="156.0" layoutY="337.0" onAction="#loginBtnOnAction" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: #1a9043;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <Text fill="WHITE" layoutX="193.0" layoutY="308.0" strokeWidth="5.0" style="-fx-stroke-width: 10;" text="forget password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <PasswordField layoutX="98.0" layoutY="245.0" prefHeight="38.0" prefWidth="211.0" promptText="password" />
+      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="271.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-lock-96.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="271.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-unlock-96.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
