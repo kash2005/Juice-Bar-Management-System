@@ -7,121 +7,217 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.DelivaryFormController">
    <children>
-      <Text fill="ORANGE" layoutX="93.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order">
+      <Text fill="ORANGE" layoutX="79.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order">
          <font>
             <Font name="Algerian" size="51.0" />
          </font>
       </Text>
-      <Circle fill="#f4f4f4" layoutX="268.0" layoutY="499.0" opacity="0.37" radius="297.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="5.0" />
-      <Pane layoutX="-100.0" layoutY="194.0" prefHeight="605.0" prefWidth="455.0" style="-fx-background-color: #f4f4f4;">
-         <children>
-            <ImageView fitHeight="60.0" fitWidth="50.0" layoutX="324.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-cart-100%20(1).png" />
-               </image>
-            </ImageView>
-            <TextField layoutX="157.0" layoutY="65.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="157.0" layoutY="134.0" opacity="0.39" promptText="Order Date" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="283.0" layoutY="450.0" opacity="0.39" prefHeight="46.0" prefWidth="124.0" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <ComboBox layoutX="157.0" layoutY="290.0" opacity="0.45" prefHeight="50.0" prefWidth="251.0" promptText="Item Id" style="-fx-background-color: #f4f4f4; -fx-border-color: black;" />
-            <TextField layoutX="157.0" layoutY="530.0" opacity="0.39" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <ComboBox layoutX="157.0" layoutY="210.0" opacity="0.45" prefHeight="50.0" prefWidth="251.0" promptText="Customer Id" style="-fx-background-color: #f4f4f4; -fx-border-color: black;" />
-            <TextField layoutX="157.0" layoutY="370.0" opacity="0.39" promptText="Unit Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-            <Label layoutX="157.0" layoutY="458.0" opacity="0.5" text="Qty On Hand:">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <JFXButton layoutX="355.0" layoutY="479.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text=" Add to Cart" textFill="WHITE">
+      <Label layoutX="822.0" layoutY="676.0" opacity="0.45" text="Delivery Status :">
          <font>
             <Font size="20.0" />
          </font>
-      </JFXButton>
-      <TextField layoutX="777.0" layoutY="86.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+      </Label>
+      <RadioButton layoutX="826.0" layoutY="717.0" mnemonicParsing="false" opacity="0.45" text="Yes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton layoutX="916.0" layoutY="717.0" mnemonicParsing="false" opacity="0.45" text="No">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="636.0" layoutX="6.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
+      <TextField layoutX="21.0" layoutY="230.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1085.0" layoutY="95.0" opacity="0.39" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/icons8-search-64.png" />
-         </image>
-      </ImageView>
-      <TableView layoutX="609.0" layoutY="191.0" prefHeight="397.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <Label layoutX="23.0" layoutY="194.0" opacity="0.45" text="Order Id :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="285.0" layoutY="230.0" opacity="0.39" promptText="Order Date" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="287.0" layoutY="194.0" opacity="0.45" text="Order Date :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="522.0" layoutX="586.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
+      <TableView layoutX="602.0" layoutY="556.0" prefHeight="76.0" prefWidth="514.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
-            <TableColumn prefWidth="72.0" text="Id" />
-            <TableColumn prefWidth="119.0" text="Name" />
+            <TableColumn prefWidth="60.0" text="Code" />
+            <TableColumn prefWidth="108.0" text="Name" />
             <TableColumn prefWidth="103.0" text="Unit Price" />
-            <TableColumn prefWidth="88.0" text="Qty" />
-            <TableColumn prefWidth="155.0" text="Total" />
+            <TableColumn prefWidth="111.0" text="Qty on Hand" />
+            <TableColumn prefWidth="131.0" text="Qty" />
          </columns>
       </TableView>
-      <ImageView fitHeight="302.0" fitWidth="370.0" layoutX="862.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/orange_logo.png" />
-         </image>
-      </ImageView>
-      <TextField layoutX="605.0" layoutY="641.0" opacity="0.39" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;" text="Net Total">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="ORANGE" height="46.0" layoutX="6.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
+      <Label layoutX="208.0" layoutY="144.0" text="Invoice Details" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="ORANGE" height="46.0" layoutX="586.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
+      <Label layoutX="788.0" layoutY="144.0" text="Order Details" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="292.0" opacity="0.45" text="Customer Id :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="285.0" layoutY="328.0" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="607.0" layoutY="601.0" opacity="0.5" text="Net Total  :">
+      <Label layoutX="287.0" layoutY="292.0" opacity="0.45" text="Customer Name :">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="607.0" layoutY="706.0" opacity="0.45" text="Delivery Status :">
+      <TextField layoutX="21.0" layoutY="438.0" opacity="0.39" promptText="Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="23.0" layoutY="402.0" opacity="0.45" text="Total :">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <RadioButton layoutX="611.0" layoutY="747.0" mnemonicParsing="false" opacity="0.45" text="Yes">
+      <TextField layoutX="285.0" layoutY="438.0" opacity="0.39" promptText="Discount" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="701.0" layoutY="747.0" mnemonicParsing="false" opacity="0.45" text="No">
+      </TextField>
+      <Label layoutX="287.0" layoutY="402.0" opacity="0.45" text="Discount :">
          <font>
             <Font size="20.0" />
          </font>
-      </RadioButton>
-      <JFXButton layoutX="782.0" layoutY="737.0" prefHeight="44.0" prefWidth="159.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Delivery Form" textFill="WHITE">
+      </Label>
+      <TextField layoutX="21.0" layoutY="548.0" opacity="0.39" promptText="Sub Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="23.0" layoutY="512.0" opacity="0.45" text="Sub Total :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="285.0" layoutY="548.0" opacity="0.39" promptText="Cash" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="287.0" layoutY="512.0" opacity="0.45" text="Cash :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="21.0" layoutY="652.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Balance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="23.0" layoutY="616.0" opacity="0.45" text="Balance :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="292.0" layoutY="716.0" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Purchase" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
          </font>
       </JFXButton>
+      <JFXButton layoutX="428.0" layoutY="716.0" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Return" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="604.0" layoutY="195.0" opacity="0.45" text="Item Code :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="866.0" layoutY="231.0" opacity="0.39" promptText="Order Date" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="868.0" layoutY="195.0" opacity="0.45" text="Item Description :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="602.0" layoutY="329.0" opacity="0.39" promptText="Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="604.0" layoutY="293.0" opacity="0.45" text="Price :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="866.0" layoutY="329.0" opacity="0.39" promptText="Qty on Hand" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="868.0" layoutY="293.0" opacity="0.45" text="Qty on Hand :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="21.0" layoutY="329.0" opacity="0.39" prefHeight="46.0" prefWidth="251.0" promptText="Select Customer Id" style="-fx-border-color: black;" />
+      <ComboBox layoutX="602.0" layoutY="230.0" opacity="0.39" prefHeight="46.0" prefWidth="251.0" promptText="Select Item Code" style="-fx-border-color: black;" />
+      <TextField layoutX="602.0" layoutY="432.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="604.0" layoutY="396.0" opacity="0.45" text="Getting Qty :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="991.0" layoutY="498.0" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #0B5ED7; -fx-background-radius: 10;" text="Add to Cart" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="995.0" layoutY="703.0" prefHeight="44.0" prefWidth="138.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Delivery Form" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <TextField layoutX="585.0" layoutY="705.0" opacity="0.39" prefHeight="46.0" prefWidth="222.0" promptText="Net Total" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="587.0" layoutY="669.0" opacity="0.45" text="Net Total :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
