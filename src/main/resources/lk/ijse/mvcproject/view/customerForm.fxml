@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.CustomerFormController">
    <children>
       <Text fill="ORANGE" layoutX="73.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer">
@@ -28,50 +27,50 @@
                   <Image url="@../image/icons8-customers-100%20(5).png" />
                </image>
             </ImageView>
-            <TextField layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerId" layoutX="157.0" layoutY="107.0" onAction="#txtIdOnAction" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="197.0" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerNameId" layoutX="157.0" layoutY="197.0" onAction="#txtNameOnAction" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="287.0" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerAddressId" layoutX="157.0" layoutY="287.0" onAction="#txtAddressOnAction" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="467.0" opacity="0.39" promptText="Customer Email" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerContactId" layoutX="157.0" layoutY="467.0" onAction="#txtContactOnAction" opacity="0.39" promptText="Customer Contact" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="377.0" opacity="0.39" promptText="Customer Contact" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerEmailId" layoutX="157.0" layoutY="377.0" onAction="#txtEmailOnAction" opacity="0.39" promptText="Customer Email" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
          </children>
       </Pane>
-      <JFXButton layoutX="340.0" layoutY="495.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="deleteBtn" layoutX="340.0" layoutY="495.0" onAction="#deleteBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="340.0" layoutY="403.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="saveBtn" layoutX="340.0" layoutY="403.0" onAction="#saveBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="589.0" layoutY="171.0" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <TableView fx:id="tblCustomer" layoutX="589.0" layoutY="171.0" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
-            <TableColumn prefWidth="75.0" text="Id" />
-            <TableColumn prefWidth="104.0" text="Name" />
-            <TableColumn prefWidth="113.0" text="Address" />
-            <TableColumn prefWidth="100.0" text="Contact" />
-            <TableColumn prefWidth="145.0" text="Email" />
+            <TableColumn fx:id="tblCustomerId" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="tblCustomerName" prefWidth="104.0" text="Name" />
+            <TableColumn fx:id="tblCustomerAddress" prefWidth="113.0" text="Address" />
+            <TableColumn fx:id="tblCustomerEmail" prefWidth="100.0" text="Email" />
+            <TableColumn fx:id="tblCustomerContact" prefWidth="145.0" text="Contact" />
          </columns>
       </TableView>
       <ImageView fitHeight="302.0" fitWidth="370.0" layoutX="842.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
@@ -79,7 +78,7 @@
             <Image url="@../image/orange_logo.png" />
          </image>
       </ImageView>
-      <TextField layoutX="773.0" layoutY="66.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+      <TextField fx:id="searchId" layoutX="773.0" layoutY="66.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
          <font>
             <Font size="20.0" />
          </font>
