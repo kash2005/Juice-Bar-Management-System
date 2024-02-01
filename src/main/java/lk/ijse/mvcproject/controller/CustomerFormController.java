@@ -73,20 +73,39 @@ public class CustomerFormController implements Initializable {
         String email = customerEmailId.getText();
         String contact = customerContactId.getText();
 
-        try {
-            boolean isSaved = CustomerModel.saveCustomer(id,name,address,email,contact);
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
-                customerId.clear();
-                customerNameId.clear();
-                customerAddressId.clear();
-                customerEmailId.clear();
-                customerContactId.clear();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
+        if (saveBtn.getText().equals("Save")){
+            try {
+                boolean isSaved = CustomerModel.saveCustomer(id,name,address,email,contact);
+                if (isSaved){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
+                    customerId.clear();
+                    customerNameId.clear();
+                    customerAddressId.clear();
+                    customerEmailId.clear();
+                    customerContactId.clear();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        }else if (saveBtn.getText().equals("Update")){
+            try {
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+                CustomerDTO customerDTO = new CustomerDTO(id, name, address, email, contact);
+                boolean isUpdated = CustomerModel.updateCustomer(customerDTO);
+                if (isUpdated){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is updated !");
+                    saveBtn.setText("Save");
+                    saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
+                    clearTextFields();
+                }else {
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is not updated !");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 
@@ -110,6 +129,8 @@ public class CustomerFormController implements Initializable {
         try {
             CustomerDTO customerDTO = CustomerModel.searchCustomer(searchIdText);
             if (customerDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
                 String id = customerDTO.getCustomerId();
                 String name = customerDTO.getName();
                 String address = customerDTO.getAddress();
@@ -124,6 +145,14 @@ public class CustomerFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void clearTextFields(){
+        customerId.clear();
+        customerNameId.clear();
+        customerAddressId.clear();
+        customerEmailId.clear();
+        customerContactId.clear();
     }
 
     @FXML

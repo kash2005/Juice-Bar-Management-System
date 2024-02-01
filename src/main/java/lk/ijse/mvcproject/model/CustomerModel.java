@@ -22,7 +22,6 @@ public class CustomerModel {
                     return "C001";
                 }else {
                     int nextId = Integer.parseInt(lastCustomerId.substring(1))+1;
-                    System.out.println(nextId);
                     return "C" + String.format("%03d",nextId);
                 }
             }
@@ -44,6 +43,21 @@ public class CustomerModel {
         int rowAffected = preparedStatement.executeUpdate();
         boolean isSaved = rowAffected != 0;
         return isSaved;
+    }
+
+    public static boolean updateCustomer(CustomerDTO customerDTO) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "update customer set name = ?,address = ?,email = ?,contact = ? where customerId = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,customerDTO.getName());
+        preparedStatement.setString(2,customerDTO.getAddress());
+        preparedStatement.setString(3,customerDTO.getEmail());
+        preparedStatement.setString(4,customerDTO.getContact());
+        preparedStatement.setString(5,customerDTO.getCustomerId());
+        int rowAffected = preparedStatement.executeUpdate();
+        Boolean isUpdate = rowAffected != 0;
+
+        return isUpdate;
     }
 
     public static CustomerDTO searchCustomer(String id) throws SQLException {
