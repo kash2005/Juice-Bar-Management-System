@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -61,9 +62,28 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void saveBtnOnAction(ActionEvent event) {
+        String id = customerId.getText();
+        String name = customerNameId.getText();
+        String address = customerAddressId.getText();
+        String email = customerEmailId.getText();
+        String contact = customerContactId.getText();
 
+        try {
+            boolean isSaved = CustomerModel.saveCustomer(id,name,address,email,contact);
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
+                customerId.clear();
+                customerNameId.clear();
+                customerAddressId.clear();
+                customerEmailId.clear();
+                customerContactId.clear();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
