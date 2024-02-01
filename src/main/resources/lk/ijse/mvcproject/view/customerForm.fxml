@@ -78,7 +78,7 @@
             <Image url="@../image/orange_logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="searchId" layoutX="773.0" layoutY="66.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+      <TextField fx:id="searchId" layoutX="773.0" layoutY="66.0" onAction="#searchTxtOnAction" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
          <font>
             <Font size="20.0" />
          </font>

@@ -1,6 +1,7 @@
 package lk.ijse.mvcproject.model;
 
 import lk.ijse.mvcproject.db.DbConnection;
+import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.Connection;
@@ -43,5 +44,23 @@ public class CustomerModel {
         int rowAffected = preparedStatement.executeUpdate();
         boolean isSaved = rowAffected != 0;
         return isSaved;
+    }
+
+    public static CustomerDTO searchCustomer(String id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "select * from customer where customerId = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        CustomerDTO customerDTO = null;
+        if (resultSet.next()){
+            String customerId = resultSet.getString("customerId");
+            String name = resultSet.getString("name");
+            String address = resultSet.getString("address");
+            String email = resultSet.getString("email");
+            String contact = resultSet.getString("contact");
+            customerDTO = new CustomerDTO(customerId,name,address,email,contact);
+        }
+        return customerDTO;
     }
 }

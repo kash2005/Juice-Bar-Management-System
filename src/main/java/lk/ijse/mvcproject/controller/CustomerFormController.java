@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.model.CustomerModel;
 
 import java.net.URL;
@@ -30,6 +31,10 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     private TextField customerEmailId;
+
+
+    @FXML
+    private TextField searchId;
 
     @FXML
     private JFXButton deleteBtn;
@@ -97,6 +102,28 @@ public class CustomerFormController implements Initializable {
     public void generateCustomerId() throws SQLException {
         String id = CustomerModel.generateCustomerId();
         customerId.setText(id);
+    }
+
+    @FXML
+    void searchTxtOnAction(ActionEvent event) {
+        String searchIdText = searchId.getText();
+        try {
+            CustomerDTO customerDTO = CustomerModel.searchCustomer(searchIdText);
+            if (customerDTO != null){
+                String id = customerDTO.getCustomerId();
+                String name = customerDTO.getName();
+                String address = customerDTO.getAddress();
+                String email = customerDTO.getEmail();
+                String contact = customerDTO.getContact();
+                customerId.setText(id);
+                customerNameId.setText(name);
+                customerAddressId.setText(address);
+                customerEmailId.setText(email);
+                customerContactId.setText(contact);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
