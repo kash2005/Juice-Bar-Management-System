@@ -53,7 +53,19 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-
+        String searchIdText = itemCode.getText();
+        try {
+            boolean isDeleted = ItemModel.deleteItem(searchIdText);
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !");
+                clearTextFields();
+                generateItemId();
+            }else {
+                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

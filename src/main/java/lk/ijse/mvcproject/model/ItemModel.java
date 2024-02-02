@@ -50,4 +50,9 @@ public class ItemModel {
         }
         return itemDTO;
     }
+
+    public static boolean deleteItem(String id) throws SQLException {
+        String sql = "delete from item where itemId = ?;";
+        return CrudUtil.execute(sql,id);
+    }
 }
