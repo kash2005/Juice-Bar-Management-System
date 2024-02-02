@@ -54,7 +54,7 @@
             </TextField>
          </children>
       </Pane>
-      <JFXButton fx:id="deleteBtn" layoutX="340.0" layoutY="495.0" onAction="#deleteBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="340.0" layoutY="495.0" onAction="#deleteBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

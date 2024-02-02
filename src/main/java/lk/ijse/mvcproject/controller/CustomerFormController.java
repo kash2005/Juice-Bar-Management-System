@@ -1,6 +1,8 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,11 +10,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.mvcproject.dto.CustomerDTO;
+import lk.ijse.mvcproject.dto.tm.CustomerTM;
 import lk.ijse.mvcproject.model.CustomerModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {
@@ -32,40 +37,37 @@ public class CustomerFormController implements Initializable {
     @FXML
     private TextField customerEmailId;
 
-
     @FXML
     private TextField searchId;
-
-    @FXML
-    private JFXButton deleteBtn;
 
     @FXML
     private JFXButton saveBtn;
 
     @FXML
-    private TableView<?> tblCustomer;
+    private TableView<CustomerTM> tblCustomer;
 
     @FXML
-    private TableColumn<?, ?> tblCustomerId;
+    private TableColumn<CustomerTM, String> tblCustomerId;
 
     @FXML
-    private TableColumn<?, ?> tblCustomerName;
+    private TableColumn<CustomerTM, String> tblCustomerName;
 
     @FXML
-    private TableColumn<?, ?> tblCustomerAddress;
+    private TableColumn<CustomerTM, String> tblCustomerAddress;
 
     @FXML
-    private TableColumn<?, ?> tblCustomerEmail;
+    private TableColumn<CustomerTM, String> tblCustomerEmail;
 
     @FXML
-    private TableColumn<?, ?> tblCustomerContact;
+    private TableColumn<CustomerTM, String> tblCustomerContact;
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-        String id = searchId.getText();
+        String id = customerId.getText();
         try {
             boolean isDeleted = CustomerModel.deleteCustomer(id);
             if (isDeleted){
+                System.out.println(id);
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer is deleted !");
                 clearTextFields();
                 generateCustomerId();
@@ -87,7 +89,8 @@ public class CustomerFormController implements Initializable {
 
         if (saveBtn.getText().equals("Save")){
             try {
-                boolean isSaved = CustomerModel.saveCustomer(id,name,address,email,contact);
+                CustomerDTO customerDTO = new CustomerDTO(id,name,address,email,contact);
+                boolean isSaved = CustomerModel.saveCustomer(customerDTO);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
                     clearTextFields();
@@ -123,6 +126,8 @@ public class CustomerFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             generateCustomerId();
+            setValueFactory();
+            getAll();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -164,6 +169,33 @@ public class CustomerFormController implements Initializable {
         customerAddressId.clear();
         customerEmailId.clear();
         customerContactId.clear();
+    }
+
+    void getAll(){
+        ObservableList<CustomerTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<CustomerDTO> all = CustomerModel.getAll();
+            for (CustomerDTO customerDTO:all) {
+                observableList.add(new CustomerTM(
+                    customerDTO.getCustomerId(),
+                    customerDTO.getName(),
+                    customerDTO.getAddress(),
+                    customerDTO.getEmail(),
+                    customerDTO.getContact()
+                ));
+            }
+            tblCustomer.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void setValueFactory(){
+        tblCustomerId.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("customerId"));
+        tblCustomerName.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("name"));
+        tblCustomerAddress.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("address"));
+        tblCustomerEmail.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("email"));
+        tblCustomerContact.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("contact"));
     }
 
     @FXML

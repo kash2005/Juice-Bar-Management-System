@@ -8,14 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CustomerModel {
     public static String generateCustomerId() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
         String sql = "select max(customerId) as lastCustomerId from customer";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = CrudUtil.execute(sql);
             if (resultSet.next()){
                 String lastCustomerId = resultSet.getString("lastCustomerId");
                 if (lastCustomerId == null){
@@ -31,41 +30,24 @@ public class CustomerModel {
         return null;
     }
 
-    public static boolean saveCustomer(String id,String name,String address,String email,String contact) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public static boolean saveCustomer(CustomerDTO customerDTO) throws SQLException {
         String sql = "insert into customer(customerId,name,address,email,contact) values (?,?,?,?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,id);
-        preparedStatement.setString(2,name);
-        preparedStatement.setString(3,address);
-        preparedStatement.setString(4,email);
-        preparedStatement.setString(5,contact);
-        int rowAffected = preparedStatement.executeUpdate();
-        boolean isSaved = rowAffected != 0;
-        return isSaved;
+        return CrudUtil.execute(sql,customerDTO.getCustomerId(),customerDTO.getName(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getContact());
     }
 
     public static boolean updateCustomer(CustomerDTO customerDTO) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
         String sql = "update customer set name = ?,address = ?,email = ?,contact = ? where customerId = ?;";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,customerDTO.getName());
-        preparedStatement.setString(2,customerDTO.getAddress());
-        preparedStatement.setString(3,customerDTO.getEmail());
-        preparedStatement.setString(4,customerDTO.getContact());
-        preparedStatement.setString(5,customerDTO.getCustomerId());
-        int rowAffected = preparedStatement.executeUpdate();
-        Boolean isUpdate = rowAffected != 0;
-
-        return isUpdate;
+        System.out.println(customerDTO.getCustomerId());
+        System.out.println(customerDTO.getName());
+        System.out.println(customerDTO.getAddress());
+        System.out.println(customerDTO.getEmail());
+        System.out.println(customerDTO.getContact());
+        return CrudUtil.execute(sql,customerDTO.getName(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getContact(),customerDTO.getCustomerId());
     }
 
     public static CustomerDTO searchCustomer(String id) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
         String sql = "select * from customer where customerId = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,id);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = CrudUtil.execute(sql,id);
         CustomerDTO customerDTO = null;
         if (resultSet.next()){
             String customerId = resultSet.getString("customerId");
@@ -79,12 +61,24 @@ public class CustomerModel {
     }
 
     public static boolean deleteCustomer(String id) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
         String sql = "delete from customer where customerId = ?;";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,id);
-        int rowAffected = preparedStatement.executeUpdate();
-        boolean isDelete = rowAffected != 0;
-        return isDelete;
+        return CrudUtil.execute(sql,id);
+    }
+
+    public static ArrayList<CustomerDTO> getAll() throws SQLException {
+        String sql = "select * from customer;";
+        ArrayList<CustomerDTO> customerDTOArrayList = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute(sql);
+        while (resultSet.next()){
+            CustomerDTO customerDTO = new CustomerDTO(
+                    resultSet.getString("customerId"),
+                    resultSet.getString("name"),
+                    resultSet.getString("address"),
+                    resultSet.getString("email"),
+                    resultSet.getString("contact")
+            );
+            customerDTOArrayList.add(customerDTO);
+        }
+        return customerDTOArrayList;
     }
 }
