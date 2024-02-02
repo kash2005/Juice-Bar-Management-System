@@ -1,6 +1,7 @@
 package lk.ijse.mvcproject.model;
 
 import lk.ijse.mvcproject.dto.ItemDTO;
+import lk.ijse.mvcproject.dto.UserDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -29,5 +30,24 @@ public class ItemModel {
     public static boolean saveItem(ItemDTO itemDTO) throws SQLException {
         String sql = "insert into item(itemId,description,qty,price) values(?,?,?,?);";
         return CrudUtil.execute(sql,itemDTO.getItemId(),itemDTO.getDescription(),itemDTO.getQty(),itemDTO.getPrice());
+    }
+
+    public static boolean updateItem(ItemDTO itemDTO) throws SQLException {
+        String sql = "update item set description = ?,qty = ?,price = ? where itemId = ?;";
+        return CrudUtil.execute(sql,itemDTO.getDescription(),itemDTO.getQty(),itemDTO.getPrice(),itemDTO.getItemId());
+    }
+
+    public static ItemDTO searchItem(String id) throws SQLException {
+        String sql = "select * from item where itemId = ?";
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        ItemDTO itemDTO = null;
+        if (resultSet.next()){
+            String itemId = resultSet.getString("itemId");
+            String description = resultSet.getString("description");
+            int qty = resultSet.getInt("qty");
+            double price = resultSet.getDouble("price");
+            itemDTO = new ItemDTO(itemId,description,qty,price);
+        }
+        return itemDTO;
     }
 }
