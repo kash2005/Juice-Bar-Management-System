@@ -1,6 +1,8 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,30 +10,32 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.ItemDTO;
-import lk.ijse.mvcproject.dto.UserDTO;
+import lk.ijse.mvcproject.dto.tm.ItemTM;
 import lk.ijse.mvcproject.model.ItemModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ItemFormController implements Initializable {
     @FXML
-    private TableView<?> tblItem;
+    private TableView<ItemTM> tblItem;
 
     @FXML
-    private TableColumn<?, ?> tblItemCode;
+    private TableColumn<String, ItemTM> tblItemCode;
 
     @FXML
-    private TableColumn<?, ?> tblItemDescription;
+    private TableColumn<String, ItemTM> tblItemDescription;
 
     @FXML
-    private TableColumn<?, ?> tblItemQty;
+    private TableColumn<String, ItemTM> tblItemQty;
 
     @FXML
-    private TableColumn<?, ?> tblItemPerPrice;
+    private TableColumn<String, ItemTM> tblItemPerPrice;
 
     @FXML
     private JFXButton saveBtn;
@@ -97,6 +101,7 @@ public class ItemFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Item is saved !");
                     clearTextFields();
                     generateItemId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Item is not saved !");
                 }
@@ -115,6 +120,7 @@ public class ItemFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"item is updated !");
                     clearTextFields();
                     generateItemId();
+                    getAll();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -176,6 +182,33 @@ public class ItemFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateItemId();
+        setValueFactory();
+        getAll();
+    }
+
+    private void getAll() {
+        ObservableList<ItemTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<ItemDTO> all = ItemModel.getAll();
+            for (ItemDTO itemDTO:all) {
+                observableList.add(new ItemTM(
+                        itemDTO.getItemId(),
+                        itemDTO.getDescription(),
+                        itemDTO.getQty(),
+                        itemDTO.getPrice()
+                ));
+            }
+            tblItem.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setValueFactory() {
+        tblItemCode.setCellValueFactory(new PropertyValueFactory<String,ItemTM>("itemId"));
+        tblItemDescription.setCellValueFactory(new PropertyValueFactory<String,ItemTM>("description"));
+        tblItemQty.setCellValueFactory(new PropertyValueFactory<String,ItemTM>("qty"));
+        tblItemPerPrice.setCellValueFactory(new PropertyValueFactory<String,ItemTM>("price"));
     }
 
     void generateItemId(){

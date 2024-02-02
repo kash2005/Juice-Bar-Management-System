@@ -1,11 +1,13 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.UserDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ItemModel {
     public static String generateItemId() throws SQLException {
@@ -54,5 +56,21 @@ public class ItemModel {
     public static boolean deleteItem(String id) throws SQLException {
         String sql = "delete from item where itemId = ?;";
         return CrudUtil.execute(sql,id);
+    }
+
+    public static ArrayList<ItemDTO> getAll() throws SQLException {
+        String sql = "select * from item";
+        ArrayList<ItemDTO> itemDTOArrayList = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute(sql);
+        if (resultSet.next()){
+            ItemDTO itemDTO =new ItemDTO(
+                    resultSet.getString("itemId"),
+                    resultSet.getString("description"),
+                    resultSet.getInt("qty"),
+                    resultSet.getDouble("price")
+            );
+            itemDTOArrayList.add(itemDTO);
+        }
+        return itemDTOArrayList;
     }
 }
