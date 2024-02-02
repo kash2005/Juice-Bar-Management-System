@@ -20,12 +20,12 @@
             <Font name="Algerian" size="51.0" />
          </font>
       </Text>
-      <TableView layoutX="589.0" layoutY="171.0" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <TableView fx:id="tblItem" layoutX="589.0" layoutY="171.0" onMouseClicked="#tblItemOnMouseClick" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
-            <TableColumn prefWidth="75.0" text="Code" />
-            <TableColumn prefWidth="158.0" text="Description" />
-            <TableColumn prefWidth="154.0" text="Qty" />
-            <TableColumn prefWidth="150.0" text="Per price" />
+            <TableColumn fx:id="tblItemCode" prefWidth="75.0" text="Code" />
+            <TableColumn fx:id="tblItemDescription" prefWidth="158.0" text="Description" />
+            <TableColumn fx:id="tblItemQty" prefWidth="154.0" text="Qty" />
+            <TableColumn fx:id="tblItemPerPrice" prefWidth="150.0" text="Per price" />
          </columns>
       </TableView>
       <ImageView fitHeight="302.0" fitWidth="370.0" layoutX="842.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
@@ -33,7 +33,7 @@
             <Image url="@../image/orange_logo.png" />
          </image>
       </ImageView>
-      <TextField layoutX="773.0" layoutY="66.0" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+      <TextField layoutX="773.0" layoutY="66.0" onAction="#searchTxtOnAction" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
          <font>
             <Font size="20.0" />
          </font>
@@ -43,18 +43,18 @@
             <Image url="@../image/icons8-search-64.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="1070.0" layoutY="67.0" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+      <JFXButton layoutX="1070.0" layoutY="67.0" onAction="#searchImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
       <Circle fill="#f4f4f4" layoutX="248.0" layoutY="479.0" opacity="0.37" radius="297.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="5.0" />
-      <JFXButton layoutX="340.0" layoutY="403.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="saveBtn" layoutX="340.0" layoutY="403.0" onAction="#saveBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="340.0" layoutY="495.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+      <JFXButton layoutX="340.0" layoutY="495.0" onAction="#deleteBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -66,22 +66,22 @@
                   <Image url="@../image/icons8-supplier-80%20(1).png" />
                </image>
             </ImageView>
-            <TextField layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Item Code" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="itemCode" layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Item Code" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="227.0" opacity="0.39" promptText="Iten Description" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="itemDescription" layoutX="157.0" layoutY="227.0" onAction="#itemDescriptionOnAction" opacity="0.39" promptText="Item Description" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="347.0" opacity="0.39" promptText="Item Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="itemQtyId" layoutX="157.0" layoutY="347.0" onAction="#itemQtyOnAction" opacity="0.39" promptText="Item Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField layoutX="157.0" layoutY="467.0" opacity="0.39" promptText="Item Per Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="itemPerPriceId" layoutX="157.0" layoutY="467.0" onAction="#itemPerPriceOnAction" opacity="0.39" promptText="Item Per Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>

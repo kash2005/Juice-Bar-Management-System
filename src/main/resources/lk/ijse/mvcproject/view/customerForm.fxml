@@ -27,7 +27,7 @@
                   <Image url="@../image/icons8-customers-100%20(5).png" />
                </image>
             </ImageView>
-            <TextField fx:id="customerId" layoutX="157.0" layoutY="107.0" onAction="#txtIdOnAction" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="customerId" layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>

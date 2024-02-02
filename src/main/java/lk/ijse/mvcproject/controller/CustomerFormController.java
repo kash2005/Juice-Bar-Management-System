@@ -121,24 +121,23 @@ public class CustomerFormController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
             generateCustomerId();
             setValueFactory();
             getAll();
+    }
+
+    public void generateCustomerId() {
+        try {
+            String id = CustomerModel.generateCustomerId();
+            customerId.setText(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void generateCustomerId() throws SQLException {
-        String id = CustomerModel.generateCustomerId();
-        customerId.setText(id);
     }
 
     @FXML
@@ -256,11 +255,6 @@ public class CustomerFormController implements Initializable {
     @FXML
     void txtEmailOnAction(ActionEvent event) {
         customerContactId.requestFocus();
-    }
-
-    @FXML
-    void txtIdOnAction(ActionEvent event) {
-//        customerNameId.requestFocus();
     }
 
     @FXML
