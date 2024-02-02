@@ -37,11 +37,6 @@ public class CustomerModel {
 
     public static boolean updateCustomer(CustomerDTO customerDTO) throws SQLException {
         String sql = "update customer set name = ?,address = ?,email = ?,contact = ? where customerId = ?;";
-        System.out.println(customerDTO.getCustomerId());
-        System.out.println(customerDTO.getName());
-        System.out.println(customerDTO.getAddress());
-        System.out.println(customerDTO.getEmail());
-        System.out.println(customerDTO.getContact());
         return CrudUtil.execute(sql,customerDTO.getName(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getContact(),customerDTO.getCustomerId());
     }
 

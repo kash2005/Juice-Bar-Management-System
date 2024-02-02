@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.tm.CustomerTM;
 import lk.ijse.mvcproject.model.CustomerModel;
@@ -67,10 +68,10 @@ public class CustomerFormController implements Initializable {
         try {
             boolean isDeleted = CustomerModel.deleteCustomer(id);
             if (isDeleted){
-                System.out.println(id);
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer is deleted !");
                 clearTextFields();
                 generateCustomerId();
+                getAll();
             }else {
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer is not deleted !");
             }
@@ -95,6 +96,7 @@ public class CustomerFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
                     clearTextFields();
                     generateCustomerId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
                 }
@@ -112,6 +114,7 @@ public class CustomerFormController implements Initializable {
                     saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
                     clearTextFields();
                     generateCustomerId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is not updated !");
                 }
@@ -140,6 +143,31 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void searchTxtOnAction(ActionEvent event) {
+        String searchIdText = searchId.getText();
+        try {
+            CustomerDTO customerDTO = CustomerModel.searchCustomer(searchIdText);
+            if (customerDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+                String id = customerDTO.getCustomerId();
+                String name = customerDTO.getName();
+                String address = customerDTO.getAddress();
+                String email = customerDTO.getEmail();
+                String contact = customerDTO.getContact();
+                customerId.setText(id);
+                customerNameId.setText(name);
+                customerAddressId.setText(address);
+                customerEmailId.setText(email);
+                customerContactId.setText(contact);
+                searchId.clear();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void searchImgOnAction(ActionEvent event) {
         String searchIdText = searchId.getText();
         try {
             CustomerDTO customerDTO = CustomerModel.searchCustomer(searchIdText);
@@ -196,6 +224,23 @@ public class CustomerFormController implements Initializable {
         tblCustomerAddress.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("address"));
         tblCustomerEmail.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("email"));
         tblCustomerContact.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("contact"));
+    }
+
+    @FXML
+    void tblCustomerOnMouseClick(MouseEvent event) {
+        CustomerTM selectedCustomer = (CustomerTM) tblCustomer.getSelectionModel().getSelectedItem();
+        try {
+            CustomerDTO customer = CustomerModel.searchCustomer(selectedCustomer.getCustomerId());
+            customerId.setText(customer.getCustomerId());
+            customerNameId.setText(customer.getName());
+            customerAddressId.setText(customer.getAddress());
+            customerEmailId.setText(customer.getEmail());
+            customerContactId.setText(customer.getEmail());
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

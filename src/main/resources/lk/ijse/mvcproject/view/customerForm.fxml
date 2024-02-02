@@ -64,7 +64,7 @@
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tblCustomer" layoutX="589.0" layoutY="171.0" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <TableView fx:id="tblCustomer" layoutX="589.0" layoutY="171.0" onMouseClicked="#tblCustomerOnMouseClick" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
             <TableColumn fx:id="tblCustomerId" prefWidth="75.0" text="Id" />
             <TableColumn fx:id="tblCustomerName" prefWidth="104.0" text="Name" />
@@ -88,7 +88,7 @@
             <Image url="@../image/icons8-search-64.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="1070.0" layoutY="67.0" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+      <JFXButton layoutX="1070.0" layoutY="67.0" onAction="#searchImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
