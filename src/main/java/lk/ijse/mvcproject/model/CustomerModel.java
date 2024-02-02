@@ -77,4 +77,14 @@ public class CustomerModel {
         }
         return customerDTO;
     }
+
+    public static boolean deleteCustomer(String id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "delete from customer where customerId = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id);
+        int rowAffected = preparedStatement.executeUpdate();
+        boolean isDelete = rowAffected != 0;
+        return isDelete;
+    }
 }

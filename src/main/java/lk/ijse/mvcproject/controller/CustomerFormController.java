@@ -62,7 +62,19 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            boolean isDeleted = CustomerModel.deleteCustomer(id);
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer is deleted !");
+                clearTextFields();
+                generateCustomerId();
+            }else {
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer is not deleted !");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -78,11 +90,8 @@ public class CustomerFormController implements Initializable {
                 boolean isSaved = CustomerModel.saveCustomer(id,name,address,email,contact);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
-                    customerId.clear();
-                    customerNameId.clear();
-                    customerAddressId.clear();
-                    customerEmailId.clear();
-                    customerContactId.clear();
+                    clearTextFields();
+                    generateCustomerId();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
                 }
@@ -99,6 +108,7 @@ public class CustomerFormController implements Initializable {
                     saveBtn.setText("Save");
                     saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
                     clearTextFields();
+                    generateCustomerId();
                 }else {
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is not updated !");
                 }
@@ -141,6 +151,7 @@ public class CustomerFormController implements Initializable {
                 customerAddressId.setText(address);
                 customerEmailId.setText(email);
                 customerContactId.setText(contact);
+                searchId.clear();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
