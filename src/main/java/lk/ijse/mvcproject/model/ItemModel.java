@@ -62,13 +62,14 @@ public class ItemModel {
         String sql = "select * from item";
         ArrayList<ItemDTO> itemDTOArrayList = new ArrayList<>();
         ResultSet resultSet = CrudUtil.execute(sql);
-        if (resultSet.next()){
+        while (resultSet.next()){
             ItemDTO itemDTO =new ItemDTO(
                     resultSet.getString("itemId"),
                     resultSet.getString("description"),
                     resultSet.getInt("qty"),
                     resultSet.getDouble("price")
             );
+            System.out.println(itemDTO);
             itemDTOArrayList.add(itemDTO);
         }
         return itemDTOArrayList;

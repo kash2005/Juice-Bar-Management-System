@@ -12,8 +12,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
+import lk.ijse.mvcproject.dto.tm.CustomerTM;
 import lk.ijse.mvcproject.dto.tm.ItemTM;
+import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.ItemModel;
 
 import java.net.URL;
@@ -61,11 +64,12 @@ public class ItemFormController implements Initializable {
         try {
             boolean isDeleted = ItemModel.deleteItem(searchIdText);
             if (isDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !");
+                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !").show();
                 clearTextFields();
                 generateItemId();
+                getAll();
             }else {
-                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !");
+                new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -98,12 +102,12 @@ public class ItemFormController implements Initializable {
                 ItemDTO itemDTO = new ItemDTO(code, description, qty, price);
                 boolean isSave = ItemModel.saveItem(itemDTO);
                 if (isSave){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Item is saved !");
+                    getAll();
+                    new Alert(Alert.AlertType.CONFIRMATION,"Item is saved !").show();
                     clearTextFields();
                     generateItemId();
-                    getAll();
                 }else {
-                    new Alert(Alert.AlertType.ERROR,"Item is not saved !");
+                    new Alert(Alert.AlertType.ERROR,"Item is not saved !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -117,10 +121,12 @@ public class ItemFormController implements Initializable {
                 if (isUpdate){
                     saveBtn.setText("Save");
                     saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
-                    new Alert(Alert.AlertType.CONFIRMATION,"item is updated !");
+                    new Alert(Alert.AlertType.CONFIRMATION,"item is updated !").show();
                     clearTextFields();
                     generateItemId();
                     getAll();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"item is not updated !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -176,7 +182,18 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void tblItemOnMouseClick(MouseEvent event) {
-
+        ItemTM selectedItem = (ItemTM) tblItem.getSelectionModel().getSelectedItem();
+        try {
+            ItemDTO item = ItemModel.searchItem(selectedItem.getItemId());
+            itemCode.setText(item.getItemId());
+            itemDescription.setText(item.getDescription());
+            itemQtyId.setText(String.valueOf(item.getQty()));
+            itemPerPriceId.setText(String.valueOf(item.getPrice()));
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -191,6 +208,7 @@ public class ItemFormController implements Initializable {
         try {
             ArrayList<ItemDTO> all = ItemModel.getAll();
             for (ItemDTO itemDTO:all) {
+                System.out.println(itemDTO);
                 observableList.add(new ItemTM(
                         itemDTO.getItemId(),
                         itemDTO.getDescription(),

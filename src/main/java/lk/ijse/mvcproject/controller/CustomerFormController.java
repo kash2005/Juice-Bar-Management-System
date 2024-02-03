@@ -68,12 +68,12 @@ public class CustomerFormController implements Initializable {
         try {
             boolean isDeleted = CustomerModel.deleteCustomer(id);
             if (isDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION,"Customer is deleted !");
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer is deleted !").show();
                 clearTextFields();
                 generateCustomerId();
                 getAll();
             }else {
-                new Alert(Alert.AlertType.CONFIRMATION,"Customer is not deleted !");
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer is not deleted !").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -93,12 +93,12 @@ public class CustomerFormController implements Initializable {
                 CustomerDTO customerDTO = new CustomerDTO(id,name,address,email,contact);
                 boolean isSaved = CustomerModel.saveCustomer(customerDTO);
                 if (isSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !");
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !").show();
                     clearTextFields();
                     generateCustomerId();
                     getAll();
                 }else {
-                    new Alert(Alert.AlertType.ERROR,"Customer is not saved !");
+                    new Alert(Alert.AlertType.ERROR,"Customer is not saved !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -109,14 +109,14 @@ public class CustomerFormController implements Initializable {
                 CustomerDTO customerDTO = new CustomerDTO(id, name, address, email, contact);
                 boolean isUpdated = CustomerModel.updateCustomer(customerDTO);
                 if (isUpdated){
-                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is updated !");
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is updated !").show();
                     saveBtn.setText("Save");
                     saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
                     clearTextFields();
                     generateCustomerId();
                     getAll();
                 }else {
-                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is not updated !");
+                    new Alert(Alert.AlertType.CONFIRMATION,"Customer is not updated !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
