@@ -57,7 +57,19 @@ public class IngredientFormController implements Initializable {
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-
+        String id = ingredientId.getText();
+        try {
+            boolean isDeleted = IngredientModel.deleteIngredient(id);
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is deleted ").show();
+                clearTextFields();
+                generateIngredientId();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Ingredient is not deleted ").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -76,10 +88,9 @@ public class IngredientFormController implements Initializable {
         String description = ingredientDescription.getText();
         String weight = ingredientWeight.getText();
         Double price = Double.valueOf(ingredientPrice.getText());
-
+        IngredientDTO ingredientDTO = new IngredientDTO(id,description,price,weight);
         if (saveBtn.getText().equals("Save")){
             try {
-                IngredientDTO ingredientDTO = new IngredientDTO(id,description,price,weight);
                 boolean isSaved = IngredientModel.saveIngredient(ingredientDTO);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is saved !").show();
@@ -87,6 +98,23 @@ public class IngredientFormController implements Initializable {
                     generateIngredientId();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Ingredient is not saved").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else if (saveBtn.getText().equals("Update")){
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+            try {
+                boolean isUpdate = IngredientModel.updateIngredient(ingredientDTO);
+                if (isUpdate){
+                    saveBtn.setText("Save");
+                    saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+                    new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is updated !").show();
+                    clearTextFields();
+                    generateIngredientId();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Ingredient is not updated !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -100,6 +128,8 @@ public class IngredientFormController implements Initializable {
         try {
             IngredientDTO ingredientDTO = IngredientModel.searchIngredientId(id);
             if (ingredientDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
                 String ingredientId1 = ingredientDTO.getIngredientId();
                 String description = ingredientDTO.getDescription();
                 double price = ingredientDTO.getPrice();
@@ -108,6 +138,7 @@ public class IngredientFormController implements Initializable {
                 ingredientDescription.setText(description);
                 ingredientWeight.setText(weight);
                 ingredientPrice.setText(String.valueOf(price));
+                searchId.clear();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

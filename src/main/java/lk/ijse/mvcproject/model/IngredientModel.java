@@ -45,4 +45,14 @@ public class IngredientModel {
         }
         return ingredientDTO;
     }
+
+    public static boolean updateIngredient(IngredientDTO ingredientDTO) throws SQLException {
+        String sql = "update ingredient set description = ?,price = ?,weight =? where ingredientId = ?;";
+        return CrudUtil.execute(sql,ingredientDTO.getDescription(),ingredientDTO.getPrice(),ingredientDTO.getWeight(),ingredientDTO.getIngredientId());
+    }
+
+    public static boolean deleteIngredient(String id) throws SQLException {
+        String sql = "delete from ingredient where ingredientId = ?;";
+        return CrudUtil.execute(sql,id);
+    }
 }
