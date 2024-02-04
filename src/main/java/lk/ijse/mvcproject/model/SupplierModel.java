@@ -1,5 +1,6 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.SupplierDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -21,5 +22,13 @@ public class SupplierModel {
         return null;
     }
 
-//    public static boolean saveSuppli
+    public static boolean saveSupplier(SupplierDTO supplierDTO) throws SQLException {
+        String sql = "insert into supplier(supplierId,name,contact,company) values(?,?,?,?)";
+        return CrudUtil.execute(sql,supplierDTO.getSupplierId(),supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany());
+    }
+
+//    public static boolean updateSupplier(SupplierDTO supplierDTO) throws SQLException {
+//        String sql = "update supplier set name = ?, contact = ?, company = ? where supplierId = ?;";
+//        return CrudUtil.execute(sql,supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany(),supplierDTO.getSupplierId());
+//    }
 }

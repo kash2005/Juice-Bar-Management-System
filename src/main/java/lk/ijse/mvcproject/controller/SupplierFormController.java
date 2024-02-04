@@ -4,10 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.SupplierDTO;
 import lk.ijse.mvcproject.model.SupplierModel;
 
 import java.net.URL;
@@ -53,7 +55,47 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void saveBtnOnAction(ActionEvent event) {
+        String id = supplierId.getText();
+        String name = supplierName.getText();
+        String contact = supplierContact.getText();
+        String company = supplierCompany.getText();
+        SupplierDTO supplierDTO = new SupplierDTO(id,name,contact,company);
+        if (saveBtn.getText().equals("Save")){
+            try {
+                boolean isSave = SupplierModel.saveSupplier(supplierDTO);
+                if (isSave){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Supplier is saved !").show();
+                    clearTextFileds();
+                    generateSupplierId();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Supplier is not saved !").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+//        }else if (saveBtn.getText().equals("Update")){
+//            saveBtn.setText("Update");
+//            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+//            try {
+//                boolean isUpdate = SupplierModel.updateSupplier(supplierDTO);
+//                if (isUpdate){
+//                    new Alert(Alert.AlertType.CONFIRMATION,"Supplier is update !");
+//                    clearTextFileds();
+//                    generateSupplierId();
+//                }else{
+//                    new Alert(Alert.AlertType.ERROR,"Supplier is not update !");
+//                }
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+    }
 
+    private void clearTextFileds() {
+        supplierId.clear();
+        supplierName.clear();
+        supplierContact.clear();
+        supplierCompany.clear();
     }
 
     @FXML
@@ -68,17 +110,17 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void supplierCompany(ActionEvent event) {
-
+        saveBtn.fire();
     }
 
     @FXML
     void supplierContactOnAction(ActionEvent event) {
-
+        supplierCompany.requestFocus();
     }
 
     @FXML
     void supplierNameOnAction(ActionEvent event) {
-
+        supplierContact.requestFocus();
     }
 
     @FXML
