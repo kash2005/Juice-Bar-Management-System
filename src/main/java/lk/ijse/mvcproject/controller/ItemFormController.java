@@ -97,9 +97,9 @@ public class ItemFormController implements Initializable {
         String description = itemDescription.getText();
         int qty = Integer.parseInt(itemQtyId.getText());
         double price = Double.parseDouble(itemPerPriceId.getText());
+        ItemDTO itemDTO = new ItemDTO(code, description, qty, price);
         if (saveBtn.getText().equals("Save")){
             try {
-                ItemDTO itemDTO = new ItemDTO(code, description, qty, price);
                 boolean isSave = ItemModel.saveItem(itemDTO);
                 if (isSave){
                     getAll();
@@ -115,7 +115,6 @@ public class ItemFormController implements Initializable {
         }else if (saveBtn.getText().equals("Update")){
             saveBtn.setText("Update");
             saveBtn.setStyle("-fx-background-color: blue; fx-background-radius: 10;");
-            ItemDTO itemDTO = new ItemDTO(code, description, qty, price);
             try {
                 boolean isUpdate = ItemModel.updateItem(itemDTO);
                 if (isUpdate){
@@ -208,7 +207,6 @@ public class ItemFormController implements Initializable {
         try {
             ArrayList<ItemDTO> all = ItemModel.getAll();
             for (ItemDTO itemDTO:all) {
-                System.out.println(itemDTO);
                 observableList.add(new ItemTM(
                         itemDTO.getItemId(),
                         itemDTO.getDescription(),

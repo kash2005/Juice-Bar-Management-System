@@ -1,6 +1,8 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,11 +10,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.IngredientDTO;
+import lk.ijse.mvcproject.dto.ItemDTO;
+import lk.ijse.mvcproject.dto.tm.IngredientTM;
+import lk.ijse.mvcproject.dto.tm.ItemTM;
 import lk.ijse.mvcproject.model.IngredientModel;
+import lk.ijse.mvcproject.model.ItemModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class IngredientFormController implements Initializable {
@@ -32,22 +41,20 @@ public class IngredientFormController implements Initializable {
     private JFXButton saveBtn;
 
     @FXML
-    private TableView<?> tblIngredient;
+    private TableView<Object> tblIngredient;
 
     @FXML
-    private TableColumn<?, ?> tblId;
+    private TableColumn<String, IngredientTM> tblId;
 
     @FXML
-    private TableColumn<?, ?> tblName;
+    private TableColumn<String, IngredientTM> tblDescription;
 
     @FXML
-    private TableColumn<?, ?> tblAddress;
+    private TableColumn<String, IngredientTM> tblWeight;
 
     @FXML
-    private TableColumn<?, ?> tblContact;
+    private TableColumn<String, IngredientTM> tblPrice;
 
-    @FXML
-    private TableColumn<?, ?> tblEmail;
 
     @FXML
     private TextField searchId;
@@ -64,6 +71,7 @@ public class IngredientFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is deleted ").show();
                 clearTextFields();
                 generateIngredientId();
+                getAll();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Ingredient is not deleted ").show();
             }
@@ -75,6 +83,22 @@ public class IngredientFormController implements Initializable {
     @FXML
     void descriptionTxtOnAction(ActionEvent event) {
         ingredientWeight.requestFocus();
+    }
+
+    @FXML
+    void tblIngredientOnMouseClick(MouseEvent event) {
+        IngredientTM selectedIngredient = (IngredientTM) tblIngredient.getSelectionModel().getSelectedItem();
+        try {
+            IngredientDTO ingredientDTO = IngredientModel.searchIngredientId(selectedIngredient.getIngredientId());
+            ingredientId.setText(ingredientDTO.getIngredientId());
+            ingredientDescription.setText(ingredientDTO.getDescription());
+            ingredientWeight.setText(ingredientDTO.getWeight());
+            ingredientPrice.setText(String.valueOf(ingredientDTO.getPrice()));
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -96,6 +120,7 @@ public class IngredientFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is saved !").show();
                     clearTextFields();
                     generateIngredientId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Ingredient is not saved").show();
                 }
@@ -109,10 +134,11 @@ public class IngredientFormController implements Initializable {
                 boolean isUpdate = IngredientModel.updateIngredient(ingredientDTO);
                 if (isUpdate){
                     saveBtn.setText("Save");
-                    saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+                    saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
                     new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is updated !").show();
                     clearTextFields();
                     generateIngredientId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Ingredient is not updated !").show();
                 }
@@ -146,6 +172,29 @@ public class IngredientFormController implements Initializable {
     }
 
     @FXML
+    void searchImgOnAction(ActionEvent event) {
+        String id = searchImg.getText();
+        try {
+            IngredientDTO ingredientDTO = IngredientModel.searchIngredientId(id);
+            if (ingredientDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+                String ingredientId1 = ingredientDTO.getIngredientId();
+                String description = ingredientDTO.getDescription();
+                double price = ingredientDTO.getPrice();
+                String weight = ingredientDTO.getWeight();
+                ingredientId.setText(ingredientId1);
+                ingredientDescription.setText(description);
+                ingredientWeight.setText(weight);
+                ingredientPrice.setText(String.valueOf(price));
+                searchId.clear();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     void weightTxtOnAction(ActionEvent event) {
         ingredientPrice.requestFocus();
     }
@@ -153,7 +202,33 @@ public class IngredientFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateIngredientId();
+        setValueFactory();
+        getAll();
+    }
 
+    private void setValueFactory() {
+        tblId.setCellValueFactory(new PropertyValueFactory<String,IngredientTM>("ingredientId"));
+        tblDescription.setCellValueFactory(new PropertyValueFactory<String,IngredientTM>("description"));
+        tblPrice.setCellValueFactory(new PropertyValueFactory<String,IngredientTM>("price"));
+        tblWeight.setCellValueFactory(new PropertyValueFactory<String,IngredientTM>("weight"));
+    }
+
+    private void getAll() {
+        ObservableList<Object> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<IngredientDTO> all = IngredientModel.getAll();
+            for(IngredientDTO ingredientDTO:all){
+                observableList.add(new IngredientTM(
+                        ingredientDTO.getIngredientId(),
+                        ingredientDTO.getDescription(),
+                        ingredientDTO.getPrice(),
+                        ingredientDTO.getWeight()
+                ));
+            }
+            tblIngredient.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void generateIngredientId() {

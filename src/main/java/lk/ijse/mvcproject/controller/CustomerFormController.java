@@ -87,10 +87,9 @@ public class CustomerFormController implements Initializable {
         String address = customerAddressId.getText();
         String email = customerEmailId.getText();
         String contact = customerContactId.getText();
-
+        CustomerDTO customerDTO = new CustomerDTO(id,name,address,email,contact);
         if (saveBtn.getText().equals("Save")){
             try {
-                CustomerDTO customerDTO = new CustomerDTO(id,name,address,email,contact);
                 boolean isSaved = CustomerModel.saveCustomer(customerDTO);
                 if (isSaved){
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is saved !").show();
@@ -106,12 +105,11 @@ public class CustomerFormController implements Initializable {
         }else if (saveBtn.getText().equals("Update")){
             try {
                 saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
-                CustomerDTO customerDTO = new CustomerDTO(id, name, address, email, contact);
                 boolean isUpdated = CustomerModel.updateCustomer(customerDTO);
                 if (isUpdated){
                     new Alert(Alert.AlertType.CONFIRMATION,"Customer is updated !").show();
                     saveBtn.setText("Save");
-                    saveBtn.setStyle("-fx-background-color:  green; -fx-background-radius: 10;");
+                    saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10;");
                     clearTextFields();
                     generateCustomerId();
                     getAll();

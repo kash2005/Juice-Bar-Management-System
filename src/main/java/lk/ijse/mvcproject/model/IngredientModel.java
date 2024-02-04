@@ -5,6 +5,7 @@ import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class IngredientModel {
 
@@ -54,5 +55,21 @@ public class IngredientModel {
     public static boolean deleteIngredient(String id) throws SQLException {
         String sql = "delete from ingredient where ingredientId = ?;";
         return CrudUtil.execute(sql,id);
+    }
+
+    public static ArrayList<IngredientDTO> getAll() throws SQLException {
+        String sql = "select * from ingredient";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        ArrayList<IngredientDTO> ingredientDTOS = new ArrayList<>();
+        while (resultSet.next()){
+            IngredientDTO ingredientDTO = new IngredientDTO(
+                    resultSet.getString("ingredientId"),
+                    resultSet.getString("description"),
+                    resultSet.getDouble("price"),
+                    resultSet.getString("weight")
+            );
+            ingredientDTOS.add(ingredientDTO);
+        }
+        return ingredientDTOS;
     }
 }
