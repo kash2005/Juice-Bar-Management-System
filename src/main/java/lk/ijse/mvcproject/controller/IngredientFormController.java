@@ -4,9 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import lk.ijse.mvcproject.dto.IngredientDTO;
 import lk.ijse.mvcproject.model.IngredientModel;
 
 import java.net.URL;
@@ -70,7 +72,26 @@ public class IngredientFormController implements Initializable {
 
     @FXML
     void saveBtnOnAction(ActionEvent event) {
+        String id = ingredientId.getText();
+        String description = ingredientDescription.getText();
+        String weight = ingredientWeight.getText();
+        Double price = Double.valueOf(ingredientPrice.getText());
 
+        if (saveBtn.getText().equals("Save")){
+            try {
+                IngredientDTO ingredientDTO = new IngredientDTO(id,description,price,weight);
+                boolean isSaved = IngredientModel.saveIngredient(ingredientDTO);
+                if (isSaved){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Ingredient is saved !").show();
+                    clearTextFields();
+                    generateIngredientId();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Ingredient is not saved").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
@@ -96,6 +117,13 @@ public class IngredientFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void clearTextFields(){
+        ingredientId.clear();
+        ingredientDescription.clear();
+        ingredientWeight.clear();
+        ingredientPrice.clear();
     }
 }
 

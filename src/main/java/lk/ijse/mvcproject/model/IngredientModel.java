@@ -1,5 +1,6 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.IngredientDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -24,5 +25,10 @@ public class IngredientModel {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public static boolean saveIngredient(IngredientDTO ingredientDTO) throws SQLException {
+        String sql ="insert into ingredient(ingredientId,description,price,weight) values(?,?,?,?);";
+        return CrudUtil.execute(sql,ingredientDTO.getIngredientId(),ingredientDTO.getDescription(),ingredientDTO.getPrice(),ingredientDTO.getWeight());
     }
 }
