@@ -73,7 +73,8 @@ public class SupplierFormController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-//        }else if (saveBtn.getText().equals("Update")){
+        }
+//        else if (saveBtn.getText().equals("Update")){
 //            saveBtn.setText("Update");
 //            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
 //            try {
@@ -100,7 +101,23 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void searchIdOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            SupplierDTO supplierDTO = SupplierModel.searchSupplier(id);
+            if (supplierDTO != null){
+                String supplierId1 = supplierDTO.getSupplierId();
+                String name = supplierDTO.getName();
+                String contact = supplierDTO.getContact();
+                String company = supplierDTO.getCompany();
+                supplierId.setText(supplierId1);
+                supplierName.setText(name);
+                supplierContact.setText(contact);
+                supplierCompany.setText(company);
+                searchId.clear();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

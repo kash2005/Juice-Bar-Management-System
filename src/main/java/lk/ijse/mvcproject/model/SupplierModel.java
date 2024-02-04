@@ -31,4 +31,18 @@ public class SupplierModel {
 //        String sql = "update supplier set name = ?, contact = ?, company = ? where supplierId = ?;";
 //        return CrudUtil.execute(sql,supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany(),supplierDTO.getSupplierId());
 //    }
+
+    public static SupplierDTO searchSupplier(String id) throws SQLException {
+        String sql = "select * from supplier where supplierId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql,id);
+        SupplierDTO supplierDTO = null;
+        while (resultSet.next()){
+            String supplierId = resultSet.getString("supplierId");
+            String name = resultSet.getString("name");
+            String contact = resultSet.getString("contact");
+            String company = resultSet.getString("company");
+            supplierDTO = new SupplierDTO(supplierId,name,contact,company);
+        }
+        return supplierDTO;
+    }
 }
