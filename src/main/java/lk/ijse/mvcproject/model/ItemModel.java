@@ -69,7 +69,6 @@ public class ItemModel {
                     resultSet.getInt("qty"),
                     resultSet.getDouble("price")
             );
-            System.out.println(itemDTO);
             itemDTOArrayList.add(itemDTO);
         }
         return itemDTOArrayList;

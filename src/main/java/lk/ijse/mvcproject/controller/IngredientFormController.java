@@ -60,9 +60,6 @@ public class IngredientFormController implements Initializable {
     private TextField searchId;
 
     @FXML
-    private JFXButton searchImg;
-
-    @FXML
     void deleteBtnOnAction(ActionEvent event) {
         String id = ingredientId.getText();
         try {
@@ -173,7 +170,7 @@ public class IngredientFormController implements Initializable {
 
     @FXML
     void searchImgOnAction(ActionEvent event) {
-        String id = searchImg.getText();
+        String id = searchId.getText();
         try {
             IngredientDTO ingredientDTO = IngredientModel.searchIngredientId(id);
             if (ingredientDTO != null){

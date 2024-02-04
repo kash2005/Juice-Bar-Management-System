@@ -82,7 +82,7 @@
             <Image url="@../image/icons8-search-64.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="searchImg" layoutX="1080.0" layoutY="77.0" onAction="#searchImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+      <JFXButton layoutX="1080.0" layoutY="77.0" onAction="#searchImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
