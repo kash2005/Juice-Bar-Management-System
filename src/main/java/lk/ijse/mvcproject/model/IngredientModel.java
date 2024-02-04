@@ -31,4 +31,18 @@ public class IngredientModel {
         String sql ="insert into ingredient(ingredientId,description,price,weight) values(?,?,?,?);";
         return CrudUtil.execute(sql,ingredientDTO.getIngredientId(),ingredientDTO.getDescription(),ingredientDTO.getPrice(),ingredientDTO.getWeight());
     }
+
+    public static IngredientDTO searchIngredientId(String id) throws SQLException {
+        String sql = "select * from ingredient where ingredientId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        IngredientDTO ingredientDTO = null;
+        while (resultSet.next()){
+            String ingredientId = resultSet.getString("ingredientId");
+            String description = resultSet.getString("description");
+            double price = resultSet.getDouble("price");
+            String weight = resultSet.getString("weight");
+            ingredientDTO = new IngredientDTO(ingredientId,description,price,weight);
+        }
+        return ingredientDTO;
+    }
 }

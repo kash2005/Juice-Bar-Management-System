@@ -96,7 +96,22 @@ public class IngredientFormController implements Initializable {
 
     @FXML
     void searchIdOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            IngredientDTO ingredientDTO = IngredientModel.searchIngredientId(id);
+            if (ingredientDTO != null){
+                String ingredientId1 = ingredientDTO.getIngredientId();
+                String description = ingredientDTO.getDescription();
+                double price = ingredientDTO.getPrice();
+                String weight = ingredientDTO.getWeight();
+                ingredientId.setText(ingredientId1);
+                ingredientDescription.setText(description);
+                ingredientWeight.setText(weight);
+                ingredientPrice.setText(String.valueOf(price));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
