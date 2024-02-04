@@ -95,7 +95,19 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-
+        String id = supplierId.getText();
+        try {
+            boolean isDelete = SupplierModel.deleteSupplier(id);
+            if (isDelete){
+                new Alert(Alert.AlertType.CONFIRMATION,"Supplier is deleted !").show();
+                clearTextFileds();
+                generateSupplierId();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Supplier is not deleted !").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void clearTextFileds() {
@@ -174,6 +186,8 @@ public class SupplierFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateSupplierId();
+        setValueFactory();
+        getAll();
     }
 
     private void generateSupplierId(){
