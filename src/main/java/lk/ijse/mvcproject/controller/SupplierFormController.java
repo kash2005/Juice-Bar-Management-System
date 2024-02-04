@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.model.SupplierModel;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SupplierFormController implements Initializable {
@@ -90,8 +91,12 @@ public class SupplierFormController implements Initializable {
         generateSupplierId();
     }
 
-    private void generateSupplierId() {
-
-        SupplierModel.generateId();
+    private void generateSupplierId(){
+        try {
+            String id = SupplierModel.generateId();
+            supplierId.setText(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
