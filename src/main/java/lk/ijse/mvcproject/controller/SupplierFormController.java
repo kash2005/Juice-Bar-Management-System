@@ -73,23 +73,29 @@ public class SupplierFormController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        } else if (saveBtn.getText().equals("Update")){
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+            try {
+                boolean isUpdate = SupplierModel.updateSupplier(supplierDTO);
+                if (isUpdate){
+                    saveBtn.setText("Save");
+                    saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
+                    new Alert(Alert.AlertType.CONFIRMATION,"Supplier is update !").show();
+                    clearTextFileds();
+                    generateSupplierId();
+                }else{
+                    new Alert(Alert.AlertType.ERROR,"Supplier is not update !").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-//        else if (saveBtn.getText().equals("Update")){
-//            saveBtn.setText("Update");
-//            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
-//            try {
-//                boolean isUpdate = SupplierModel.updateSupplier(supplierDTO);
-//                if (isUpdate){
-//                    new Alert(Alert.AlertType.CONFIRMATION,"Supplier is update !");
-//                    clearTextFileds();
-//                    generateSupplierId();
-//                }else{
-//                    new Alert(Alert.AlertType.ERROR,"Supplier is not update !");
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+    }
+
+    @FXML
+    void deleteBtnOnAction(ActionEvent event) {
+
     }
 
     private void clearTextFileds() {
@@ -105,6 +111,8 @@ public class SupplierFormController implements Initializable {
         try {
             SupplierDTO supplierDTO = SupplierModel.searchSupplier(id);
             if (supplierDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
                 String supplierId1 = supplierDTO.getSupplierId();
                 String name = supplierDTO.getName();
                 String contact = supplierDTO.getContact();
@@ -122,7 +130,25 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void searchImgOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            SupplierDTO supplierDTO = SupplierModel.searchSupplier(id);
+            if (supplierDTO != null){
+                saveBtn.setText("Update");
+                saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+                String supplierId1 = supplierDTO.getSupplierId();
+                String name = supplierDTO.getName();
+                String contact = supplierDTO.getContact();
+                String company = supplierDTO.getCompany();
+                supplierId.setText(supplierId1);
+                supplierName.setText(name);
+                supplierContact.setText(contact);
+                supplierCompany.setText(company);
+                searchId.clear();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

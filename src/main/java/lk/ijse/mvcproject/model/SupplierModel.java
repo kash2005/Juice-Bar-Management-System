@@ -27,9 +27,14 @@ public class SupplierModel {
         return CrudUtil.execute(sql,supplierDTO.getSupplierId(),supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany());
     }
 
-//    public static boolean updateSupplier(SupplierDTO supplierDTO) throws SQLException {
-//        String sql = "update supplier set name = ?, contact = ?, company = ? where supplierId = ?;";
-//        return CrudUtil.execute(sql,supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany(),supplierDTO.getSupplierId());
+    public static boolean updateSupplier(SupplierDTO supplierDTO) throws SQLException {
+        String sql = "update supplier set name = ?, contact = ?, company = ? where supplierId = ?;";
+        return CrudUtil.execute(sql,supplierDTO.getName(),supplierDTO.getContact(),supplierDTO.getCompany(),supplierDTO.getSupplierId());
+    }
+
+//    public static boolean deleteSupplier(String id) throws SQLException {
+//        String sql = "delete from supplier where supplierId = ?";
+//        return CrudUtil.execute(sql,id);
 //    }
 
     public static SupplierDTO searchSupplier(String id) throws SQLException {
