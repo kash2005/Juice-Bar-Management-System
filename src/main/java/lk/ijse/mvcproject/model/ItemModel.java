@@ -82,4 +82,18 @@ public class ItemModel {
         }
         return item;
     }
+
+    public static ItemDTO getItemDetails(String id) throws SQLException {
+        String sql = "select * from item where itemId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        ItemDTO itemDTO = null;
+        if (resultSet.next()){
+            String description = resultSet.getString("description");
+            int qty = resultSet.getInt("qty");
+            Double price = resultSet.getDouble("price");
+            String itemId = resultSet.getString("itemId");
+            itemDTO = new ItemDTO(itemId,description,qty,price);
+        }
+        return itemDTO;
+    }
 }
