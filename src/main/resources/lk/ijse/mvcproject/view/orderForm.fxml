@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.DelivaryFormController">
+<AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.OrderFormController">
    <children>
       <Text fill="ORANGE" layoutX="79.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order">
          <font>
@@ -157,7 +157,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="866.0" layoutY="231.0" opacity="0.39" promptText="Order Date" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="itemDescription" layoutX="866.0" layoutY="231.0" opacity="0.39" promptText="Item Description" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -167,7 +167,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="602.0" layoutY="329.0" opacity="0.39" promptText="Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="itemPrice" layoutX="602.0" layoutY="329.0" opacity="0.39" promptText="Price" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -177,7 +177,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="866.0" layoutY="329.0" opacity="0.39" promptText="Qty on Hand" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="itemQtyOnHand" layoutX="866.0" layoutY="329.0" opacity="0.39" promptText="Qty on Hand" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -188,8 +188,8 @@
          </font>
       </Label>
       <ComboBox layoutX="21.0" layoutY="329.0" opacity="0.39" prefHeight="46.0" prefWidth="251.0" promptText="Select Customer Id" style="-fx-border-color: black;" />
-      <ComboBox layoutX="602.0" layoutY="230.0" opacity="0.39" prefHeight="46.0" prefWidth="251.0" promptText="Select Item Code" style="-fx-border-color: black;" />
-      <TextField layoutX="602.0" layoutY="432.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <ComboBox fx:id="itemIdCmb" layoutX="602.0" layoutY="230.0" opacity="0.39" prefHeight="46.0" prefWidth="251.0" promptText="Select Item Code" style="-fx-border-color: black;" />
+      <TextField fx:id="itemGettingQty" layoutX="602.0" layoutY="432.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Qty" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -199,7 +199,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXButton layoutX="991.0" layoutY="498.0" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #0B5ED7; -fx-background-radius: 10;" text="Add to Cart" textFill="WHITE">
+      <JFXButton layoutX="991.0" layoutY="498.0" onAction="#addToCartOnAction" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #0B5ED7; -fx-background-radius: 10;" text="Add to Cart" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

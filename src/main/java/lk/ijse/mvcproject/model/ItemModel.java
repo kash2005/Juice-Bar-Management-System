@@ -1,8 +1,6 @@
 package lk.ijse.mvcproject.model;
 
-import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
-import lk.ijse.mvcproject.dto.UserDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -72,5 +70,16 @@ public class ItemModel {
             itemDTOArrayList.add(itemDTO);
         }
         return itemDTOArrayList;
+    }
+
+    public static ArrayList<String> getItemId() throws SQLException {
+        String sql = "select itemId from item";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        ArrayList<String> item = new ArrayList<>();
+        while (resultSet.next()){
+            String itemId = resultSet.getString("itemId");
+            item.add(itemId);
+        }
+        return item;
     }
 }
