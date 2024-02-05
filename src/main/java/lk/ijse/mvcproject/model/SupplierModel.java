@@ -1,10 +1,12 @@
 package lk.ijse.mvcproject.model;
 
 import lk.ijse.mvcproject.dto.SupplierDTO;
+import lk.ijse.mvcproject.dto.tm.SupplierTM;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SupplierModel {
     public static String generateId() throws SQLException {
@@ -35,6 +37,22 @@ public class SupplierModel {
     public static boolean deleteSupplier(String id) throws SQLException {
         String sql = "delete from supplier where supplierId = ?";
         return CrudUtil.execute(sql,id);
+    }
+
+    public static ArrayList<SupplierDTO> getAll() throws SQLException {
+        String sql = "select * from supplier";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        ArrayList<SupplierDTO> supplierDTOS = new ArrayList<>();
+        while (resultSet.next()){
+            SupplierDTO supplierDTO = new SupplierDTO(
+                    resultSet.getString("supplierId"),
+                    resultSet.getString("name"),
+                    resultSet.getString("contact"),
+                    resultSet.getString("company")
+            );
+            supplierDTOS.add(supplierDTO);
+        }
+        return supplierDTOS;
     }
 
     public static SupplierDTO searchSupplier(String id) throws SQLException {

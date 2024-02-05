@@ -1,6 +1,8 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,12 +10,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.SupplierDTO;
+import lk.ijse.mvcproject.dto.tm.SupplierTM;
 import lk.ijse.mvcproject.model.SupplierModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SupplierFormController implements Initializable {
@@ -36,19 +41,19 @@ public class SupplierFormController implements Initializable {
     private JFXButton deleteBtn;
 
     @FXML
-    private TableView<?> tblSupplier;
+    private TableView<SupplierTM> tblSupplier;
 
     @FXML
-    private TableColumn<?, ?> tblId;
+    private TableColumn<String, SupplierTM> tblId;
 
     @FXML
-    private TableColumn<?, ?> tblName;
+    private TableColumn<String, SupplierTM> tblName;
 
     @FXML
-    private TableColumn<?, ?> tblContact;
+    private TableColumn<String, SupplierTM> tblContact;
 
     @FXML
-    private TableColumn<?, ?> tblCompnay;
+    private TableColumn<String, SupplierTM> tblCompnay;
 
     @FXML
     private TextField searchId;
@@ -67,6 +72,7 @@ public class SupplierFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Supplier is saved !").show();
                     clearTextFileds();
                     generateSupplierId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Supplier is not saved !").show();
                 }
@@ -84,6 +90,7 @@ public class SupplierFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Supplier is update !").show();
                     clearTextFileds();
                     generateSupplierId();
+                    getAll();
                 }else{
                     new Alert(Alert.AlertType.ERROR,"Supplier is not update !").show();
                 }
@@ -102,6 +109,7 @@ public class SupplierFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION,"Supplier is deleted !").show();
                 clearTextFileds();
                 generateSupplierId();
+                getAll();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Supplier is not deleted !").show();
             }
@@ -180,7 +188,18 @@ public class SupplierFormController implements Initializable {
 
     @FXML
     void tblSupplierOnMouseClick(MouseEvent event) {
-
+        SupplierTM selectedSupplier = tblSupplier.getSelectionModel().getSelectedItem();
+        try {
+            SupplierDTO supplierDTO = SupplierModel.searchSupplier(selectedSupplier.getSupplierId());
+            supplierId.setText(supplierDTO.getSupplierId());
+            supplierName.setText(supplierDTO.getName());
+            supplierContact.setText(supplierDTO.getContact());
+            supplierCompany.setText(supplierDTO.getCompany());
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -188,6 +207,31 @@ public class SupplierFormController implements Initializable {
         generateSupplierId();
         setValueFactory();
         getAll();
+    }
+
+    private void setValueFactory() {
+        tblId.setCellValueFactory(new PropertyValueFactory<String, SupplierTM>("supplierId"));
+        tblName.setCellValueFactory(new PropertyValueFactory<String, SupplierTM>("name"));
+        tblContact.setCellValueFactory(new PropertyValueFactory<String, SupplierTM>("contact"));
+        tblCompnay.setCellValueFactory(new PropertyValueFactory<String, SupplierTM>("company"));
+    }
+
+    private void getAll(){
+        ObservableList<SupplierTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<SupplierDTO> all = SupplierModel.getAll();
+            for (SupplierDTO supplierDTO : all){
+                observableList.add(new SupplierTM(
+                        supplierDTO.getSupplierId(),
+                        supplierDTO.getName(),
+                        supplierDTO.getContact(),
+                        supplierDTO.getCompany()
+                ));
+            }
+            tblSupplier.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void generateSupplierId(){
