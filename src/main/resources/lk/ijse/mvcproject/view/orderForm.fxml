@@ -56,13 +56,13 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="522.0" layoutX="586.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
-      <TableView layoutX="602.0" layoutY="556.0" prefHeight="76.0" prefWidth="514.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <TableView fx:id="tblItemDetails" layoutX="602.0" layoutY="556.0" prefHeight="76.0" prefWidth="514.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
-            <TableColumn prefWidth="60.0" text="Code" />
-            <TableColumn prefWidth="108.0" text="Name" />
-            <TableColumn prefWidth="103.0" text="Unit Price" />
-            <TableColumn prefWidth="111.0" text="Qty on Hand" />
-            <TableColumn prefWidth="131.0" text="Qty" />
+            <TableColumn fx:id="tblCode" prefWidth="60.0" text="Code" />
+            <TableColumn fx:id="tblDescription" prefWidth="108.0" text="Description" />
+            <TableColumn fx:id="tblPrice" prefWidth="103.0" text="Unit Price" />
+            <TableColumn fx:id="tblQtyOnHand" prefWidth="111.0" text="Qty on Hand" />
+            <TableColumn fx:id="tblGetQty" prefWidth="131.0" text="Get Qty" />
          </columns>
       </TableView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="ORANGE" height="46.0" layoutX="6.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
