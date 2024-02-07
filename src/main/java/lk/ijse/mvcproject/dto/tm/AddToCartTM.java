@@ -11,6 +11,6 @@ public class AddToCartTM {
     private String itemCode;
     private String itemDescription;
     private Double unitPrice;
-    private String qtyOnHand;
-    private String getQty;
+    private int qtyOnHand;
+    private int getQty;
 }

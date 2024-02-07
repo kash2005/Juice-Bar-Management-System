@@ -55,6 +55,8 @@ public class OrderFormController implements Initializable {
     @FXML
     private TableView<AddToCartTM> tblItemDetails;
 
+    private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
+
     void setItemId(){
         try {
             ArrayList<String> itemId = ItemModel.getItemId();
@@ -100,16 +102,6 @@ public class OrderFormController implements Initializable {
             new Alert(Alert.AlertType.CONFIRMATION,"Items Add to Cart !").show();
             setValueFactory();
             getAll();
-            String selectedItemId = itemIdCmb.getSelectionModel().getSelectedItem();
-            String description = itemDescription.getText();
-            Double price = Double.valueOf(itemPrice.getText());
-            String qtyOnHand = itemQtyOnHand.getText();
-            String getQty1 = itemGettingQty.getText();
-
-            ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
-            observableList.add(new AddToCartTM(selectedItemId,description,price,qtyOnHand,getQty1));
-            tblItemDetails.setItems(observableList);
-
             itemDescription.clear();
             itemPrice.clear();
             itemQtyOnHand.clear();
@@ -125,46 +117,42 @@ public class OrderFormController implements Initializable {
         tblGetQty.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("getQty"));
     }
 
-//    void getAll(){
-//        ObservableList<AddToCartTM> addToCartTMS = FXCollections.observableArrayList();
-//
-//        // Assuming you have data structures to hold your item details
-//        List<String> selectedItemIds = itemIdCmb.getItems();
-//        List<String> descriptions = itemDescription.getText() ; // get descriptions from somewhere
-//        List<Double> prices = itemPrice.getText(); // get prices from somewhere
-//        List<String> qtyOnHands = itemQtyOnHand.getText(); // get qty on hand from somewhere
-//        List<String> getQtys = itemGettingQty.getText(); // get getting qty from somewhere
-//
-//        // Assuming all lists have the same size
-//        int size = selectedItemIds.size();
-//        for (int i = 0; i < size; i++) {
-//            // Create a new AddToCartTM object for each set of item details
-//            AddToCartTM addToCartTM = new AddToCartTM(
-//                    selectedItemIds.get(i),
-//                    descriptions.get(i),
-//                    prices.get(i),
-//                    qtyOnHands.get(i),
-//                    getQtys.get(i)
-//            );
-//            addToCartTMS.add(addToCartTM);
-//        }
-//
-//        // Set the items of the TableView to the ObservableList
-//        tblItemDetails.setItems(addToCartTMS);
-//    }
-
-
     void getAll(){
         String selectedItemId = itemIdCmb.getSelectionModel().getSelectedItem();
         String description = itemDescription.getText();
-        String price = itemPrice.getText();
-        String qtyOnHand = itemQtyOnHand.getText();
-        String getQty = itemGettingQty.getText();
-        ObservableList<AddToCartTM> addToCartTMS = FXCollections.observableArrayList();
-        AddToCartTM addToCartTM = new AddToCartTM(selectedItemId, description, Double.valueOf(price), qtyOnHand, getQty);
-        addToCartTMS.add(addToCartTM);
-        tblItemDetails.setItems(addToCartTMS);
+        Double price = Double.valueOf(itemPrice.getText());
+        int qtyOnHand = Integer.parseInt(itemQtyOnHand.getText());
+        int getQty1 = Integer.parseInt(itemGettingQty.getText());
+
+        boolean isUpdatedNewRow = false;
+        int getQty = 0;
+
+        for (AddToCartTM item : observableList) {
+            if (item.getItemCode().equals(selectedItemId)) {
+                getQty = item.getGetQty();
+                getQty += getQty1;
+                item.setGetQty(getQty);
+                isUpdatedNewRow = true;
+            }
+        }
+
+        if (!isUpdatedNewRow){
+            observableList.add(new AddToCartTM(selectedItemId,description,price,qtyOnHand,getQty1));
+            tblItemDetails.setItems(observableList);
+        }else {
+
+        }
+
+
     }
+
+//    void setItemDetailsToTable(){
+//        String selectedItemId = itemIdCmb.getSelectionModel().getSelectedItem();
+//        if (selectedItemId.equals(tblCode)){
+//            int qty = Integer.parseInt(String.valueOf(itemGettingQty));
+//            tblGetQty += qty;
+//        }
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
