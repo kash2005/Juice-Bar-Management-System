@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
 import lk.ijse.mvcproject.model.ItemModel;
@@ -100,19 +101,34 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void addToCartOnAction(ActionEvent event) {
-        int onHandQty = Integer.parseInt(itemQtyOnHand.getText());
-        int getQty = Integer.parseInt(itemGettingQty.getText());
-        if (onHandQty < getQty){
-            new Alert(Alert.AlertType.ERROR,"Out of Stock Items").show();
-            itemGettingQty.setText("");
-        }else {
-            new Alert(Alert.AlertType.CONFIRMATION,"Items Add to Cart !").show();
-
-            getAll();
-            itemDescription.clear();
-            itemPrice.clear();
-            itemQtyOnHand.clear();
-            itemGettingQty.clear();
+        if (addToCartBtn.getText().equals("Add to Cart")){
+            int onHandQty = Integer.parseInt(itemQtyOnHand.getText());
+            int getQty = Integer.parseInt(itemGettingQty.getText());
+            if (onHandQty < getQty){
+                new Alert(Alert.AlertType.ERROR,"Out of Stock Items").show();
+                itemGettingQty.setText("");
+            }else {
+                new Alert(Alert.AlertType.CONFIRMATION,"Items Add to Cart !").show();
+                getAll();
+                itemDescription.clear();
+                itemPrice.clear();
+                itemQtyOnHand.clear();
+                itemGettingQty.clear();
+            }
+        }else if (addToCartBtn.getText().equals("Remove")){
+            boolean isDeleted = false;
+            AddToCartTM addToCartTM = tblItemDetails.getSelectionModel().getSelectedItem();
+            if (addToCartTM != null){
+                observableList.remove(addToCartTM);
+                isDeleted = true;
+            }
+            if (isDeleted){
+                addToCartBtn.setText("Add to Cart");
+                addToCartBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
+                new Alert(Alert.AlertType.CONFIRMATION,"Item is removed !").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Item is not removed !").show();
+            }
         }
     }
 
@@ -160,6 +176,12 @@ public class OrderFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void tblItemDetailsOnMouseClick(MouseEvent event) {
+        addToCartBtn.setText("Remove");
+        addToCartBtn.setStyle("-fx-background-color:  red mat; -fx-background-radius: 10");
     }
 
 }

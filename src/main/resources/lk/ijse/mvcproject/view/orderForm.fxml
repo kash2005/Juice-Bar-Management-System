@@ -56,7 +56,7 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="522.0" layoutX="586.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
-      <TableView fx:id="tblItemDetails" layoutX="602.0" layoutY="556.0" prefHeight="76.0" prefWidth="514.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+      <TableView fx:id="tblItemDetails" layoutX="602.0" layoutY="556.0" onMouseClicked="#tblItemDetailsOnMouseClick" prefHeight="76.0" prefWidth="514.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
          <columns>
             <TableColumn fx:id="tblCode" prefWidth="60.0" text="Code" />
             <TableColumn fx:id="tblDescription" prefWidth="108.0" text="Description" />
