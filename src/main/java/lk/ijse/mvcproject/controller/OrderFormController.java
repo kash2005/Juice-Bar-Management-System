@@ -186,7 +186,7 @@ public class OrderFormController implements Initializable {
         setItemId();
         generateOrderId();
         orderDateOnAction(new ActionEvent());
-//        setCustomerId();
+        setCustomerId();
     }
 
     void generateOrderId(){
@@ -206,27 +206,27 @@ public class OrderFormController implements Initializable {
         orderDate.setText(formattedDate);
     }
 
-//    void setCustomerId(){
-//        try {
-//            ArrayList<String> arrayList = CustomerModel.setCustomerId();
-//            ObservableList<String> strings = observableList(arrayList);
-//            customerIdCmb.setItems(strings);
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    void setCustomerId(){
+        try {
+            ArrayList<String> arrayList = CustomerModel.setCustomerId();
+            ObservableList<String> strings = observableList(arrayList);
+            customerIdCmb.setItems(strings);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void customerIdCmbOnAction(ActionEvent event) {
-//        String value = customerIdCmb.getValue();
-//        try {
-//            CustomerDTO customerDTO = CustomerModel.searchCustomer(value);
-//            String name = customerDTO.getName();
-//            customerName.setText(name);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+        String value = customerIdCmb.getValue();
+        try {
+            CustomerDTO customerDTO = CustomerModel.searchCustomer(value);
+            String name = customerDTO.getName();
+            customerName.setText(name);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
