@@ -76,4 +76,20 @@ public class CustomerModel {
         }
         return customerDTOArrayList;
     }
+
+    public static ArrayList<String> setCustomerId() throws SQLException {
+        String sql = "select customerId from customer";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        ArrayList<String> arrayList = new ArrayList<>();
+        while (resultSet.next()){
+            String customerId = resultSet.getString("customerId");
+            arrayList.add(customerId);
+        }
+        return arrayList;
+    }
+
+//    public static String setCustomerName(String value) {
+//        String sql = "select * from customer";
+//        r
+//    }
 }

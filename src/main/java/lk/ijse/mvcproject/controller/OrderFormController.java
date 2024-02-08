@@ -9,15 +9,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
+import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.ItemModel;
 import lk.ijse.mvcproject.model.OrderModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableList;
@@ -62,6 +65,14 @@ public class OrderFormController implements Initializable {
     @FXML
     private TextField orderId;
 
+    @FXML
+    private TextField orderDate;
+
+    @FXML
+    private ComboBox<String> customerIdCmb;
+
+    @FXML
+    private TextField customerName;
 
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
@@ -78,7 +89,7 @@ public class OrderFormController implements Initializable {
     void setItemDetailsToTextFileds(){
         String selectedItem = itemIdCmb.getSelectionModel().getSelectedItem();
         try {
-            ItemDTO itemDetails = ItemModel.getItemDetails(selectedItem);
+            ItemDTO itemDetails = ItemModel.searchItem(selectedItem);
             if (itemDetails != null){
                 itemDescription.setText(itemDetails.getDescription());
                 itemPrice.setText(String.valueOf(itemDetails.getPrice()));
@@ -107,9 +118,10 @@ public class OrderFormController implements Initializable {
             if (onHandQty < getQty){
                 new Alert(Alert.AlertType.ERROR,"Out of Stock Items").show();
                 itemGettingQty.setText("");
-            }else {
+            }else{
                 new Alert(Alert.AlertType.CONFIRMATION,"Items Add to Cart !").show();
                 getAll();
+                itemIdCmb.setValue(null);
                 itemDescription.clear();
                 itemPrice.clear();
                 itemQtyOnHand.clear();
@@ -153,7 +165,7 @@ public class OrderFormController implements Initializable {
                     getQty1 += (int) tblGetQty.getCellData(i);
                     observableList.get(i).setGetQty(getQty1);
                     tblItemDetails.refresh();
-
+                    return;
                 }
             }
         }
@@ -162,11 +174,19 @@ public class OrderFormController implements Initializable {
         tblItemDetails.setItems(observableList);
     }
 
+    @FXML
+    void tblItemDetailsOnMouseClick(MouseEvent event) {
+        addToCartBtn.setText("Remove");
+        addToCartBtn.setStyle("-fx-background-color:  red mat; -fx-background-radius: 10");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setValueFactory();
         setItemId();
         generateOrderId();
+        orderDateOnAction(new ActionEvent());
+//        setCustomerId();
     }
 
     void generateOrderId(){
@@ -179,9 +199,34 @@ public class OrderFormController implements Initializable {
     }
 
     @FXML
-    void tblItemDetailsOnMouseClick(MouseEvent event) {
-        addToCartBtn.setText("Remove");
-        addToCartBtn.setStyle("-fx-background-color:  red mat; -fx-background-radius: 10");
+    void orderDateOnAction(ActionEvent event) {
+//        LocalDate localDate = LocalDate.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String formattedDate = localDate.format(formatter);
+//        orderDate.setText(formattedDate);
+    }
+
+//    void setCustomerId(){
+//        try {
+//            ArrayList<String> arrayList = CustomerModel.setCustomerId();
+//            ObservableList<String> strings = observableList(arrayList);
+//            customerIdCmb.setItems(strings);
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    @FXML
+    void customerIdCmbOnAction(ActionEvent event) {
+//        String value = customerIdCmb.getValue();
+//        try {
+//            CustomerDTO customerDTO = CustomerModel.searchCustomer(value);
+//            String name = customerDTO.getName();
+//            customerName.setText(name);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 }
