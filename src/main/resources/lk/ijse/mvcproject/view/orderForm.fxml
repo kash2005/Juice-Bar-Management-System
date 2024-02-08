@@ -102,7 +102,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="discountId" layoutX="285.0" layoutY="438.0" opacity="0.39" promptText="Discount" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="discountId" layoutX="285.0" layoutY="438.0" onAction="#discountOnAction" opacity="0.39" promptText="Discount" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -122,7 +122,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="285.0" layoutY="548.0" opacity="0.39" promptText="Cash" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="cashId" layoutX="285.0" layoutY="548.0" onAction="#cashOnAction" opacity="0.39" promptText="Cash" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -132,7 +132,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="21.0" layoutY="652.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Balance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="balanceId" layoutX="21.0" layoutY="652.0" onAction="#balanceOnAction" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Balance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>

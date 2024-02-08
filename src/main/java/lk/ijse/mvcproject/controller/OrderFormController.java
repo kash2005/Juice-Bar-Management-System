@@ -253,4 +253,34 @@ public class OrderFormController implements Initializable {
         }
     }
 
+    void calculateDiscount(){
+        System.out.println("Kash");
+        double fullTot = Double.parseDouble(totalId.getText());
+        if (discountId.getText() != null){
+            Double discount = Double.valueOf(discountId.getText());
+            double subTotal = fullTot-(fullTot * (discount / 100));
+            subTotalId.setText(String.valueOf(subTotal));
+            System.out.println(subTotal+"sub");
+        }else {
+            subTotalId.setText(String.valueOf(fullTot));
+        }
+        System.out.println("full"+fullTot);
+    }
+
+    @FXML
+    void discountOnAction(ActionEvent event) {
+        calculateDiscount();
+    }
+
+    @FXML
+    void balanceOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cashOnAction(ActionEvent event) {
+
+    }
+
+
 }
