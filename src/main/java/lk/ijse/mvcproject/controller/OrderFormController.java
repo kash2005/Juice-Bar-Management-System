@@ -200,10 +200,10 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void orderDateOnAction(ActionEvent event) {
-//        LocalDate localDate = LocalDate.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        String formattedDate = localDate.format(formatter);
-//        orderDate.setText(formattedDate);
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = localDate.format(formatter);
+        orderDate.setText(formattedDate);
     }
 
 //    void setCustomerId(){
