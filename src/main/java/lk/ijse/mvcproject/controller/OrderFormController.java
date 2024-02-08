@@ -11,12 +11,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
 import lk.ijse.mvcproject.model.ItemModel;
+import lk.ijse.mvcproject.model.OrderModel;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static javafx.collections.FXCollections.observableList;
 
 public class OrderFormController implements Initializable {
     @FXML
@@ -38,22 +41,26 @@ public class OrderFormController implements Initializable {
     private JFXButton addToCartBtn;
 
     @FXML
-    private TableColumn<String, AddToCartTM> tblCode;
+    private TableColumn tblCode;
 
     @FXML
-    private TableColumn<String, AddToCartTM> tblDescription;
+    private TableColumn tblDescription;
 
     @FXML
-    private TableColumn<String, AddToCartTM> tblPrice;
+    private TableColumn  tblPrice;
 
     @FXML
-    private TableColumn<String, AddToCartTM> tblQtyOnHand;
+    private TableColumn tblQtyOnHand;
 
     @FXML
-    private TableColumn<String, AddToCartTM> tblGetQty;
+    private TableColumn tblGetQty;
 
     @FXML
     private TableView<AddToCartTM> tblItemDetails;
+
+    @FXML
+    private TextField orderId;
+
 
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
@@ -100,7 +107,7 @@ public class OrderFormController implements Initializable {
             itemGettingQty.setText("");
         }else {
             new Alert(Alert.AlertType.CONFIRMATION,"Items Add to Cart !").show();
-            setValueFactory();
+
             getAll();
             itemDescription.clear();
             itemPrice.clear();
@@ -110,52 +117,49 @@ public class OrderFormController implements Initializable {
     }
 
     void setValueFactory(){
-        tblCode.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("itemCode"));
-        tblDescription.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("itemDescription"));
-        tblPrice.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("unitPrice"));
-        tblQtyOnHand.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("qtyOnHand"));
-        tblGetQty.setCellValueFactory(new PropertyValueFactory<String, AddToCartTM>("getQty"));
+        tblCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        tblDescription.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
+        tblPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        tblQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
+        tblGetQty.setCellValueFactory(new PropertyValueFactory<>("getQty"));
     }
 
-    void getAll(){
-        String selectedItemId = itemIdCmb.getSelectionModel().getSelectedItem();
+    void getAll() {
+        String selectedItemId = itemIdCmb.getValue();
         String description = itemDescription.getText();
         Double price = Double.valueOf(itemPrice.getText());
         int qtyOnHand = Integer.parseInt(itemQtyOnHand.getText());
         int getQty1 = Integer.parseInt(itemGettingQty.getText());
 
-        boolean isUpdatedNewRow = false;
-        int getQty = 0;
+        if (!observableList.isEmpty()){
+            for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
+                if (tblCode.getCellData(i).equals(selectedItemId)){
+                    getQty1 += (int) tblGetQty.getCellData(i);
+                    observableList.get(i).setGetQty(getQty1);
+                    tblItemDetails.refresh();
 
-        for (AddToCartTM item : observableList) {
-            if (item.getItemCode().equals(selectedItemId)) {
-                getQty = item.getGetQty();
-                getQty += getQty1;
-                item.setGetQty(getQty);
-                isUpdatedNewRow = true;
+                }
             }
         }
-
-        if (!isUpdatedNewRow){
-            observableList.add(new AddToCartTM(selectedItemId,description,price,qtyOnHand,getQty1));
-            tblItemDetails.setItems(observableList);
-        }else {
-
-        }
-
-
+        AddToCartTM addToCartTM = new AddToCartTM(selectedItemId,description,price,qtyOnHand,getQty1);
+        observableList.add(addToCartTM);
+        tblItemDetails.setItems(observableList);
     }
-
-//    void setItemDetailsToTable(){
-//        String selectedItemId = itemIdCmb.getSelectionModel().getSelectedItem();
-//        if (selectedItemId.equals(tblCode)){
-//            int qty = Integer.parseInt(String.valueOf(itemGettingQty));
-//            tblGetQty += qty;
-//        }
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setValueFactory();
         setItemId();
+        generateOrderId();
     }
+
+    void generateOrderId(){
+        try {
+            String nextId = OrderModel.generateOrderId();
+            orderId.setText(nextId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -11,4 +11,18 @@ import java.util.ArrayList;
 
 public class OrderModel {
 
+    public static String generateOrderId() throws SQLException {
+        String sql = "select max(orderId) as lastOrder from orders";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        if (resultSet.next()){
+            String lastId = resultSet.getString("lastOrder");
+            if (lastId == null){
+                return "OR001";
+            }else {
+                int nextId = Integer.parseInt(lastId.substring(2))+1;
+                return "OR"+String.format("%03d",nextId);
+            }
+        }
+        return null;
+    }
 }

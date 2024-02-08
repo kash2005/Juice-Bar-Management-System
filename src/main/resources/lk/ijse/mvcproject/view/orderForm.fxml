@@ -35,7 +35,7 @@
          </font>
       </RadioButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="636.0" layoutX="6.0" layoutY="136.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="2.0" width="547.0" />
-      <TextField layoutX="21.0" layoutY="230.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="orderId" layoutX="21.0" layoutY="230.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
