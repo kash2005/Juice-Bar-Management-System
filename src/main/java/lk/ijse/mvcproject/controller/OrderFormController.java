@@ -83,6 +83,15 @@ public class OrderFormController implements Initializable {
     @FXML
     private TextField subTotalId;
 
+    @FXML
+    private JFXButton purchaseBtn;
+
+    @FXML
+    private TextField cashId;
+
+    @FXML
+    private TextField balanceId;
+
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
     void setItemId(){
@@ -254,17 +263,14 @@ public class OrderFormController implements Initializable {
     }
 
     void calculateDiscount(){
-        System.out.println("Kash");
         double fullTot = Double.parseDouble(totalId.getText());
         if (discountId.getText() != null){
             Double discount = Double.valueOf(discountId.getText());
             double subTotal = fullTot-(fullTot * (discount / 100));
             subTotalId.setText(String.valueOf(subTotal));
-            System.out.println(subTotal+"sub");
         }else {
             subTotalId.setText(String.valueOf(fullTot));
         }
-        System.out.println("full"+fullTot);
     }
 
     @FXML
@@ -279,6 +285,14 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void cashOnAction(ActionEvent event) {
+        Double subTot = Double.valueOf(subTotalId.getText());
+        Double cash = Double.valueOf(cashId.getText());
+        double balance = cash - subTot;
+        balanceId.setText(String.valueOf(balance));
+    }
+
+    @FXML
+    void purchaseBtnOnAction(ActionEvent event) {
 
     }
 
