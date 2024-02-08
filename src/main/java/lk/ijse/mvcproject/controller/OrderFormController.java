@@ -74,6 +74,15 @@ public class OrderFormController implements Initializable {
     @FXML
     private TextField customerName;
 
+    @FXML
+    private TextField totalId;
+
+    @FXML
+    private TextField discountId;
+
+    @FXML
+    private TextField subTotalId;
+
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
     void setItemId(){
@@ -127,6 +136,7 @@ public class OrderFormController implements Initializable {
                 itemQtyOnHand.clear();
                 itemGettingQty.clear();
             }
+            itemsTotal();
         }else if (addToCartBtn.getText().equals("Remove")){
             boolean isDeleted = false;
             AddToCartTM addToCartTM = tblItemDetails.getSelectionModel().getSelectedItem();
@@ -226,6 +236,20 @@ public class OrderFormController implements Initializable {
             customerName.setText(name);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    void itemsTotal(){
+        double fullTot = 0.0;
+        if (!observableList.isEmpty()){
+            ObservableList<AddToCartTM> observableList1 = observableList;
+            for(AddToCartTM addToCartTM : observableList1){
+                Double unitPrice = addToCartTM.getUnitPrice();
+                int getQty = addToCartTM.getGetQty();
+                double itemTot = getQty * unitPrice;
+                fullTot += itemTot;
+                totalId.setText(String.valueOf(fullTot));
+            }
         }
     }
 

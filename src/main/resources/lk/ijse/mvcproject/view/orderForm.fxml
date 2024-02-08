@@ -92,7 +92,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="21.0" layoutY="438.0" opacity="0.39" promptText="Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="totalId" layoutX="21.0" layoutY="438.0" opacity="0.39" promptText="Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -102,7 +102,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="285.0" layoutY="438.0" opacity="0.39" promptText="Discount" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="discountId" layoutX="285.0" layoutY="438.0" opacity="0.39" promptText="Discount" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -112,7 +112,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="21.0" layoutY="548.0" opacity="0.39" promptText="Sub Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="subTotalId" layoutX="21.0" layoutY="548.0" opacity="0.39" promptText="Sub Total " style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
