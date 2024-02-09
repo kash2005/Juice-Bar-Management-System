@@ -321,22 +321,25 @@ public class OrderFormController implements Initializable {
             purchaseBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
         }else if (noRadioBtn.isSelected()){
             type = "No";
-//            placeOrder();
+            placeOrder();
         }
 
     }
 
-//    void placeOrder(){
-//        String id = orderId.getText();
-//        LocalDate date = LocalDate.parse(orderDate.getText());
-//        String custId = customerIdCmb.getValue();
-//        OrderDTO orderDTO = new OrderDTO(id, date, custId);
-//        try {
-//            boolean isOrderSave = OrderModel.saveOrder(orderDTO);
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    void placeOrder(){
+        String id = orderId.getText();
+        LocalDate date = LocalDate.parse(orderDate.getText());
+        String custId = customerIdCmb.getValue();
+        OrderDTO orderDTO = new OrderDTO(id, date, custId);
+        boolean isOrderSave = true;
+        try {
+            isOrderSave = OrderModel.saveOrder(orderDTO);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
 }
