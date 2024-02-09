@@ -12,9 +12,11 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.OrderDTO;
+import lk.ijse.mvcproject.dto.OrderDetailsDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
 import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.ItemModel;
+import lk.ijse.mvcproject.model.OrderDetailsModel;
 import lk.ijse.mvcproject.model.OrderModel;
 
 import java.net.URL;
@@ -330,13 +332,27 @@ public class OrderFormController implements Initializable {
         String id = orderId.getText();
         LocalDate date = LocalDate.parse(orderDate.getText());
         String custId = customerIdCmb.getValue();
+        String itemId = itemIdCmb.getValue();
+        int getQty = Integer.parseInt(itemGettingQty.getText());
+        double subTot = Double.parseDouble(subTotalId.getText());
+
+
         OrderDTO orderDTO = new OrderDTO(id, date, custId);
-        boolean isOrderSave = true;
+        boolean isOrderSave = false;
         try {
             isOrderSave = OrderModel.saveOrder(orderDTO);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id, itemId, getQty, subTot);
+        boolean isOrderDetailsSave = false;
+        try {
+            isOrderDetailsSave = OrderDetailsModel.saveOrderDetails(orderDetailsDTO);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
 
     }
