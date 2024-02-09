@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -19,17 +21,17 @@
             <Font name="Algerian" size="51.0" />
          </font>
       </Text>
-      <Label layoutX="822.0" layoutY="676.0" opacity="0.45" text="Delivery Status :">
+      <Label layoutX="592.0" layoutY="676.0" opacity="0.45" text="Delivery Status :">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <RadioButton layoutX="826.0" layoutY="717.0" mnemonicParsing="false" opacity="0.45" text="Yes">
+      <RadioButton fx:id="yesRadioBtn" layoutX="596.0" layoutY="717.0" mnemonicParsing="false" onAction="#yesRadioBtnOnAction" opacity="0.45" style="-jfx-selected-color: orange;" text="Yes">
          <font>
             <Font size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton layoutX="916.0" layoutY="717.0" mnemonicParsing="false" opacity="0.45" text="No">
+      <RadioButton fx:id="noRadioBtn" layoutX="686.0" layoutY="717.0" mnemonicParsing="false" onAction="#noRadioBtnOnAction" opacity="0.45" style="-jfx-selected-color: orange;" text="No">
          <font>
             <Font size="20.0" />
          </font>
@@ -132,7 +134,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="balanceId" layoutX="21.0" layoutY="652.0" onAction="#balanceOnAction" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Balance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="balanceId" layoutX="21.0" layoutY="652.0" opacity="0.39" prefHeight="46.0" prefWidth="514.0" promptText="Balance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -204,20 +206,10 @@
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="995.0" layoutY="703.0" prefHeight="44.0" prefWidth="138.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Delivery Form" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
-      <TextField layoutX="585.0" layoutY="705.0" opacity="0.39" prefHeight="46.0" prefWidth="222.0" promptText="Net Total" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="587.0" layoutY="669.0" opacity="0.45" text="Net Total :">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="221.0" fitWidth="159.0" layoutX="974.0" layoutY="636.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

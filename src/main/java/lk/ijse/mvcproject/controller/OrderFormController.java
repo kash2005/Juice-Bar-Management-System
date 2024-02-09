@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
+import lk.ijse.mvcproject.dto.OrderDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
 import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.ItemModel;
@@ -91,6 +92,12 @@ public class OrderFormController implements Initializable {
 
     @FXML
     private TextField balanceId;
+
+    @FXML
+    private RadioButton yesRadioBtn;
+
+    @FXML
+    private RadioButton noRadioBtn;
 
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
@@ -279,16 +286,26 @@ public class OrderFormController implements Initializable {
     }
 
     @FXML
-    void balanceOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void cashOnAction(ActionEvent event) {
         Double subTot = Double.valueOf(subTotalId.getText());
         Double cash = Double.valueOf(cashId.getText());
         double balance = cash - subTot;
         balanceId.setText(String.valueOf(balance));
+        if (balanceId.getText() != null){
+            new Alert(Alert.AlertType.WARNING,"Please select the delivery status !").show();
+        }
+    }
+
+    @FXML
+    void yesRadioBtnOnAction(ActionEvent event) {
+        yesRadioBtn.setSelected(true);
+        noRadioBtn.setSelected(false);
+    }
+
+    @FXML
+    void noRadioBtnOnAction(ActionEvent event) {
+        noRadioBtn.setSelected(true);
+        yesRadioBtn.setSelected(false);
     }
 
     @FXML
@@ -296,5 +313,30 @@ public class OrderFormController implements Initializable {
 
     }
 
+    void check(){
+        String type = null;
+        if (yesRadioBtn.isSelected()){
+            type = "Yes";
+            purchaseBtn.setText("Delivery Form");
+            purchaseBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+        }else if (noRadioBtn.isSelected()){
+            type = "No";
+//            placeOrder();
+        }
+
+    }
+
+//    void placeOrder(){
+//        String id = orderId.getText();
+//        LocalDate date = LocalDate.parse(orderDate.getText());
+//        String custId = customerIdCmb.getValue();
+//        OrderDTO orderDTO = new OrderDTO(id, date, custId);
+//        try {
+//            boolean isOrderSave = OrderModel.saveOrder(orderDTO);
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }
