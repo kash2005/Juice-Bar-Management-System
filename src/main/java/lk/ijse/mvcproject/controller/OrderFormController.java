@@ -334,7 +334,6 @@ public class OrderFormController implements Initializable {
         boolean isOrderSave = true;
         try {
             isOrderSave = OrderModel.saveOrder(orderDTO);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
