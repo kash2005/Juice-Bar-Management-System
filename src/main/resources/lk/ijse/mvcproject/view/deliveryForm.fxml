@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="647.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.DeliveryFormController">
+   <children>
+      <Text fill="ORANGE" layoutX="89.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <TextField fx:id="deliveryId" layoutX="89.0" layoutY="160.0" opacity="0.39" promptText="Delivery Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="450.0" layoutY="160.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="89.0" layoutY="230.0" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="450.0" layoutY="230.0" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="89.0" layoutY="300.0" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="450.0" layoutY="300.0" opacity="0.39" promptText="Vehicle Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="89.0" layoutY="370.0" opacity="0.39" promptText="Distance" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="450.0" layoutY="370.0" opacity="0.39" promptText="Delivery Total" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="89.0" layoutY="440.0" opacity="0.39" promptText="Sub Total" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="450.0" layoutY="440.0" opacity="0.39" promptText="Cash" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="177.0" fitWidth="212.0" layoutX="656.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="89.0" layoutY="523.0" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Purchase" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
