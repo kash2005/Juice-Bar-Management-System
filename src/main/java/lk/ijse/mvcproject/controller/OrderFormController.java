@@ -5,10 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.OrderDTO;
@@ -19,6 +23,7 @@ import lk.ijse.mvcproject.model.ItemModel;
 import lk.ijse.mvcproject.model.OrderDetailsModel;
 import lk.ijse.mvcproject.model.OrderModel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -285,6 +290,8 @@ public class OrderFormController implements Initializable {
     @FXML
     void discountOnAction(ActionEvent event) {
         calculateDiscount();
+        cashId.setDisable(true);
+        balanceId.setDisable(true);
     }
 
     @FXML
@@ -293,66 +300,74 @@ public class OrderFormController implements Initializable {
         Double cash = Double.valueOf(cashId.getText());
         double balance = cash - subTot;
         balanceId.setText(String.valueOf(balance));
-        if (balanceId.getText() != null){
-            new Alert(Alert.AlertType.WARNING,"Please select the delivery status !").show();
-        }
+
     }
 
     @FXML
     void yesRadioBtnOnAction(ActionEvent event) {
         yesRadioBtn.setSelected(true);
         noRadioBtn.setSelected(false);
+        purchaseBtn.setText("Delivery Form");
+        purchaseBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
     void noRadioBtnOnAction(ActionEvent event) {
         noRadioBtn.setSelected(true);
         yesRadioBtn.setSelected(false);
+        cashId.setDisable(false);
+        balanceId.setDisable(false);
     }
 
     @FXML
     void purchaseBtnOnAction(ActionEvent event) {
-
-    }
-
-    void check(){
-        String type = null;
-        if (yesRadioBtn.isSelected()){
-            type = "Yes";
-            purchaseBtn.setText("Delivery Form");
-            purchaseBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
-        }else if (noRadioBtn.isSelected()){
-            type = "No";
+        System.out.println("place");
+        if (purchaseBtn.getText().equals("Purchase")){
             placeOrder();
+        }else if (purchaseBtn.getText().equals("Delivery Form")){
+            try {
+                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/deliveryForm.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Juice Bar Management System - Delivery Page");
+                stage.show();
+                stage.centerOnScreen();
+                stage.setScene(new Scene(anchorPane));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-
     }
 
     void placeOrder(){
+        System.out.println("place");
         String id = orderId.getText();
         LocalDate date = LocalDate.parse(orderDate.getText());
         String custId = customerIdCmb.getValue();
-        String itemId = itemIdCmb.getValue();
-        int getQty = Integer.parseInt(itemGettingQty.getText());
         double subTot = Double.parseDouble(subTotalId.getText());
 
+        ArrayList<AddToCartTM> arrayList = new ArrayList<>();
+        AddToCartTM addToCartTM1 = null;
+        OrderDetailsDTO orderDetailsDTO = null;
+        for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
+            AddToCartTM addToCartTM = observableList.get(i);
+            arrayList.add(addToCartTM);
+            orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),subTot);
+            addToCartTM1 = new AddToCartTM(addToCartTM.getItemCode(),addToCartTM.getItemDescription(),addToCartTM.getUnitPrice(),addToCartTM.getQtyOnHand(),addToCartTM.getGetQty());
+            arrayList.add(addToCartTM1);
+        }
 
         OrderDTO orderDTO = new OrderDTO(id, date, custId);
-        boolean isOrderSave = false;
+
         try {
-            isOrderSave = OrderModel.saveOrder(orderDTO);
+            boolean isOrderSaved = OrderModel.saveOrder(orderDTO, orderDetailsDTO, addToCartTM1);
+            if (isOrderSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Place Order not Success").show();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id, itemId, getQty, subTot);
-        boolean isOrderDetailsSave = false;
-        try {
-            isOrderDetailsSave = OrderDetailsModel.saveOrderDetails(orderDetailsDTO);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
 
 
     }
