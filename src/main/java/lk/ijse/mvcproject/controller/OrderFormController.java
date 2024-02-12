@@ -109,8 +109,6 @@ public class OrderFormController implements Initializable {
 
     public static List<OrderDTO> orderDTOList;
 
-    public static Double subTotal;
-
     void setItemId(){
         try {
             ArrayList<String> itemId = ItemModel.getItemId();
@@ -334,6 +332,15 @@ public class OrderFormController implements Initializable {
             String custId = customerIdCmb.getValue();
             orderDTO = new OrderDTO(id,date,custId);
             DeliveryFormController.orderDTO = orderDTO;
+
+            double subTot = Double.parseDouble(subTotalId.getText());
+
+            for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
+                AddToCartTM addToCartTM = observableList.get(i);
+
+                OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),subTot);
+                DeliveryFormController.orderDetailsDTO = orderDetailsDTO;
+            }
             try {
                 AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/deliveryForm.fxml"));
                 Stage stage = new Stage();

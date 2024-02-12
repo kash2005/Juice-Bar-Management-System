@@ -1,10 +1,13 @@
 package lk.ijse.mvcproject.controller;
 
+import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import lk.ijse.mvcproject.dto.CustomerDTO;
 import lk.ijse.mvcproject.dto.OrderDTO;
+import lk.ijse.mvcproject.dto.OrderDetailsDTO;
 import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.DeliveryModel;
 
@@ -31,7 +34,27 @@ public class DeliveryFormController implements Initializable {
     @FXML
     private TextField customerContact;
 
+    @FXML
+    private TextField distance;
+
+    @FXML
+    private TextField deliveryTot;
+
+    @FXML
+    private TextField subTotal;
+
+    @FXML
+    private TextField balanceId;
+
+    @FXML
+    private TextField cashId;
+
+    @FXML
+    private JFXButton purchaseBtn;
+
     public static OrderDTO orderDTO;
+
+    public static OrderDetailsDTO orderDetailsDTO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,7 +88,28 @@ public class DeliveryFormController implements Initializable {
         }
     }
 
+    @FXML
+    void distanceOnAction(ActionEvent event) {
+        calculateNetTotal();
+    }
+
     void calculateNetTotal(){
+        Double subTot = orderDetailsDTO.getAmount();
+        System.out.println(subTot);
+        int distanceText = Integer.parseInt(distance.getText());
+        double deliveryTotal = distanceText * 20;
+        deliveryTot.setText(String.valueOf(deliveryTotal));
+        double netTotal = subTot + deliveryTotal;
+        subTotal.setText(String.valueOf(netTotal));
+    }
+
+    @FXML
+    void cashIdOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void purchaseBtnOnAction(ActionEvent event) {
 
     }
 }
