@@ -335,11 +335,22 @@ public class OrderFormController implements Initializable {
 
             double subTot = Double.parseDouble(subTotalId.getText());
 
+            double tot = Double.parseDouble(totalId.getText());
+
+            List<CartDTO> cartDTOList = new ArrayList<>();
+
             for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
                 AddToCartTM addToCartTM = observableList.get(i);
+                OrderDetailsDTO orderDetailsDTO1 = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),subTot);
+                DeliveryFormController.orderDetailsDTO = orderDetailsDTO1;
 
-                OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),subTot);
-                DeliveryFormController.orderDetailsDTO = orderDetailsDTO;
+                CartDTO cartDTO = new CartDTO(addToCartTM.getItemCode(), addToCartTM.getGetQty(), addToCartTM.getUnitPrice());
+                cartDTOList.add(cartDTO);
+                DeliveryFormController.cartDTOList = cartDTOList;
+
+                OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),tot);
+                orderDetailsDTOList.add(orderDetailsDTO);
+                DeliveryFormController.orderDetailsDTOList = orderDetailsDTOList;
             }
             try {
                 AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/deliveryForm.fxml"));

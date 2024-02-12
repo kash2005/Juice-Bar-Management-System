@@ -5,14 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import lk.ijse.mvcproject.dto.CustomerDTO;
-import lk.ijse.mvcproject.dto.OrderDTO;
-import lk.ijse.mvcproject.dto.OrderDetailsDTO;
+import lk.ijse.mvcproject.dto.*;
 import lk.ijse.mvcproject.model.CustomerModel;
 import lk.ijse.mvcproject.model.DeliveryModel;
+import lk.ijse.mvcproject.model.OrderModel;
+import lk.ijse.mvcproject.model.PlaceOrderModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeliveryFormController implements Initializable {
@@ -55,6 +56,11 @@ public class DeliveryFormController implements Initializable {
     public static OrderDTO orderDTO;
 
     public static OrderDetailsDTO orderDetailsDTO;
+//    public static OrderDetailsDTO orderDetailsDTO2;
+    public static List<OrderDetailsDTO> orderDetailsDTOList;
+
+    public static List<CartDTO> cartDTOList;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,6 +119,17 @@ public class DeliveryFormController implements Initializable {
 
     @FXML
     void purchaseBtnOnAction(ActionEvent event) {
+        String deliveryIdText = deliveryId.getText();
+        String distanceText = distance.getText();
+        double deliveryTotText = Double.parseDouble(deliveryTot.getText());
+        String ordersId = orderId.getText();
 
+        DeliveryDTO deliveryDTO = new DeliveryDTO(deliveryIdText, distanceText, deliveryTotText, ordersId);
+
+        try {
+            PlaceOrderModel.savePlaceOrderWithDelivery(orderDTO,cartDTOList,orderDetailsDTOList,deliveryDTO);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

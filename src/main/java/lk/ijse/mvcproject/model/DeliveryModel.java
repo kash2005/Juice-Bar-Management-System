@@ -1,5 +1,6 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.DeliveryDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -19,5 +20,10 @@ public class DeliveryModel {
             }
         }
         return null;
+    }
+
+    public static boolean saveDelivery(DeliveryDTO deliveryDTO) throws SQLException {
+        String sql = "insert into delivery(deliveryId,distance,price,orderId) values(?,?,?,?);";
+        return CrudUtil.execute(sql,deliveryDTO.getDeliveryId(),deliveryDTO.getDistance(),deliveryDTO.getPrice(),deliveryDTO.getOrderId());
     }
 }
