@@ -167,7 +167,7 @@ public class OrderFormController implements Initializable {
             }
             if (isDeleted){
                 addToCartBtn.setText("Add to Cart");
-                addToCartBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
+                addToCartBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
                 new Alert(Alert.AlertType.CONFIRMATION,"Item is removed !").show();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Item is not removed !").show();
@@ -315,6 +315,8 @@ public class OrderFormController implements Initializable {
         yesRadioBtn.setSelected(false);
         cashId.setDisable(false);
         balanceId.setDisable(false);
+        purchaseBtn.setText("Purchase");
+        purchaseBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
     }
 
     @FXML
