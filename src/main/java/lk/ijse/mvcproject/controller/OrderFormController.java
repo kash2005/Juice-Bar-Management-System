@@ -104,7 +104,12 @@ public class OrderFormController implements Initializable {
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
 
     public static OrderDTO orderDTO;
+
     public static List<OrderDetailsDTO> orderDetailsDTOList = new ArrayList<>();
+
+    public static List<OrderDTO> orderDTOList;
+
+    public static Double subTotal;
 
     void setItemId(){
         try {
@@ -324,13 +329,18 @@ public class OrderFormController implements Initializable {
         if (purchaseBtn.getText().equals("Purchase")){
             placeOrder();
         }else if (purchaseBtn.getText().equals("Delivery Form")){
+            String id = orderId.getText();
+            LocalDate date = LocalDate.parse(orderDate.getText());
+            String custId = customerIdCmb.getValue();
+            orderDTO = new OrderDTO(id,date,custId);
+            DeliveryFormController.orderDTO = orderDTO;
             try {
                 AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/deliveryForm.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Juice Bar Management System - Delivery Page");
-                stage.show();
-                stage.centerOnScreen();
                 stage.setScene(new Scene(anchorPane));
+                stage.centerOnScreen();
+                stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -346,6 +356,7 @@ public class OrderFormController implements Initializable {
         double tot = Double.parseDouble(totalId.getText());
 
         orderDTO = new OrderDTO(id,date,custId);
+        orderDTOList.add(orderDTO);
         List<CartDTO> cartDTOList = new ArrayList<>();
 
         for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
@@ -355,7 +366,6 @@ public class OrderFormController implements Initializable {
             OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),tot);
             orderDetailsDTOList.add(orderDetailsDTO);
         }
-
         try {
             boolean isPlaceOrder = PlaceOrderModel.savePlaceOrder(orderDTO, cartDTOList, orderDetailsDTOList);
             if (isPlaceOrder){

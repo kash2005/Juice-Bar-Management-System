@@ -20,22 +20,22 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="450.0" layoutY="160.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="orderId" layoutX="450.0" layoutY="160.0" opacity="0.39" promptText="Order Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="89.0" layoutY="230.0" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="customerId" layoutX="89.0" layoutY="230.0" opacity="0.39" promptText="Customer Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="450.0" layoutY="230.0" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="customerName" layoutX="450.0" layoutY="230.0" opacity="0.39" promptText="Customer Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="89.0" layoutY="300.0" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="customerAddress" layoutX="89.0" layoutY="300.0" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
@@ -70,7 +70,7 @@
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <TextField layoutX="450.0" layoutY="301.0" opacity="0.39" promptText="Customer Address" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+      <TextField fx:id="customerContact" layoutX="450.0" layoutY="301.0" opacity="0.39" promptText="Customer Contact" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
          <font>
             <Font size="20.0" />
          </font>
