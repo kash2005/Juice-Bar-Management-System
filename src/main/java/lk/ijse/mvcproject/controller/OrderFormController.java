@@ -13,15 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.mvcproject.dto.CustomerDTO;
-import lk.ijse.mvcproject.dto.ItemDTO;
-import lk.ijse.mvcproject.dto.OrderDTO;
-import lk.ijse.mvcproject.dto.OrderDetailsDTO;
+import lk.ijse.mvcproject.dto.*;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
-import lk.ijse.mvcproject.model.CustomerModel;
-import lk.ijse.mvcproject.model.ItemModel;
-import lk.ijse.mvcproject.model.OrderDetailsModel;
-import lk.ijse.mvcproject.model.OrderModel;
+import lk.ijse.mvcproject.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +23,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableList;
@@ -107,6 +102,9 @@ public class OrderFormController implements Initializable {
     private RadioButton noRadioBtn;
 
     private ObservableList<AddToCartTM> observableList = FXCollections.observableArrayList();
+
+    public static OrderDTO orderDTO;
+    public static List<OrderDetailsDTO> orderDetailsDTOList = new ArrayList<>();
 
     void setItemId(){
         try {
@@ -321,7 +319,6 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void purchaseBtnOnAction(ActionEvent event) {
-        System.out.println("place");
         if (purchaseBtn.getText().equals("Purchase")){
             placeOrder();
         }else if (purchaseBtn.getText().equals("Delivery Form")){
@@ -335,41 +332,38 @@ public class OrderFormController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            purchaseBtn.setText("Purchase");
+            purchaseBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
         }
     }
 
     void placeOrder(){
-        System.out.println("place");
         String id = orderId.getText();
         LocalDate date = LocalDate.parse(orderDate.getText());
         String custId = customerIdCmb.getValue();
-        double subTot = Double.parseDouble(subTotalId.getText());
+        double tot = Double.parseDouble(totalId.getText());
 
-        ArrayList<AddToCartTM> arrayList = new ArrayList<>();
-        AddToCartTM addToCartTM1 = null;
-        OrderDetailsDTO orderDetailsDTO = null;
+        orderDTO = new OrderDTO(id,date,custId);
+        List<CartDTO> cartDTOList = new ArrayList<>();
+
         for (int i = 0; i < tblItemDetails.getItems().size(); i++) {
             AddToCartTM addToCartTM = observableList.get(i);
-            arrayList.add(addToCartTM);
-            orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),subTot);
-            addToCartTM1 = new AddToCartTM(addToCartTM.getItemCode(),addToCartTM.getItemDescription(),addToCartTM.getUnitPrice(),addToCartTM.getQtyOnHand(),addToCartTM.getGetQty());
-            arrayList.add(addToCartTM1);
+            CartDTO cartDTO = new CartDTO(addToCartTM.getItemCode(), addToCartTM.getGetQty(), addToCartTM.getUnitPrice());
+            cartDTOList.add(cartDTO);
+            OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),tot);
+            orderDetailsDTOList.add(orderDetailsDTO);
         }
 
-        OrderDTO orderDTO = new OrderDTO(id, date, custId);
-
         try {
-            boolean isOrderSaved = OrderModel.saveOrder(orderDTO, orderDetailsDTO, addToCartTM1);
-            if (isOrderSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success").show();
+            boolean isPlaceOrder = PlaceOrderModel.savePlaceOrder(orderDTO, cartDTOList, orderDetailsDTOList);
+            if (isPlaceOrder){
+                new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success !").show();
             }else {
-                new Alert(Alert.AlertType.ERROR,"Place Order not Success").show();
+                new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 }
