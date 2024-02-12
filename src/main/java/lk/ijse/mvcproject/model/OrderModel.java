@@ -27,34 +27,8 @@ public class OrderModel {
         return null;
     }
 
-    public static boolean saveOrder(OrderDTO orderDTO, OrderDetailsDTO orderDetailsDTO, AddToCartTM addToCartTM) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
-            String sql = "insert into orders(orderId,date,customerId) values (?,?,?);";
-            boolean result = CrudUtil.execute(sql, orderDTO.getOrderId(), orderDTO.getDate(), orderDTO.getCustomerId());
-            System.out.println(result+" order");
-            if (result){
-                boolean isUpdated = ItemModel.updateQty(addToCartTM);
-                System.out.println(isUpdated+" item");
-                if (isUpdated){
-                    System.out.println("sahan");
-                    boolean isOrderDetailsSaved = OrderDetailsModel.saveOrderDetails(orderDetailsDTO);
-                    System.out.println(isOrderDetailsSaved+" orderdetail");
-                    if (isOrderDetailsSaved){
-                        connection.commit();
-                        return true;
-                    }
-                }
-            }
-            return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();
-            return false;
-        }finally {
-            connection.setAutoCommit(true);
-        }
-
+    public static boolean saveOrder(OrderDTO orderDTO) throws SQLException {
+        String sql = "insert into orders(orderId,date,customerId) values (?,?,?);";
+        return CrudUtil.execute(sql, orderDTO.getOrderId(), orderDTO.getDate(), orderDTO.getCustomerId());
     }
 }
