@@ -105,7 +105,10 @@ public class DeliveryFormController implements Initializable {
 
     @FXML
     void cashIdOnAction(ActionEvent event) {
-
+        double cash = Double.parseDouble(cashId.getText());
+        double tot = Double.parseDouble(subTotal.getText());
+        double balance = cash - tot;
+        balanceId.setText(String.valueOf(balance));
     }
 
     @FXML
