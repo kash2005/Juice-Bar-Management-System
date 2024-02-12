@@ -1,5 +1,6 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.CartDTO;
 import lk.ijse.mvcproject.dto.ItemDTO;
 import lk.ijse.mvcproject.dto.tm.AddToCartTM;
 import lk.ijse.mvcproject.util.CrudUtil;
@@ -7,6 +8,7 @@ import lk.ijse.mvcproject.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemModel {
     public static String generateItemId() throws SQLException {
@@ -84,13 +86,18 @@ public class ItemModel {
         return item;
     }
 
-    public static boolean updateQty(AddToCartTM addToCartTM1) throws SQLException {
-        System.out.println("kashmi");
-        String sql = "update item set qty = (qty - ?) where itemId =?;";
-        boolean b = CrudUtil.execute(sql,addToCartTM1.getGetQty(),addToCartTM1.getItemCode());
-        System.out.println(b+"itemmodel");
-        System.out.println(addToCartTM1.getGetQty()+"itemmodel");
-        System.out.println(addToCartTM1.getItemCode()+"itemmodel");
-         return true;
+    public static boolean updateQty(List<CartDTO> cartDTOList) throws SQLException {
+        for (CartDTO cartDTO : cartDTOList){
+            if (!updateQty(cartDTO)){
+                return false;
+            }
+        }
+        return true;
     }
+
+    public static boolean updateQty(CartDTO cartDTO) throws SQLException {
+        String sql = "update item set qty = (qty - ?) where itemId =?;";
+        return CrudUtil.execute(sql,cartDTO.getQty(),cartDTO.getItemId());
+    }
+
 }
