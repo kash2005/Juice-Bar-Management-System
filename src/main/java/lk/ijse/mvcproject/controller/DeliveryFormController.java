@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.mvcproject.dto.*;
 import lk.ijse.mvcproject.model.CustomerModel;
@@ -127,7 +128,12 @@ public class DeliveryFormController implements Initializable {
         DeliveryDTO deliveryDTO = new DeliveryDTO(deliveryIdText, distanceText, deliveryTotText, ordersId);
 
         try {
-            PlaceOrderModel.savePlaceOrderWithDelivery(orderDTO,cartDTOList,orderDetailsDTOList,deliveryDTO);
+            boolean isSaved = PlaceOrderModel.savePlaceOrderWithDelivery(orderDTO, cartDTOList, orderDetailsDTOList, deliveryDTO);
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success !").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
