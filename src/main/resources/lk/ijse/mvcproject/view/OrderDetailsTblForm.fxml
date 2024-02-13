@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="647.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.OrderDetailsTblFormController">
+   <children>
+      <TableView fx:id="orderDetailsTbl" layoutX="48.0" layoutY="136.0" prefHeight="377.0" prefWidth="718.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+         <columns>
+            <TableColumn fx:id="colOrderId" prefWidth="68.0" text="Order Id" />
+            <TableColumn fx:id="colOrderDate" prefWidth="103.0" text="Order Date" />
+            <TableColumn fx:id="colCustomerId" prefWidth="97.0" text="Customer Id" />
+            <TableColumn fx:id="colItemId" prefWidth="64.0" text="Item Id" />
+            <TableColumn fx:id="colDescription" prefWidth="97.0" text="Description" />
+            <TableColumn fx:id="colGetQty" prefWidth="55.0" text="Qty" />
+            <TableColumn fx:id="colPrice" prefWidth="95.0" text="Price" />
+            <TableColumn fx:id="colDeliveryStatus" prefWidth="138.0" text="Delivery Status" />
+         </columns>
+      </TableView>
+      <Text fill="ORANGE" layoutX="79.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order details">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="177.0" fitWidth="212.0" layoutX="580.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
