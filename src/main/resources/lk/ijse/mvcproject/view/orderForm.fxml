@@ -211,7 +211,7 @@
             <Image url="@../image/orange_logo.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="803.0" layoutY="710.0" prefHeight="44.0" prefWidth="138.0" style="-fx-background-color: orange; -fx-background-radius: 10;" text="Order Details" textFill="WHITE">
+      <JFXButton layoutX="803.0" layoutY="710.0" onAction="#orderDetailsOnAction" prefHeight="44.0" prefWidth="138.0" style="-fx-background-color: orange; -fx-background-radius: 10;" text="Order Details" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

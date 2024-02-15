@@ -16,6 +16,7 @@ public class OrderDetailsTM {
     private String itemId;
     private String description;
     private int getQty;
-    private String amount;
+    private double amount;
     private String deliveryStatus;
+
 }
