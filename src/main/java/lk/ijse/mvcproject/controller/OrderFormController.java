@@ -396,4 +396,9 @@ public class OrderFormController implements Initializable {
         }
     }
 
+    @FXML
+    void orderDetailsOnAction(ActionEvent event) {
+
+    }
+
 }
