@@ -397,8 +397,13 @@ public class OrderFormController implements Initializable {
     }
 
     @FXML
-    void orderDetailsOnAction(ActionEvent event) {
-
+    void orderDetailsOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/OrderDetailsTblForm.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(load));
+        stage.show();
+        stage.centerOnScreen();
+        stage.setTitle("Juice Bar Management System - Order Details Page");
     }
 
 }

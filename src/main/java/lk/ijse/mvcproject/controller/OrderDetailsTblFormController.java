@@ -77,6 +77,7 @@ public class OrderDetailsTblFormController implements Initializable {
         String customerId= null;
         String description = null;
         String deliveryStatus = null;
+        OrderDetailsTM orderDetailsTM = null;
         try {
             ArrayList<OrderDetailsDTO> orderDetails = OrderDetailsModel.getOrderDetails();
             for (OrderDetailsDTO orderDetailsDTO : orderDetails){
@@ -84,39 +85,42 @@ public class OrderDetailsTblFormController implements Initializable {
                 itemId = orderDetailsDTO.getItemId();
                 getQty = orderDetailsDTO.getGetQty();
                 amount = orderDetailsDTO.getAmount();
+                try {
+                    OrderDTO orderDTO = OrderModel.searchOrderId(orderId);
+                    date = orderDTO.getDate();
+                    customerId = orderDTO.getCustomerId();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    ItemDTO itemDTO = ItemModel.searchItem(itemId);
+                    description = itemDTO.getDescription();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    System.out.println(orderId);
+                    DeliveryDTO allDelivery = DeliveryModel.getAllDelivery(orderId);
+                    String orderId1 = allDelivery.getOrderId();
+                    if (orderId1.equals(orderId)){
+                        deliveryStatus = "Yes";
+                    }else {
+                        deliveryStatus = "No";
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                orderDetailsTM = new OrderDetailsTM(orderId,date,customerId,itemId,description,getQty,amount,deliveryStatus);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        try {
-            OrderDTO orderDTO = OrderModel.searchOrderId(orderId);
-            date = orderDTO.getDate();
-            customerId = orderDTO.getCustomerId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
-        try {
-            ItemDTO itemDTO = ItemModel.searchItem(itemId);
-            description = itemDTO.getDescription();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            DeliveryDTO allDelivery = DeliveryModel.getAllDelivery(orderId);
-            String orderId1 = allDelivery.getOrderId();
-            if (orderId1.equals(orderId)){
-                deliveryStatus = "Yes";
-            }else {
-                deliveryStatus = "No";
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        OrderDetailsTM orderDetailsTM = new OrderDetailsTM(orderId,date,customerId,itemId,description,getQty,amount,deliveryStatus);
         observableList.add(orderDetailsTM);
         orderDetailsTbl.setItems(observableList);
     }

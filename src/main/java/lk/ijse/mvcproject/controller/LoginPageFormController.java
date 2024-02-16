@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,14 @@ public class LoginPageFormController implements Initializable {
     private ImageView hideImg;
 
     @FXML
+    private ComboBox<?> cmbEmployeeId;
+
+    @FXML
+    void cmbEmployeeIdOnACtion(ActionEvent event) {
+
+    }
+
+    @FXML
     void hidePasswordOnMouseClicked(MouseEvent event) {
         passwordId.setText(textPasswordId.getText());
         hideImg.setVisible(true);
@@ -67,6 +76,9 @@ public class LoginPageFormController implements Initializable {
     void loginBtnOnAction(ActionEvent event) throws IOException {
         String userName = userNameId.getText();
         String password = passwordId.getText();
+
+
+
         try {
             UserDTO user = UserModel.getUser(userName);
             if (userName.equals(user.getUserName()) && password.equals(user.getPassword())){
