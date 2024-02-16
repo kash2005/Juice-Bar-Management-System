@@ -66,7 +66,19 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
+        String id = eId.getText();
+        try {
+            boolean delete = EmployeeModel.delete(id);
+            if (delete){
+                new Alert(Alert.AlertType.CONFIRMATION,"Employee is deleted !").show();
+                clear();
+                generateId();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Employee is not deleted !").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -98,6 +110,8 @@ public class EmployeeFormController implements Initializable {
                 boolean update = EmployeeModel.update(employeeDTO);
                 if (update){
                     new Alert(Alert.AlertType.CONFIRMATION,"Employee is updated !").show();
+                    btnSave.setText("Save");
+                    btnSave.setStyle("-fx-background-color: green; -fx-background-radius: 10");
                     clear();
                     generateId();
                 }else {

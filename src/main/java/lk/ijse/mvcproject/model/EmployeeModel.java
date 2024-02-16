@@ -72,4 +72,9 @@ public class EmployeeModel {
         return CrudUtil.execute(sql,employeeDTO.getName(),employeeDTO.getAddress(),employeeDTO.getEmail(),
                 employeeDTO.getContact(),employeeDTO.getJobRoll(),employeeDTO.getOnePerHour(),employeeDTO.getEId());
     }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "delete from employee where eId = ?;";
+        return CrudUtil.execute(sql,id);
+    }
 }
