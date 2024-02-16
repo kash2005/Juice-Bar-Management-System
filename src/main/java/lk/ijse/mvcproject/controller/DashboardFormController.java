@@ -38,15 +38,6 @@ public class DashboardFormController implements Initializable {
     private ImageView customerOrangeImg;
 
     @FXML
-    private JFXButton employeeBtn;
-
-    @FXML
-    private ImageView employeeGreyImg;
-
-    @FXML
-    private ImageView employeeOrangeImg;
-
-    @FXML
     private JFXButton itemBtn;
 
     @FXML
@@ -107,11 +98,6 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void employeeBtnOnAction(ActionEvent event) throws IOException {
-        setForms(employeeBtn,"/lk/ijse/mvcproject/view/employeeForm.fxml",employeeOrangeImg,employeeGreyImg);
-    }
-
-    @FXML
     void ingredientBtnOnAction(ActionEvent event) throws IOException {
         setForms(ingredientBtn,"/lk/ijse/mvcproject/view/ingredientForm.fxml",ingredientOrangeImg,ingredientGreyImg);
     }
@@ -139,14 +125,13 @@ public class DashboardFormController implements Initializable {
     }
 
     void setForms(JFXButton btn,String path,ImageView image,ImageView greyImageView) throws IOException {
-        JFXButton[] buttons = {dashboardBtn,customerBtn,employeeBtn,itemBtn,ingredientBtn,orderBtn,supplierBtn};
+        JFXButton[] buttons = {dashboardBtn,customerBtn,itemBtn,ingredientBtn,orderBtn,supplierBtn};
         String[] forms = {"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml","/lk/ijse/mvcproject/view/customerForm.fxml",
-                "/lk/ijse/mvcproject/view/employeeForm.fxml","/lk/ijse/mvcproject/view/itemForm.fxml",
-                "/lk/ijse/mvcproject/view/ingredientForm.fxml","/lk/ijse/mvcproject/view/orderForm.fxml",
+                "/lk/ijse/mvcproject/view/itemForm.fxml", "/lk/ijse/mvcproject/view/ingredientForm.fxml","/lk/ijse/mvcproject/view/orderForm.fxml",
                 "/lk/ijse/mvcproject/view/supplierForm.fxml"};
-        ImageView[] imageViews = {dashboardOrangeImg,customerOrangeImg,employeeOrangeImg,itemOrangeImg,ingredientOrangeImg,
+        ImageView[] imageViews = {dashboardOrangeImg,customerOrangeImg,itemOrangeImg,ingredientOrangeImg,
         orderOrangeImg,supplierOrangeImg};
-        ImageView[] greyImage = {dashboardGreyImg,customerGreyImg,employeeGreyImg,itemGreyImg,ingredientGreyImg,
+        ImageView[] greyImage = {dashboardGreyImg,customerGreyImg,itemGreyImg,ingredientGreyImg,
         orderGreyImg,supplierGreyImg};
         for (int i = 0; i < forms.length; i++) {
             if (btn.equals(buttons[i]) && path.equals(forms[i]) && image.equals(imageViews[i]) && greyImageView.equals(greyImage[i])){

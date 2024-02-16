@@ -18,7 +18,13 @@ public class EmployeeModel {
         return arrayList;
     }
 
-//    public static String searchId(String eId) {
-//        String sql = "select jobRoll from employee where eId = ?;";
-//    }
+    public static String searchId(String eId) throws SQLException {
+        String sql = "select jobRoll from employee where eId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql, eId);
+        String jobRoll =null;
+        if (resultSet.next()){
+            jobRoll = resultSet.getString("jobRoll");
+        }
+        return jobRoll;
+    }
 }
