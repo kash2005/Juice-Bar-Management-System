@@ -27,4 +27,19 @@ public class EmployeeModel {
         }
         return jobRoll;
     }
+
+    public static String generateId() throws SQLException {
+        String sql = "select max(eId) as lastId from employee;";
+        ResultSet resultSet = CrudUtil.execute(sql);
+        if (resultSet.next()){
+            String lastId = resultSet.getString("lastId");
+            if (lastId == null){
+                return "E001";
+            }else {
+                int nextId = Integer.parseInt(lastId.substring(1)) + 1;
+                return "E" + String.format("%03d",nextId);
+            }
+        }
+        return null;
+    }
 }
