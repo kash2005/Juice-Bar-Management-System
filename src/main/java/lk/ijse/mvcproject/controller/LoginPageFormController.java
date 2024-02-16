@@ -54,6 +54,10 @@ public class LoginPageFormController implements Initializable {
 
     }
 
+    void setCmbEmployeeId(){
+
+    }
+
     @FXML
     void hidePasswordOnMouseClicked(MouseEvent event) {
         passwordId.setText(textPasswordId.getText());
