@@ -66,4 +66,10 @@ public class EmployeeModel {
         }
         return employeeDTO;
     }
+
+    public static boolean update(EmployeeDTO employeeDTO) throws SQLException {
+        String  sql = "update employee set name = ?,address = ?,email = ?,contact = ?,jobRoll = ?,onePerHour = ? where eId = ?;";
+        return CrudUtil.execute(sql,employeeDTO.getName(),employeeDTO.getAddress(),employeeDTO.getEmail(),
+                employeeDTO.getContact(),employeeDTO.getJobRoll(),employeeDTO.getOnePerHour(),employeeDTO.getEId());
+    }
 }

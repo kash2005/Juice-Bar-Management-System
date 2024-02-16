@@ -78,7 +78,7 @@ public class EmployeeFormController implements Initializable {
         String contact = eContact.getText();
         String email = eEmail.getText();
         String perHour = onePerHour.getText();
-        EmployeeDTO employeeDTO = new EmployeeDTO(id, name, type, address, email, contact, perHour);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id, name, address, email, contact, type, perHour);
 
         if (btnSave.getText().equals("Save")){
             try {
@@ -89,6 +89,19 @@ public class EmployeeFormController implements Initializable {
                     generateId();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Employee is not saved !").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else if (btnSave.getText().equals("Update")){
+            try {
+                boolean update = EmployeeModel.update(employeeDTO);
+                if (update){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Employee is updated !").show();
+                    clear();
+                    generateId();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Employee is not updated !").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
