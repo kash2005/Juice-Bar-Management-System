@@ -2,11 +2,12 @@ package lk.ijse.mvcproject.controller;
 
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -15,13 +16,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import lk.ijse.mvcproject.dto.UserDTO;
+import lk.ijse.mvcproject.model.EmployeeModel;
 import lk.ijse.mvcproject.model.UserModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginPageFormController implements Initializable {
@@ -47,15 +49,21 @@ public class LoginPageFormController implements Initializable {
     private ImageView hideImg;
 
     @FXML
-    private ComboBox<?> cmbEmployeeId;
+    private ComboBox<String> cmbEmployeeId;
 
     @FXML
     void cmbEmployeeIdOnACtion(ActionEvent event) {
-
+        userNameId.requestFocus();
     }
 
     void setCmbEmployeeId(){
-
+        try {
+            ArrayList<String> cmbEmployeeId1 = EmployeeModel.getCmbEmployeeId();
+            ObservableList<String> observableList = FXCollections.observableArrayList(cmbEmployeeId1);
+            cmbEmployeeId.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -78,10 +86,11 @@ public class LoginPageFormController implements Initializable {
 
     @FXML
     void loginBtnOnAction(ActionEvent event) throws IOException {
+        String eId = cmbEmployeeId.getValue();
         String userName = userNameId.getText();
         String password = passwordId.getText();
 
-
+//        EmployeeModel.searchId(eId);
 
         try {
             UserDTO user = UserModel.getUser(userName);
@@ -112,9 +121,10 @@ public class LoginPageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userNameId.requestFocus();
+//        userNameId.requestFocus();
         textPasswordId.setVisible(false);
         hideImg.setVisible(true);
         passwordId.setVisible(true);
+        setCmbEmployeeId();
     }
 }
