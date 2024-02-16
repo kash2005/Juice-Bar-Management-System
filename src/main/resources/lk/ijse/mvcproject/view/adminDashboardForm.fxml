@@ -18,7 +18,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="ORANGE" height="95.0" layoutX="92.0" layoutY="681.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="194.0" />
-      <JFXButton layoutX="142.0" layoutY="725.0" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sign out" textFill="ORANGE">
+      <JFXButton layoutX="142.0" layoutY="725.0" onAction="#signoutBtnOnAction" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sign out" textFill="ORANGE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -28,7 +28,7 @@
             <Image url="@../image/orange&amp;burger.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="104.0" layoutY="152.0" onAction="#dashboardOnAction" text="  Dashboard" textFill="#757575">
+      <JFXButton fx:id="dashboardBtn" layoutX="104.0" layoutY="152.0" onAction="#dashboardOnAction" text="  Dashboard" textFill="#757575">
          <font>
             <Font size="23.0" />
          </font>
@@ -40,12 +40,12 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <ImageView fx:id="dashboardOrangeImg1" fitHeight="150.0" fitWidth="30.0" layoutX="120.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dashboardOrangeImg" fitHeight="150.0" fitWidth="30.0" layoutX="120.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-dashboard-96%20(2).png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="104.0" layoutY="243.0" onAction="#employeeBtnOnAction" text="  Employee" textFill="#757575">
+      <JFXButton fx:id="employeeBtn" layoutX="104.0" layoutY="243.0" onAction="#employeeBtnOnAction" text="  Employee" textFill="#757575">
          <font>
             <Font size="23.0" />
          </font>
