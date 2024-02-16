@@ -15,6 +15,7 @@ import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeFormController implements Initializable {
@@ -43,7 +44,7 @@ public class EmployeeFormController implements Initializable {
     private JFXButton btnSave;
 
     @FXML
-    private TableView<?> tblEmployee;
+    private TableView<EmployeeTM> tblEmployee;
 
     @FXML
     private TableColumn<String, EmployeeTM> colId;
@@ -78,6 +79,7 @@ public class EmployeeFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION,"Employee is deleted !").show();
                 clear();
                 generateId();
+                getAll();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Employee is not deleted !").show();
             }
@@ -104,6 +106,7 @@ public class EmployeeFormController implements Initializable {
                     new Alert(Alert.AlertType.CONFIRMATION,"Employee is saved !").show();
                     clear();
                     generateId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Employee is not saved !").show();
                 }
@@ -119,6 +122,7 @@ public class EmployeeFormController implements Initializable {
                     btnSave.setStyle("-fx-background-color: green; -fx-background-radius: 10");
                     clear();
                     generateId();
+                    getAll();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Employee is not updated !").show();
                 }
@@ -210,10 +214,6 @@ public class EmployeeFormController implements Initializable {
 
     }
 
-    void searchId(){
-
-    }
-
     void clear(){
         eId.clear();
         eName.clear();
@@ -244,6 +244,7 @@ public class EmployeeFormController implements Initializable {
         setCmbJobRollTypes();
         eName.requestFocus();
         setValueFactory();
+        getAll();
     }
 
     private void setValueFactory() {
@@ -254,5 +255,26 @@ public class EmployeeFormController implements Initializable {
         colContact.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("contact"));
         colType.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("jobRoll"));
         colPerHour.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("onePerHour"));
+    }
+
+    private void getAll(){
+        ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<EmployeeDTO> all = EmployeeModel.getAll();
+            for (EmployeeDTO employeeDTO : all){
+                observableList.add(new EmployeeTM(
+                    employeeDTO.getEId(),
+                    employeeDTO.getName(),
+                    employeeDTO.getAddress(),
+                    employeeDTO.getEmail(),
+                    employeeDTO.getContact(),
+                    employeeDTO.getJobRoll(),
+                    employeeDTO.getOnePerHour()
+                ));
+                tblEmployee.setItems(observableList);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -77,4 +77,24 @@ public class EmployeeModel {
         String sql = "delete from employee where eId = ?;";
         return CrudUtil.execute(sql,id);
     }
+
+    public static ArrayList<EmployeeDTO> getAll() throws SQLException {
+        String sql = "select * from employee;";
+        ArrayList<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        EmployeeDTO employeeDTO = null;
+        ResultSet resultSet = CrudUtil.execute(sql);
+        while (resultSet.next()){
+            employeeDTO = new EmployeeDTO(
+                    resultSet.getString("eId"),
+                    resultSet.getString("name"),
+                    resultSet.getString("address"),
+                    resultSet.getString("email"),
+                    resultSet.getString("contact"),
+                    resultSet.getString("jobRoll"),
+                    resultSet.getString("onePerHour")
+            );
+            employeeDTOS.add(employeeDTO);
+        }
+        return employeeDTOS;
+    }
 }
