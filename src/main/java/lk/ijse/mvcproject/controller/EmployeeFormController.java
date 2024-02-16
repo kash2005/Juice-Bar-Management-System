@@ -211,7 +211,21 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void tblEmployeeOnMouseClick(MouseEvent event) {
-
+        EmployeeTM selectedItem = (EmployeeTM) tblEmployee.getSelectionModel().getSelectedItem();
+        try {
+            EmployeeDTO employeeDTO = EmployeeModel.searchEmployeeId(selectedItem.getEId());
+            eId.setText(employeeDTO.getEId());
+            eName.setText(employeeDTO.getName());
+            cmbEType.setValue(employeeDTO.getJobRoll());
+            eAddress.setText(employeeDTO.getJobRoll());
+            eContact.setText(employeeDTO.getContact());
+            eEmail.setText(employeeDTO.getEmail());
+            onePerHour.setText(employeeDTO.getOnePerHour());
+            btnSave.setText("Update");
+            btnSave.setStyle("-fx-background-color: blue; -fx-background-radius: 10;");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void clear(){
