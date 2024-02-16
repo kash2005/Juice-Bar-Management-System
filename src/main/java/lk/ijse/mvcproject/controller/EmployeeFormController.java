@@ -7,8 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.EmployeeDTO;
+import lk.ijse.mvcproject.dto.tm.EmployeeTM;
 import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.net.URL;
@@ -44,22 +46,25 @@ public class EmployeeFormController implements Initializable {
     private TableView<?> tblEmployee;
 
     @FXML
-    private TableColumn<?, ?> colId;
+    private TableColumn<String, EmployeeTM> colId;
 
     @FXML
-    private TableColumn<?, ?> colName;
+    private TableColumn<String, EmployeeTM> colName;
 
     @FXML
-    private TableColumn<?, ?> colType;
+    private TableColumn<String, EmployeeTM> colType;
 
     @FXML
-    private TableColumn<?, ?> colAddress;
+    private TableColumn<String, EmployeeTM> colAddress;
 
     @FXML
-    private TableColumn<?, ?> colContact;
+    private TableColumn<String, EmployeeTM> colContact;
 
     @FXML
-    private TableColumn<?, ?> colEmail;
+    private TableColumn<String, EmployeeTM> colEmail;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colPerHour;
 
     @FXML
     private TextField searchId;
@@ -238,5 +243,16 @@ public class EmployeeFormController implements Initializable {
         generateId();
         setCmbJobRollTypes();
         eName.requestFocus();
+        setValueFactory();
+    }
+
+    private void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<String, EmployeeTM>("eId"));
+        colName.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("address"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("email"));
+        colContact.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("contact"));
+        colType.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("jobRoll"));
+        colPerHour.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("onePerHour"));
     }
 }
