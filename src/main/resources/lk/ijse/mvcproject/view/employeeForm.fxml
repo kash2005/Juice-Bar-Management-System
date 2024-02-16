@@ -28,7 +28,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="eName" layoutX="157.0" layoutY="138.0" onAction="#eNameOnAction" opacity="0.39" promptText="Employee Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="eName" layoutX="157.0" layoutY="138.0" opacity="0.39" promptText="Employee Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>

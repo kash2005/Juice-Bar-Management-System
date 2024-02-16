@@ -1,14 +1,14 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.EmployeeDTO;
 import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.net.URL;
@@ -32,7 +32,7 @@ public class EmployeeFormController implements Initializable {
     private TextField eContact;
 
     @FXML
-    private ComboBox<?> cmbEType;
+    private ComboBox<String> cmbEType;
 
     @FXML
     private TextField onePerHour;
@@ -71,38 +71,52 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
+        String id = eId.getText();
+        String name = eName.getText();
+        String type = cmbEType.getValue();
+        String address = eAddress.getText();
+        String contact = eContact.getText();
+        String email = eEmail.getText();
+        String perHour = onePerHour.getText();
+        EmployeeDTO employeeDTO = new EmployeeDTO(id, name, type, address, email, contact, perHour);
 
-//        EmployeeModel.save();
+        if (btnSave.getText().equals("Save")){
+            try {
+                boolean save = EmployeeModel.save(employeeDTO);
+                if (save){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Employee is saved !").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Employee is not saved !").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
     void cmbETypeOnAction(ActionEvent event) {
-
+        eAddress.requestFocus();
     }
 
     @FXML
     void eAddressOnAction(ActionEvent event) {
-
+        eContact.requestFocus();
     }
 
     @FXML
     void eContactOnAction(ActionEvent event) {
-
+        eEmail.requestFocus();
     }
 
     @FXML
     void eEmailOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void eNameOnAction(ActionEvent event) {
-
+        onePerHour.requestFocus();
     }
 
     @FXML
     void onePerHourOnAction(ActionEvent event) {
-
+        btnSave.fire();
     }
 
     @FXML
@@ -120,6 +134,11 @@ public class EmployeeFormController implements Initializable {
 
     }
 
+    void setCmbJobRollTypes(){
+        ObservableList<String> options = FXCollections.observableArrayList("Admin", "Cashier", "Shop keeper", "Driver");
+        cmbEType.setItems(options);
+    }
+
     void generateId(){
         try {
             String id = EmployeeModel.generateId();
@@ -132,5 +151,7 @@ public class EmployeeFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateId();
+        setCmbJobRollTypes();
+        eName.requestFocus();
     }
 }

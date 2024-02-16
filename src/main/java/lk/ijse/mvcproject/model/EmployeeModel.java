@@ -1,5 +1,6 @@
 package lk.ijse.mvcproject.model;
 
+import lk.ijse.mvcproject.dto.EmployeeDTO;
 import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -41,5 +42,11 @@ public class EmployeeModel {
             }
         }
         return null;
+    }
+
+    public static boolean save(EmployeeDTO employeeDTO) throws SQLException {
+        String sql = "insert into employee(eId,name,address,email,contact,jobRoll,onePerHour) values(?,?,?,?,?,?,?);";;
+        return CrudUtil.execute(sql,employeeDTO.getEId(),employeeDTO.getName(),employeeDTO.getAddress(),
+                employeeDTO.getEmail(),employeeDTO.getContact(),employeeDTO.getJobRoll(),employeeDTO.getOnePerHour());
     }
 }
