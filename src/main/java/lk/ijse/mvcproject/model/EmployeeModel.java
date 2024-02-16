@@ -49,4 +49,21 @@ public class EmployeeModel {
         return CrudUtil.execute(sql,employeeDTO.getEId(),employeeDTO.getName(),employeeDTO.getAddress(),
                 employeeDTO.getEmail(),employeeDTO.getContact(),employeeDTO.getJobRoll(),employeeDTO.getOnePerHour());
     }
+
+    public static EmployeeDTO searchEmployeeId(String id) throws SQLException {
+        String sql = "select * from employee where eId = ?;";
+        EmployeeDTO employeeDTO = null;
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        if (resultSet.next()){
+            String name = resultSet.getString("name");
+            String address = resultSet.getString("address");
+            String email = resultSet.getString("email");
+            String contact = resultSet.getString("contact");
+            String jobRoll = resultSet.getString("jobRoll");
+            String onePerHour = resultSet.getString("onePerHour");
+            String eId = resultSet.getString("eId");
+            employeeDTO = new EmployeeDTO(eId,name,address,email,contact,jobRoll,onePerHour);
+        }
+        return employeeDTO;
+    }
 }

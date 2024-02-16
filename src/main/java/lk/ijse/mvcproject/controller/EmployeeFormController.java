@@ -123,12 +123,54 @@ public class EmployeeFormController implements Initializable {
 
     @FXML
     void searchImgOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        System.out.println(id);
+        try {
+            EmployeeDTO employeeDTO = EmployeeModel.searchEmployeeId(id);
+            String name = employeeDTO.getName();
+            String jobRoll = employeeDTO.getJobRoll();
+            String address = employeeDTO.getAddress();
+            String contact = employeeDTO.getContact();
+            String email = employeeDTO.getEmail();
+            String onePerHour1 = employeeDTO.getOnePerHour();
+            eId.setText(id);
+            eName.setText(name);
+            cmbEType.setValue(jobRoll);
+            eAddress.setText(address);
+            eContact.setText(contact);
+            eEmail.setText(email);
+            onePerHour.setText(onePerHour1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        btnSave.setText("Update");
+        btnSave.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
     void searchTxtOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        System.out.println(id);
+        try {
+            EmployeeDTO employeeDTO = EmployeeModel.searchEmployeeId(id);
+            String name = employeeDTO.getName();
+            String jobRoll = employeeDTO.getJobRoll();
+            String address = employeeDTO.getAddress();
+            String contact = employeeDTO.getContact();
+            String email = employeeDTO.getEmail();
+            String onePerHour1 = employeeDTO.getOnePerHour();
+            eId.setText(id);
+            eName.setText(name);
+            cmbEType.setValue(jobRoll);
+            eAddress.setText(address);
+            eContact.setText(contact);
+            eEmail.setText(email);
+            onePerHour.setText(onePerHour1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        btnSave.setText("Update");
+        btnSave.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
@@ -136,6 +178,9 @@ public class EmployeeFormController implements Initializable {
 
     }
 
+    void searchId(){
+
+    }
 
     void clear(){
         eId.clear();
