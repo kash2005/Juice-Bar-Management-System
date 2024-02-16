@@ -85,6 +85,8 @@ public class EmployeeFormController implements Initializable {
                 boolean save = EmployeeModel.save(employeeDTO);
                 if (save){
                     new Alert(Alert.AlertType.CONFIRMATION,"Employee is saved !").show();
+                    clear();
+                    generateId();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Employee is not saved !").show();
                 }
@@ -132,6 +134,17 @@ public class EmployeeFormController implements Initializable {
     @FXML
     void tblEmployeeOnMouseClick(MouseEvent event) {
 
+    }
+
+
+    void clear(){
+        eId.clear();
+        eName.clear();
+        cmbEType.setValue("");
+        eAddress.clear();
+        eContact.clear();
+        eEmail.clear();
+        onePerHour.clear();
     }
 
     void setCmbJobRollTypes(){
