@@ -7,7 +7,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.AdminDashboardFormController">
    <children>
       <AnchorPane layoutX="350.0" prefHeight="800.0" prefWidth="1149.0" />
@@ -60,6 +59,23 @@
       <ImageView fx:id="employeeOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="120.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-employees-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="attendanceBtn" layoutX="104.0" layoutY="333.0" onAction="#attendanceBtnOnAction" text="  Attendance" textFill="#757575">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="attendanceGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-attendance-100%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <ImageView fx:id="attendanceOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="120.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-attendance-100.png" />
          </image>
       </ImageView>
    </children>

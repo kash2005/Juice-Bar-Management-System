@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.mvcproject.controller.AttendanceForm"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.AttendanceFormController">
+   <children>
+      <Text fill="ORANGE" layoutX="73.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attendace">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblAttendance" layoutX="589.0" layoutY="171.0" onMouseClicked="#tblAttendanceOnMouseClick" prefHeight="421.0" prefWidth="538.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="111.0" text="Attendance Id" />
+            <TableColumn fx:id="colEntryTime" prefWidth="158.0" text="Entry Time" />
+            <TableColumn fx:id="colDepartTime" prefWidth="158.0" text="Depart Time" />
+            <TableColumn fx:id="colEId" prefWidth="110.0" text="Employee Id" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="302.0" fitWidth="370.0" layoutX="842.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchId" layoutX="773.0" layoutY="66.0" onAction="#searchIdOnAction" opacity="0.39" prefHeight="46.0" prefWidth="347.0" promptText="search" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4; -fx-background-radius: 25;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <JFXButton layoutX="1070.0" layoutY="67.0" onAction="#searchImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <Circle fill="#f4f4f4" layoutX="248.0" layoutY="479.0" opacity="0.37" radius="297.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="5.0" />
+      <Pane layoutX="-120.0" layoutY="174.0" prefHeight="605.0" prefWidth="455.0" style="-fx-background-color: #f4f4f4;">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="50.0" layoutX="324.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-attendance-100.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="attendanceId" layoutX="157.0" layoutY="107.0" opacity="0.39" promptText="Attendance Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="entryTime" layoutX="157.0" layoutY="227.0" onAction="#entryTimeOnAction" opacity="0.39" promptText="Entry Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="departTime" layoutX="157.0" layoutY="347.0" onAction="#departOnAction" opacity="0.39" promptText="Departy Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="eId" layoutX="157.0" layoutY="467.0" onAction="#eIdOnAction" opacity="0.39" promptText="E001" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+      <JFXButton fx:id="saveBtn" layoutX="340.0" layoutY="403.0" onAction="#saveBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="deleteBtn" layoutX="340.0" layoutY="495.0" onAction="#deleteBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: red mat; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
 </AnchorPane>

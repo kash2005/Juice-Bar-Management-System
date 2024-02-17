@@ -37,6 +37,24 @@ public class AdminDashboardFormController implements Initializable {
     @FXML
     private ImageView employeeOrangeImg;
 
+    @FXML
+    private JFXButton attendanceBtn;
+
+    @FXML
+    private ImageView attendanceGreyImg;
+
+    @FXML
+    private ImageView attendanceOrangeImg;
+
+    @FXML
+    void attendanceBtnOnAction(ActionEvent event) {
+        try {
+            setForms(attendanceBtn,"/lk/ijse/mvcproject/view/attendanceForm.fxml",attendanceOrangeImg,attendanceGreyImg);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -57,10 +75,11 @@ public class AdminDashboardFormController implements Initializable {
     }
 
     void setForms(JFXButton btn,String path,ImageView image,ImageView greyImageView) throws IOException {
-        JFXButton[] buttons = {dashboardBtn,employeeBtn};
-        String[] forms = {"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml","/lk/ijse/mvcproject/view/employeeForm.fxml"};
-        ImageView[] imageViews = {dashboardOrangeImg,employeeOrangeImg};
-        ImageView[] greyImage = {dashboardGreyImg,employeeGreyImg};
+        JFXButton[] buttons = {dashboardBtn,employeeBtn,attendanceBtn};
+        String[] forms = {"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml","/lk/ijse/mvcproject/view/employeeForm.fxml",
+                "/lk/ijse/mvcproject/view/attendanceForm.fxml"};
+        ImageView[] imageViews = {dashboardOrangeImg,employeeOrangeImg,attendanceOrangeImg};
+        ImageView[] greyImage = {dashboardGreyImg,employeeGreyImg,attendanceGreyImg};
         for (int i = 0; i < forms.length; i++) {
             if (btn.equals(buttons[i]) && path.equals(forms[i]) && image.equals(imageViews[i]) && greyImageView.equals(greyImage[i])){
                 Parent load = FXMLLoader.load(getClass().getResource(forms[i]));
