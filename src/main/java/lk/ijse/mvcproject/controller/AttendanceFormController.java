@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.AttendanceDTO;
 import lk.ijse.mvcproject.dto.tm.AttendanceTM;
 import lk.ijse.mvcproject.model.AttendanceModel;
+import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,6 +38,9 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     private TableColumn<String, AttendanceTM> colEId;
+
+    @FXML
+    private ComboBox<?> cmbEId;
 
     @FXML
     private TextField searchId;
@@ -85,7 +90,12 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void searchIdOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            AttendanceModel.searchId(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -101,6 +111,8 @@ public class AttendanceFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateId();
+        setValueFactory();
+        getAll();
     }
 
     void generateId(){
@@ -110,8 +122,6 @@ public class AttendanceFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        setValueFactory();
-        getAll();
     }
 
     private void setValueFactory() {
@@ -136,5 +146,19 @@ public class AttendanceFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+//    void setEmployeeId(){
+//        try {
+//            ArrayList<String> cmbEmployeeId = EmployeeModel.getCmbEmployeeId();
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    @FXML
+    void cmbEIdeOnAction(ActionEvent event) {
+
     }
 }

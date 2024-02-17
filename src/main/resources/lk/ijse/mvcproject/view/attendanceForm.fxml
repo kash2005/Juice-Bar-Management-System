@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.AttendanceFormController">
    <children>
@@ -56,21 +56,17 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="entryTime" layoutX="157.0" layoutY="227.0" onAction="#entryTimeOnAction" opacity="0.39" promptText="Entry Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="entryTime" layoutX="157.0" layoutY="327.0" onAction="#entryTimeOnAction" opacity="0.39" promptText="Entry Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="departTime" layoutX="157.0" layoutY="347.0" onAction="#departOnAction" opacity="0.39" promptText="Departy Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+            <TextField fx:id="departTime" layoutX="157.0" layoutY="447.0" onAction="#departOnAction" opacity="0.39" promptText="Departy Time" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="eId" layoutX="157.0" layoutY="467.0" onAction="#eIdOnAction" opacity="0.39" promptText="E001" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
+            <ComboBox fx:id="cmbEId" layoutX="157.0" layoutY="213.0" onAction="#cmbEIdeOnAction" opacity="0.45" prefHeight="50.0" prefWidth="251.0" promptText="Employee Id" style="-fx-background-color: #f4f4f4; -fx-border-color: black;" />
          </children>
       </Pane>
       <JFXButton fx:id="saveBtn" layoutX="340.0" layoutY="403.0" onAction="#saveBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Save" textFill="WHITE">

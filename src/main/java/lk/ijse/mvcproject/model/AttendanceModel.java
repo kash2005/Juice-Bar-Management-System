@@ -38,4 +38,18 @@ public class AttendanceModel {
         }
         return attendanceDTOS;
     }
+
+    public static AttendanceDTO searchId(String id) throws SQLException {
+        String sql = "select * from attendance where attendanceId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        AttendanceDTO attendanceDTO = null;
+        if (resultSet.next()){
+            String attendanceId = resultSet.getString("attendanceId");
+            LocalTime departTime = LocalTime.parse(resultSet.getString("departTime"));
+            LocalTime entryTime = LocalTime.parse(resultSet.getString("entryTime"));
+            String eId = resultSet.getString("eId");
+            attendanceDTO = new AttendanceDTO(attendanceId,departTime,entryTime,eId);
+        }
+        return attendanceDTO;
+    }
 }
