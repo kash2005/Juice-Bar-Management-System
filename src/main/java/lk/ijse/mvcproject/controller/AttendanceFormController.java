@@ -1,17 +1,24 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.AttendanceDTO;
+import lk.ijse.mvcproject.dto.tm.AttendanceTM;
 import lk.ijse.mvcproject.model.AttendanceModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AttendanceFormController implements Initializable {
@@ -19,16 +26,16 @@ public class AttendanceFormController implements Initializable {
     private TableView<?> tblAttendance;
 
     @FXML
-    private TableColumn<?, ?> colId;
+    private TableColumn<String, AttendanceTM> colId;
 
     @FXML
-    private TableColumn<?, ?> colEntryTime;
+    private TableColumn<LocalTime, AttendanceTM> colEntryTime;
 
     @FXML
-    private TableColumn<?, ?> colDepartTime;
+    private TableColumn<LocalTime, AttendanceTM> colDepartTime;
 
     @FXML
-    private TableColumn<?, ?> colEId;
+    private TableColumn<String, AttendanceTM> colEId;
 
     @FXML
     private TextField searchId;
@@ -100,6 +107,32 @@ public class AttendanceFormController implements Initializable {
         try {
             String id = AttendanceModel.generateId();
             attendanceId.setText(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        setValueFactory();
+        getAll();
+    }
+
+    private void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<String, AttendanceTM>("attendanceId"));
+        colEntryTime.setCellValueFactory(new PropertyValueFactory<LocalTime, AttendanceTM>("departTime"));
+        colDepartTime.setCellValueFactory(new PropertyValueFactory<LocalTime, AttendanceTM>("entryTime"));
+        colEId.setCellValueFactory(new PropertyValueFactory<String, AttendanceTM>("eId"));
+    }
+
+    private void getAll(){
+        ObservableList<AttendanceTM> observableList =FXCollections.observableArrayList();
+        try {
+            ArrayList<AttendanceDTO> all = AttendanceModel.getAll();
+            for (AttendanceDTO attendanceDTO : all){
+                observableList.add(new AttendanceTM(
+                        attendanceDTO.getAttendanceId(),
+                        attendanceDTO.getEntryTime(),
+                        attendanceDTO.getDepartTime(),
+                        attendanceDTO.getEId()
+                ));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
