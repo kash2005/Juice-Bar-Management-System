@@ -29,18 +29,4 @@ public class DeliveryModel {
         return CrudUtil.execute(sql,deliveryDTO.getDeliveryId(),deliveryDTO.getDistance(),deliveryDTO.getPrice(),deliveryDTO.getOrderId());
     }
 
-    public static DeliveryDTO getAllDelivery(String id) throws SQLException {
-        String sql = "select * from delivery where orderId = ?;";
-        DeliveryDTO deliveryDTO = null;
-        ResultSet resultSet = CrudUtil.execute(sql,id);
-        if (resultSet.next()){
-            String deliveryId = resultSet.getString("deliveryId");
-            String distance = resultSet.getString("distance");
-            double price = resultSet.getDouble("price");
-            String orderId = resultSet.getString("orderId");
-            deliveryDTO = new DeliveryDTO(deliveryId,distance,price,orderId);
-            System.out.println(deliveryId+" "+distance+" "+price+" "+orderId);
-        }
-        return deliveryDTO;
-    }
 }

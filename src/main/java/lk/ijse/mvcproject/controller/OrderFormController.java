@@ -107,7 +107,7 @@ public class OrderFormController implements Initializable {
 
     public static List<OrderDetailsDTO> orderDetailsDTOList = new ArrayList<>();
 
-    public static List<OrderDTO> orderDTOList;
+    public static List<OrderDTO> orderDTOList = new ArrayList<>();
 
     void setItemId(){
         try {
