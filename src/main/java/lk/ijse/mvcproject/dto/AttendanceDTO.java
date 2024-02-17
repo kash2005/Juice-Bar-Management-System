@@ -1,4 +1,4 @@
-package lk.ijse.mvcproject.dto.tm;
+package lk.ijse.mvcproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AttendanceTM {
+public class AttendanceDTO {
     private String attendanceId;
     private LocalTime departTime;
     private LocalTime entryTime;
