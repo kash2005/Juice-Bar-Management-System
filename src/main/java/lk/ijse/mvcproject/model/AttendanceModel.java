@@ -55,6 +55,13 @@ public class AttendanceModel {
 
     public static boolean save(AttendanceDTO attendanceDTO) throws SQLException {
         String sql = "insert into attendance(attendanceId,departTime,eId,entryTime) values(?,?,?,?);";
-        return CrudUtil.execute(sql,attendanceDTO.getAttendanceId(),attendanceDTO.getDepartTime(),attendanceDTO.getEId(),attendanceDTO.getEntryTime());
+        return CrudUtil.execute(sql,attendanceDTO.getAttendanceId(),attendanceDTO.getDepartTime(),
+                attendanceDTO.getEId(),attendanceDTO.getEntryTime());
+    }
+
+    public static boolean update(AttendanceDTO attendanceDTO) throws SQLException {
+        String sql = "update attendance set departTime =?, eId = ?, entryTime = ? where attendanceId = ?;";
+        return CrudUtil.execute(sql,attendanceDTO.getDepartTime(),attendanceDTO.getEId(),attendanceDTO.getEntryTime(),
+                attendanceDTO.getAttendanceId());
     }
 }

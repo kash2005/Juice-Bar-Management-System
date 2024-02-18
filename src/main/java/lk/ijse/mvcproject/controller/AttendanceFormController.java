@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class AttendanceFormController implements Initializable {
     @FXML
-    private TableView<?> tblAttendance;
+    private TableView<AttendanceTM> tblAttendance;
 
     @FXML
     private TableColumn<String, AttendanceTM> colId;
@@ -64,16 +64,16 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void departOnAction(ActionEvent event) {
-
+        saveBtn.fire();
     }
 
     @FXML
     void entryTimeOnAction(ActionEvent event) {
-
+        departTime.requestFocus();
     }
 
     @FXML
-    void saveBtnOnAction(ActionEvent event) {
+    void saveBtnOnAction(ActionEvent event) throws SQLException {
         String id = attendanceId.getText();
         String eId = cmbEId.getValue();
         LocalTime entry = LocalTime.parse(entryTime.getText());
@@ -93,6 +93,18 @@ public class AttendanceFormController implements Initializable {
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
+            }
+        }else if (saveBtn.getText().equals("Update")){
+            boolean update = AttendanceModel.update(attendanceDTO);
+            if (update){
+                new Alert(Alert.AlertType.CONFIRMATION,"Attendance is updated !").show();
+                clear();
+                generateId();
+                getAll();
+                saveBtn.setText("Save");
+                saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Attendance is not updated !").show();
             }
         }
     }
@@ -115,7 +127,18 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void searchImgOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            AttendanceDTO attendanceDTO = AttendanceModel.searchId(id);
+            attendanceId.setText(attendanceDTO.getAttendanceId());
+            entryTime.setText(String.valueOf(attendanceDTO.getEntryTime()));
+            departTime.setText(String.valueOf(attendanceDTO.getDepartTime()));
+            cmbEId.setValue(attendanceDTO.getEId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        saveBtn.setText("Update");
+        saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
@@ -162,6 +185,7 @@ public class AttendanceFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        tblAttendance.setItems(observableList);
     }
 
     void setEmployeeId(){
@@ -183,6 +207,6 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void cmbEIdeOnAction(ActionEvent event) {
-
+        entryTime.requestFocus();
     }
 }
