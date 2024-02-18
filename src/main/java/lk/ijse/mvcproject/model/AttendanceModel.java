@@ -64,4 +64,9 @@ public class AttendanceModel {
         return CrudUtil.execute(sql,attendanceDTO.getDepartTime(),attendanceDTO.getEId(),attendanceDTO.getEntryTime(),
                 attendanceDTO.getAttendanceId());
     }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "delete from attendance where attendanceId = ?;";
+        return CrudUtil.execute(sql,id);
+    }
 }

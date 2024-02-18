@@ -59,7 +59,20 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
-
+        String id = attendanceId.getText();
+        try {
+            boolean delete = AttendanceModel.delete(id);
+            if (delete){
+                new Alert(Alert.AlertType.CONFIRMATION,"Attendance is deleted !").show();
+                clear();
+                generateId();
+                getAll();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Attendance is not deleted !").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -143,7 +156,18 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     void tblAttendanceOnMouseClick(MouseEvent event) {
-
+        AttendanceTM selectedItem = (AttendanceTM) tblAttendance.getSelectionModel().getSelectedItem();
+        try {
+            AttendanceDTO attendanceDTO = AttendanceModel.searchId(selectedItem.getAttendanceId());
+            attendanceId.setText(attendanceDTO.getAttendanceId());
+            entryTime.setText(String.valueOf(attendanceDTO.getEntryTime()));
+            departTime.setText(String.valueOf(attendanceDTO.getDepartTime()));
+            cmbEId.setValue(attendanceDTO.getEId());
+            saveBtn.setText("Update");
+            saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
