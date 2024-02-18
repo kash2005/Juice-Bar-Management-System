@@ -47,6 +47,25 @@ public class AdminDashboardFormController implements Initializable {
     private ImageView attendanceOrangeImg;
 
     @FXML
+    private JFXButton userBtn;
+
+    @FXML
+    private ImageView userGreyImg;
+
+    @FXML
+    private ImageView userOrangeImg;
+
+
+    @FXML
+    void userBtnOnAction(ActionEvent event) {
+        try {
+            setForms(userBtn,"/lk/ijse/mvcproject/view/userForm.fxml",userOrangeImg,userGreyImg);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     void attendanceBtnOnAction(ActionEvent event) {
         try {
             setForms(attendanceBtn,"/lk/ijse/mvcproject/view/attendanceForm.fxml",attendanceOrangeImg,attendanceGreyImg);
@@ -75,11 +94,11 @@ public class AdminDashboardFormController implements Initializable {
     }
 
     void setForms(JFXButton btn,String path,ImageView image,ImageView greyImageView) throws IOException {
-        JFXButton[] buttons = {dashboardBtn,employeeBtn,attendanceBtn};
+        JFXButton[] buttons = {dashboardBtn,employeeBtn,attendanceBtn,userBtn};
         String[] forms = {"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml","/lk/ijse/mvcproject/view/employeeForm.fxml",
-                "/lk/ijse/mvcproject/view/attendanceForm.fxml"};
-        ImageView[] imageViews = {dashboardOrangeImg,employeeOrangeImg,attendanceOrangeImg};
-        ImageView[] greyImage = {dashboardGreyImg,employeeGreyImg,attendanceGreyImg};
+                "/lk/ijse/mvcproject/view/attendanceForm.fxml","/lk/ijse/mvcproject/view/userForm.fxml"};
+        ImageView[] imageViews = {dashboardOrangeImg,employeeOrangeImg,attendanceOrangeImg,userOrangeImg};
+        ImageView[] greyImage = {dashboardGreyImg,employeeGreyImg,attendanceGreyImg,userGreyImg};
         for (int i = 0; i < forms.length; i++) {
             if (btn.equals(buttons[i]) && path.equals(forms[i]) && image.equals(imageViews[i]) && greyImageView.equals(greyImage[i])){
                 Parent load = FXMLLoader.load(getClass().getResource(forms[i]));

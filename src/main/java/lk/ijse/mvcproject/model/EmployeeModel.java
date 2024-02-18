@@ -97,4 +97,18 @@ public class EmployeeModel {
         }
         return employeeDTOS;
     }
+
+    public static ArrayList<String> getCashierId() throws SQLException {
+        String sql = "select eId,jobRoll from employee;";
+        ArrayList<String> arrayList = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute(sql);
+        while (resultSet.next()){
+            String eId = resultSet.getString("eId");
+            String jobRoll = resultSet.getString("jobRoll");
+            if (jobRoll.equals("Cashier")){
+                arrayList.add(eId);
+            }
+        }
+        return arrayList;
+    }
 }

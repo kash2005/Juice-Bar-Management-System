@@ -217,7 +217,7 @@ public class EmployeeFormController implements Initializable {
             eId.setText(employeeDTO.getEId());
             eName.setText(employeeDTO.getName());
             cmbEType.setValue(employeeDTO.getJobRoll());
-            eAddress.setText(employeeDTO.getJobRoll());
+            eAddress.setText(employeeDTO.getAddress());
             eContact.setText(employeeDTO.getContact());
             eEmail.setText(employeeDTO.getEmail());
             onePerHour.setText(employeeDTO.getOnePerHour());

@@ -2,6 +2,7 @@ package lk.ijse.mvcproject.model;
 
 import lk.ijse.mvcproject.db.DbConnection;
 import lk.ijse.mvcproject.dto.UserDTO;
+import lk.ijse.mvcproject.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,5 +27,6 @@ public class UserModel {
         }
         return null;
     }
+
 
 }

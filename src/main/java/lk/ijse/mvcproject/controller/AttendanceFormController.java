@@ -54,8 +54,6 @@ public class AttendanceFormController implements Initializable {
     @FXML
     private JFXButton saveBtn;
 
-    @FXML
-    private JFXButton deleteBtn;
 
     @FXML
     void deleteBtnOnAction(ActionEvent event) {
