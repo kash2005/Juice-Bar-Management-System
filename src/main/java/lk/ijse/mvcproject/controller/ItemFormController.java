@@ -68,6 +68,8 @@ public class ItemFormController implements Initializable {
                 clearTextFields();
                 generateItemId();
                 getAll();
+                saveBtn.setText("Save");
+                saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
             }else {
                 new Alert(Alert.AlertType.CONFIRMATION,"Item is deleted !").show();
             }

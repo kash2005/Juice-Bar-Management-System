@@ -56,4 +56,19 @@ public class UserModel {
         }
         return userDTO;
     }
+
+    public static boolean save(UserDTO userDTO) throws SQLException {
+        String sql = "insert into user(userId,userName,password) values(?,?,?);";
+        return CrudUtil.execute(sql,userDTO.getUserId(),userDTO.getUserName(),userDTO.getPassword());
+    }
+
+    public static boolean update(UserDTO userDTO) throws SQLException {
+        String sql = "update user set userName = ?,password = ? where userId = ?;";
+        return CrudUtil.execute(sql,userDTO.getUserName(),userDTO.getPassword(),userDTO.getUserId());
+    }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "delete from user where userId = ?;";
+        return CrudUtil.execute(sql,id);
+    }
 }

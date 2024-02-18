@@ -72,6 +72,8 @@ public class CustomerFormController implements Initializable {
                 clearTextFields();
                 generateCustomerId();
                 getAll();
+                saveBtn.setText("Save");
+                saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
             }else {
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer is not deleted !").show();
             }

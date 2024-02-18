@@ -65,6 +65,8 @@ public class AttendanceFormController implements Initializable {
                 clear();
                 generateId();
                 getAll();
+                saveBtn.setText("Save");
+                saveBtn.setStyle("-fx-background-color: green; -fx-background-radius: 10");
             }else {
                 new Alert(Alert.AlertType.ERROR,"Attendance is not deleted !").show();
             }

@@ -80,6 +80,8 @@ public class EmployeeFormController implements Initializable {
                 clear();
                 generateId();
                 getAll();
+                btnSave.setText("Save");
+                btnSave.setStyle("-fx-background-color: green; -fx-background-radius: 10");
             }else {
                 new Alert(Alert.AlertType.ERROR,"Employee is not deleted !").show();
             }
