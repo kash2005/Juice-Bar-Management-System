@@ -77,7 +77,7 @@ public class AdminDashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            setForms(dashboardBtn,"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml",dashboardOrangeImg,dashboardGreyImg);
+            setForms(dashboardBtn,"/lk/ijse/mvcproject/view/adminDashboardLoader.fxml",dashboardOrangeImg,dashboardGreyImg);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -95,7 +95,7 @@ public class AdminDashboardFormController implements Initializable {
 
     void setForms(JFXButton btn,String path,ImageView image,ImageView greyImageView) throws IOException {
         JFXButton[] buttons = {dashboardBtn,employeeBtn,attendanceBtn,userBtn};
-        String[] forms = {"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml","/lk/ijse/mvcproject/view/employeeForm.fxml",
+        String[] forms = {"/lk/ijse/mvcproject/view/adminDashboardLoader.fxml","/lk/ijse/mvcproject/view/employeeForm.fxml",
                 "/lk/ijse/mvcproject/view/attendanceForm.fxml","/lk/ijse/mvcproject/view/userForm.fxml"};
         ImageView[] imageViews = {dashboardOrangeImg,employeeOrangeImg,attendanceOrangeImg,userOrangeImg};
         ImageView[] greyImage = {dashboardGreyImg,employeeGreyImg,attendanceGreyImg,userGreyImg};

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -112,5 +113,104 @@
             <Image url="@../image/Screenshot%202024-02-04%20195208.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="1067.0" layoutY="50.0" onAction="#menuImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane fx:id="menuAnchorpane" layoutX="908.0" layoutY="90.0" prefHeight="282.0" prefWidth="195.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <JFXButton fx:id="customerBtn" layoutX="4.0" layoutY="1.0" onAction="#customerBtnOnAction" text="  Customer" textFill="#757575">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="customerGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-customers-100%20(3).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fx:id="customerOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-customers-100%20(5).png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="111.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <JFXButton fx:id="itemBtn" layoutX="4.0" layoutY="58.0" onAction="#itemBtnOnAction" prefHeight="50.0" prefWidth="170.0" text="  Item       " textFill="#757575">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="itemGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-item-100%20(3).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fx:id="itemOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="21.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-item-100%20(4).png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="ingredientBtn" layoutX="5.0" layoutY="115.0" onAction="#ingredientBtnOnAction" text="  Ingredient" textFill="#757575">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="ingredientGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-ingredients-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fx:id="ingredientOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="21.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-ingredients-100%20(1).png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="225.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <JFXButton fx:id="orderBtn" layoutX="4.0" layoutY="172.0" onAction="#orderBtnOnAction" prefHeight="50.0" prefWidth="177.0" text="  Order      " textFill="#757575">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="orderGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-cart-100%20(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fx:id="orderOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="21.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-cart-100%20(1).png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="supplierBtn" layoutX="8.0" layoutY="229.0" onAction="#supplierBtnOnAction" text="  Supplier" textFill="#757575">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="supplierGreyImg" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-supplier-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fx:id="supplierOrangeImg" fitHeight="30.0" fitWidth="30.0" layoutX="24.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-supplier-80%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
