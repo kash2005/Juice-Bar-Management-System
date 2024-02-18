@@ -38,9 +38,6 @@ public class SupplierFormController implements Initializable {
     private JFXButton saveBtn;
 
     @FXML
-    private JFXButton deleteBtn;
-
-    @FXML
     private TableView<SupplierTM> tblSupplier;
 
     @FXML
