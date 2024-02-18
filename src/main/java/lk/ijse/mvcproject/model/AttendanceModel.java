@@ -33,7 +33,7 @@ public class AttendanceModel {
             LocalTime departTime = LocalTime.parse(resultSet.getString("departTime"));
             LocalTime entryTime = resultSet.getTime("entryTime").toLocalTime();
             String eId = resultSet.getString("eId");
-            AttendanceDTO attendanceDTO = new AttendanceDTO(attendanceId, departTime, entryTime, eId);
+            AttendanceDTO attendanceDTO = new AttendanceDTO(attendanceId, departTime, eId,entryTime);
             attendanceDTOS.add(attendanceDTO);
         }
         return attendanceDTOS;
@@ -48,8 +48,13 @@ public class AttendanceModel {
             LocalTime departTime = LocalTime.parse(resultSet.getString("departTime"));
             LocalTime entryTime = LocalTime.parse(resultSet.getString("entryTime"));
             String eId = resultSet.getString("eId");
-            attendanceDTO = new AttendanceDTO(attendanceId,departTime,entryTime,eId);
+            attendanceDTO = new AttendanceDTO(attendanceId,departTime,eId,entryTime);
         }
         return attendanceDTO;
+    }
+
+    public static boolean save(AttendanceDTO attendanceDTO) throws SQLException {
+        String sql = "insert into attendance(attendanceId,departTime,eId,entryTime) values(?,?,?,?);";
+        return CrudUtil.execute(sql,attendanceDTO.getAttendanceId(),attendanceDTO.getDepartTime(),attendanceDTO.getEId(),attendanceDTO.getEntryTime());
     }
 }

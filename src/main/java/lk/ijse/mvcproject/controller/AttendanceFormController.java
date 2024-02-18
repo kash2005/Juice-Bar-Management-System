@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.mvcproject.dto.AttendanceDTO;
@@ -71,18 +68,33 @@ public class AttendanceFormController implements Initializable {
     }
 
     @FXML
-    void eIdOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void entryTimeOnAction(ActionEvent event) {
 
     }
 
     @FXML
     void saveBtnOnAction(ActionEvent event) {
+        String id = attendanceId.getText();
+        String eId = cmbEId.getValue();
+        LocalTime entry = LocalTime.parse(entryTime.getText());
+        LocalTime depart = LocalTime.parse(departTime.getText());
+        AttendanceDTO attendanceDTO = new AttendanceDTO(id, depart, eId, entry);
 
+        if (saveBtn.getText().equals("Save")){
+            try {
+                boolean save = AttendanceModel.save(attendanceDTO);
+                if (save){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Attendance is saved !").show();
+                    clear();
+                    generateId();
+                    getAll();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Attendance is not saved !").show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @FXML
@@ -160,6 +172,13 @@ public class AttendanceFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    void clear(){
+        attendanceId.clear();
+        cmbEId.setValue("");
+        entryTime.clear();
+        departTime.clear();
     }
 
     @FXML

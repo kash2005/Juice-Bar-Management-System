@@ -12,6 +12,6 @@ import java.time.LocalTime;
 public class AttendanceDTO {
     private String attendanceId;
     private LocalTime departTime;
-    private LocalTime entryTime;
     private String eId;
+    private LocalTime entryTime;
 }
