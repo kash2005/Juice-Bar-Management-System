@@ -4,6 +4,8 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -52,7 +54,7 @@
             <Image url="@../image/icons8-search-64.png" />
          </image>
       </ImageView>
-      <Text layoutX="47.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Two types of food menu in here">
+      <Text layoutX="47.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Details Table">
          <font>
             <Font name="SansSerif Regular" size="25.0" />
          </font>
@@ -86,28 +88,6 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </LineChart>
-      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="230.0" layoutX="48.0" layoutY="516.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="253.0" />
-      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="230.0" layoutX="338.0" layoutY="516.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="253.0" />
-      <Text layoutX="148.0" layoutY="707.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Juice">
-         <font>
-            <Font name="SansSerif Regular" size="23.0" />
-         </font>
-      </Text>
-      <Text layoutX="427.0" layoutY="707.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Snacks">
-         <font>
-            <Font name="SansSerif Regular" size="23.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="141.0" fitWidth="253.0" layoutX="58.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/juice.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="141.0" fitWidth="253.0" layoutX="349.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Screenshot_2023-12-26_225215-removebg-preview.png" />
-         </image>
-      </ImageView>
       <JFXButton layoutX="1067.0" layoutY="50.0" onAction="#menuImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
          <font>
             <Font size="20.0" />
@@ -176,5 +156,16 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <TableView fx:id="tblEmployee" layoutX="42.0" layoutY="509.0" prefHeight="254.0" prefWidth="563.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../style/progressBar.css">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="64.0" text="Id" />
+            <TableColumn fx:id="colName" prefWidth="78.0" text="Name" />
+            <TableColumn fx:id="colType" prefWidth="79.0" text="Type" />
+            <TableColumn fx:id="colAddress" prefWidth="101.0" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="95.0" text="Contact" />
+            <TableColumn fx:id="colEmail" prefWidth="72.0" text="Email" />
+            <TableColumn fx:id="colPerHour" prefWidth="72.0" text="PerHour" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

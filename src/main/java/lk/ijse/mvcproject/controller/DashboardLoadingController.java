@@ -20,6 +20,12 @@ public class DashboardLoadingController implements Initializable {
     private AnchorPane menuAnchorpane;
 
     @FXML
+    private AnchorPane juiceMenuAnchorPane;
+
+    @FXML
+    private AnchorPane snackMenuAnchorPane;
+
+    @FXML
     private JFXButton customerBtn;
 
     @FXML
@@ -63,6 +69,7 @@ public class DashboardLoadingController implements Initializable {
 
     @FXML
     private ImageView supplierOrangeImg;
+
     @FXML
     void menuImgOnAction(ActionEvent event) throws IOException {
         menuAnchorpane.setVisible(true);
@@ -120,8 +127,30 @@ public class DashboardLoadingController implements Initializable {
         }
     }
 
+    @FXML
+    void snacksBtnOnAction(ActionEvent event) {
+        snackMenuAnchorPane.setVisible(true);
+    }
+
+    @FXML
+    void juiceBtnOnAction(ActionEvent event) {
+        juiceMenuAnchorPane.setVisible(true);
+    }
+
+    @FXML
+    void closeJuiceOnAction(ActionEvent event) {
+        juiceMenuAnchorPane.setVisible(false);
+    }
+
+    @FXML
+    void closeSnackImgOnAction(ActionEvent event) {
+        snackMenuAnchorPane.setVisible(false);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuAnchorpane.setVisible(false);
+        juiceMenuAnchorPane.setVisible(false);
+        snackMenuAnchorPane.setVisible(false);
     }
 }

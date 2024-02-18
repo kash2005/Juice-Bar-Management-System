@@ -1,17 +1,27 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.mvcproject.dto.EmployeeDTO;
+import lk.ijse.mvcproject.dto.tm.EmployeeTM;
+import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminDashboardLoaderController implements Initializable {
@@ -44,6 +54,62 @@ public class AdminDashboardLoaderController implements Initializable {
 
     @FXML
     private ImageView userOrangeImg;
+
+    @FXML
+    private TableView<EmployeeTM> tblEmployee;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colId;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colName;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colType;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colAddress;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colContact;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colEmail;
+
+    @FXML
+    private TableColumn<String, EmployeeTM> colPerHour;
+
+    private void getAll(){
+        ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<EmployeeDTO> all = EmployeeModel.getAll();
+            for (EmployeeDTO employeeDTO : all){
+                observableList.add(new EmployeeTM(
+                        employeeDTO.getEId(),
+                        employeeDTO.getName(),
+                        employeeDTO.getAddress(),
+                        employeeDTO.getEmail(),
+                        employeeDTO.getContact(),
+                        employeeDTO.getJobRoll(),
+                        employeeDTO.getOnePerHour()
+
+                ));
+                tblEmployee.setItems(observableList);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<String, EmployeeTM>("eId"));
+        colName.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("address"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("email"));
+        colContact.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("contact"));
+        colType.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("jobRoll"));
+        colPerHour.setCellValueFactory(new PropertyValueFactory<String,EmployeeTM>("onePerHour"));
+    }
 
 
     @FXML
@@ -111,5 +177,7 @@ public class AdminDashboardLoaderController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuAnchorpane.setVisible(false);
+        setValueFactory();
+        getAll();
     }
 }

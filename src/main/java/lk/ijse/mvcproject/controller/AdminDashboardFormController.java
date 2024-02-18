@@ -1,18 +1,28 @@
 package lk.ijse.mvcproject.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.mvcproject.dto.EmployeeDTO;
+import lk.ijse.mvcproject.dto.tm.EmployeeTM;
+import lk.ijse.mvcproject.model.EmployeeModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminDashboardFormController implements Initializable {
@@ -55,7 +65,6 @@ public class AdminDashboardFormController implements Initializable {
     @FXML
     private ImageView userOrangeImg;
 
-
     @FXML
     void userBtnOnAction(ActionEvent event) {
         try {
@@ -85,7 +94,7 @@ public class AdminDashboardFormController implements Initializable {
 
     @FXML
     void dashboardOnAction(ActionEvent event) throws IOException {
-        setForms(dashboardBtn,"/lk/ijse/mvcproject/view/DashboardLoadingForm.fxml",dashboardOrangeImg,dashboardGreyImg);
+        setForms(dashboardBtn,"/lk/ijse/mvcproject/view/adminDashboardLoader.fxml",dashboardOrangeImg,dashboardGreyImg);
     }
 
     @FXML

@@ -22,7 +22,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </JFXButton>
-      <ImageView fx:id="dashboardOrangeImg" fitHeight="105.0" fitWidth="161.0" layoutX="122.0" layoutY="614.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dashboardOrangeImg1" fitHeight="105.0" fitWidth="161.0" layoutX="122.0" layoutY="614.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/orange&amp;burger.png" />
          </image>

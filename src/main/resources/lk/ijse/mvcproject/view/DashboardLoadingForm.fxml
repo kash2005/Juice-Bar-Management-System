@@ -4,9 +4,14 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -210,6 +215,390 @@
                   <Image url="@../image/icons8-supplier-80%20(1).png" />
                </image>
             </ImageView>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="48.0" layoutY="516.0" onAction="#juiceBtnOnAction" opacity="0.0" prefHeight="230.0" prefWidth="253.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="338.0" layoutY="516.0" onAction="#snacksBtnOnAction" opacity="0.0" prefHeight="230.0" prefWidth="253.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane fx:id="juiceMenuAnchorPane" layoutX="26.0" layoutY="87.0" prefHeight="500.0" prefWidth="392.0">
+         <children>
+            <Pane layoutX="357.0" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: red mat;">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-close-100.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton onAction="#closeJuiceOnAction" opacity="0.0" prefHeight="17.0" prefWidth="35.0" style="-fx-background-color: \\red; -fx-background-radius: 10;" text="." textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Pane prefHeight="30.0" prefWidth="357.0" style="-fx-background-color: orange;">
+               <children>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Juice Menu">
+                     <font>
+                        <Font name="SansSerif Regular" size="23.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <ScrollPane layoutY="30.0" prefHeight="470.0" prefWidth="392.0">
+               <content>
+                  <VBox prefWidth="391.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/download-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Mango Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      300.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Avocado-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Avacado Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      350.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/download__2_-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Orange Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      200.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/images__2_-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="    Watermelon Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="     150.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/download__1_-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Apple Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="        200.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/images__1_-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Papaya Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      300.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/strawberry-juice-recipe-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Stabary Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      400.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/image74-695x1024-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="           Faluda Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="        250.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/download__3_-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="           Saruwath Juice">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="     150.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="snackMenuAnchorPane" layoutX="259.0" layoutY="86.0" prefHeight="500.0" prefWidth="392.0">
+         <children>
+            <Pane layoutX="357.0" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: red mat;">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-close-100.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton onAction="#closeSnackImgOnAction" opacity="0.0" prefHeight="17.0" prefWidth="35.0" style="-fx-background-color: \\red; -fx-background-radius: 10;" text="." textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Pane prefHeight="30.0" prefWidth="357.0" style="-fx-background-color: orange;">
+               <children>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Snack Menu">
+                     <font>
+                        <Font name="SansSerif Regular" size="23.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <ScrollPane layoutY="30.0" prefHeight="470.0" prefWidth="392.0">
+               <content>
+                  <VBox prefWidth="391.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Easy-Moist-Vanilla-Cupcakes-021-2-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Cup Cake">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      100.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/9295_red-velvet-cake_ddmfs_4x3_1129-a8ab17b825e3464a9a53ceeda54ff461-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Velvet Cake">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      350.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Web-Air-Fryer-Chips-305f379-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="         Potato Chips">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      200.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/PREMIUM_FISH_CHINESE_ROLL-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="          Chiken Rolls">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="     150.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Crispy-Chicken-Burger-10-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="       Chicken Burger">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      350.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="410.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/AppleTurnovers-Beauty-01-d37f9e295a334b3084574a099531086a-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="       Chicken Pastry">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      200.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="410.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="76.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/triple-chocolate-cake-4-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label opacity="0.59" text="       Chocolate Cake ">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="45.0" opacity="0.59" text="      150.00">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>
