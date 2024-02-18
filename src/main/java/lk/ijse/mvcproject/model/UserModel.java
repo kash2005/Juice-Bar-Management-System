@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserModel {
 
@@ -29,4 +30,30 @@ public class UserModel {
     }
 
 
+    public static ArrayList<UserDTO> getAll() throws SQLException {
+        String sql = "select * from user;";
+        ArrayList<UserDTO> userDTOS = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute(sql);
+        while (resultSet.next()){
+            String userId = resultSet.getString("userId");
+            String userName = resultSet.getString("userName");
+            String password = resultSet.getString("password");
+            UserDTO userDTO = new UserDTO(userId, userName, password);
+            userDTOS.add(userDTO);
+        }
+        return userDTOS;
+    }
+
+    public static UserDTO searchId(String id) throws SQLException {
+        String sql = "select * from user where userId = ?;";
+        ResultSet resultSet = CrudUtil.execute(sql, id);
+        UserDTO userDTO = null;
+        if (resultSet.next()){
+            String userId = resultSet.getString("userId");
+            String userName = resultSet.getString("userName");
+            String password = resultSet.getString("password");
+            userDTO = new UserDTO(userId, userName, password);
+        }
+        return userDTO;
+    }
 }

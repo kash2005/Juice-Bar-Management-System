@@ -10,8 +10,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.mvcproject.dto.UserDTO;
+import lk.ijse.mvcproject.dto.tm.UserTM;
 import lk.ijse.mvcproject.model.EmployeeModel;
+import lk.ijse.mvcproject.model.UserModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,19 +37,16 @@ public class UserFormController implements Initializable {
     private JFXButton saveBtn;
 
     @FXML
-    private JFXButton saveBtn1;
+    private TableView<UserTM> tblUser;
 
     @FXML
-    private TableView<?> tblAttendance;
+    private TableColumn<String, UserTM> colId;
 
     @FXML
-    private TableColumn<?, ?> colId;
+    private TableColumn<String, UserTM> colName;
 
     @FXML
-    private TableColumn<?, ?> colName;
-
-    @FXML
-    private TableColumn<?, ?> colPassword;
+    private TableColumn<String, UserTM> colPassword;
 
     @FXML
     private TextField searchId;
@@ -60,7 +61,7 @@ public class UserFormController implements Initializable {
 
     @FXML
     void passwordOnAction(ActionEvent event) {
-
+        saveBtn.fire();
     }
 
     @FXML
@@ -70,7 +71,17 @@ public class UserFormController implements Initializable {
 
     @FXML
     void searchIdOnAction(ActionEvent event) {
-
+        String id = searchId.getText();
+        try {
+            UserDTO userDTO = UserModel.searchId(id);
+            cmbUserId.setValue(id);
+            userName.setText(userDTO.getUserName());
+            password.setText(userDTO.getPassword());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        saveBtn.setText("Update");
+        saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
@@ -80,7 +91,17 @@ public class UserFormController implements Initializable {
 
     @FXML
     void tblUserOnMouseClick(MouseEvent event) {
-
+        UserTM selectedItem = (UserTM) tblUser.getSelectionModel().getSelectedItem();
+        try {
+            UserDTO userDTO = UserModel.searchId(selectedItem.getUserId());
+            cmbUserId.setValue(userDTO.getUserId());
+            userName.setText(userDTO.getUserName());
+            password.setText(userDTO.getPassword());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        saveBtn.setText("Update");
+        saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
@@ -90,7 +111,7 @@ public class UserFormController implements Initializable {
 
     @FXML
     void cmbUserIdOnAction(ActionEvent event) {
-
+        userName.requestFocus();
     }
 
     void getCashierId(){
@@ -107,5 +128,30 @@ public class UserFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getCashierId();
+        setValueFactory();
+        getAll();
+    }
+
+    private void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<String, UserTM>("userId"));
+        colName.setCellValueFactory(new PropertyValueFactory<String, UserTM>("userName"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<String, UserTM>("password"));
+    }
+
+    private void getAll() {
+        ObservableList<UserTM> observableList = FXCollections.observableArrayList();
+        try {
+            ArrayList<UserDTO> all = UserModel.getAll();
+            for (UserDTO userDTO : all){
+                observableList.add(new UserTM(
+                        userDTO.getUserId(),
+                        userDTO.getUserName(),
+                        userDTO.getPassword()
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tblUser.setItems(observableList);
     }
 }
