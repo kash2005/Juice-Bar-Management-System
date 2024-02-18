@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 public class EmployeeModel {
     public static ArrayList<String> getCmbEmployeeId() throws SQLException {
-        String sql = "select eId from employee;";
+        String sql = "select eId,jobRoll from employee;";
         ArrayList<String> arrayList = new ArrayList<>();
         ResultSet resultSet = CrudUtil.execute(sql);
         while (resultSet.next()){
             String eId = resultSet.getString("eId");
-            arrayList.add(eId);
+            String jobRoll = resultSet.getString("jobRoll");
+            if (jobRoll.equals("Cashier") || jobRoll.equals("Admin")){
+                arrayList.add(eId);
+            }
         }
         return arrayList;
     }
