@@ -57,7 +57,6 @@ public class DeliveryFormController implements Initializable {
     public static OrderDTO orderDTO;
 
     public static OrderDetailsDTO orderDetailsDTO;
-//    public static OrderDetailsDTO orderDetailsDTO2;
     public static List<OrderDetailsDTO> orderDetailsDTOList;
 
     public static List<CartDTO> cartDTOList;
@@ -131,6 +130,7 @@ public class DeliveryFormController implements Initializable {
             boolean isSaved = PlaceOrderModel.savePlaceOrderWithDelivery(orderDTO, cartDTOList, orderDetailsDTOList, deliveryDTO);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success !").show();
+
             }else {
                 new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
             }
@@ -138,4 +138,5 @@ public class DeliveryFormController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
 }

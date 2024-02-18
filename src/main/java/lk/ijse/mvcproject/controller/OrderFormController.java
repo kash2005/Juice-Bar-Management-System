@@ -388,6 +388,9 @@ public class OrderFormController implements Initializable {
             boolean isPlaceOrder = PlaceOrderModel.savePlaceOrder(orderDTO, cartDTOList, orderDetailsDTOList);
             if (isPlaceOrder){
                 new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success !").show();
+                generateOrderId();
+                clear();
+                noRadioBtn.setSelected(false);
             }else {
                 new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
             }
@@ -404,6 +407,15 @@ public class OrderFormController implements Initializable {
         stage.show();
         stage.centerOnScreen();
         stage.setTitle("Juice Bar Management System - Order Details Page");
+    }
+    void clear(){
+        customerIdCmb.setValue("");
+        customerName.clear();
+        totalId.clear();
+        discountId.clear();
+        subTotalId.clear();
+        cashId.clear();
+        balanceId.clear();
     }
 
 }

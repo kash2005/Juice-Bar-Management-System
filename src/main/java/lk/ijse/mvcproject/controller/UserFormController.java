@@ -169,7 +169,7 @@ public class UserFormController implements Initializable {
 
     void getCashierId(){
         try {
-            ArrayList<String> cashierId = EmployeeModel.getCashierId();
+            ArrayList<String> cashierId = EmployeeModel.getCmbEmployeeId();
             ObservableList<String> observableList = FXCollections.observableArrayList(cashierId);
             cmbUserId.setItems(observableList);
         } catch (SQLException e) {

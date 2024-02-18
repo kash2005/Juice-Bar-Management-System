@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import lk.ijse.mvcproject.dto.EmployeeDTO;
 import lk.ijse.mvcproject.dto.tm.EmployeeTM;
 import lk.ijse.mvcproject.model.EmployeeModel;
+import lk.ijse.mvcproject.model.OrderModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -78,6 +81,9 @@ public class AdminDashboardLoaderController implements Initializable {
 
     @FXML
     private TableColumn<String, EmployeeTM> colPerHour;
+
+    @FXML
+    private LineChart<String, Integer> lineChart;
 
     private void getAll(){
         ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
@@ -179,5 +185,27 @@ public class AdminDashboardLoaderController implements Initializable {
         menuAnchorpane.setVisible(false);
         setValueFactory();
         getAll();
+
+        try {
+            Integer[] data = OrderModel.lineChart();
+            XYChart.Series<String, Integer> series = new XYChart.Series();
+            series.setName("No. of Orders");
+            series.getData().add(new XYChart.Data("JAN", data[0]));
+            series.getData().add(new XYChart.Data("FEB", data[1]));
+            series.getData().add(new XYChart.Data("MAR", data[2]));
+            series.getData().add(new XYChart.Data("APR", data[3]));
+            series.getData().add(new XYChart.Data("MAY", data[4]));
+            series.getData().add(new XYChart.Data("JUN", data[5]));
+            series.getData().add(new XYChart.Data("JUL", data[6]));
+            series.getData().add(new XYChart.Data("AUG", data[7]));
+            series.getData().add(new XYChart.Data("SEP", data[8]));
+            series.getData().add(new XYChart.Data("OCT", data[9]));
+            series.getData().add(new XYChart.Data("NOV", data[10]));
+            series.getData().add(new XYChart.Data("DEC", data[11]));
+
+            lineChart.getData().addAll(series);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

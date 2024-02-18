@@ -214,7 +214,7 @@ public class AttendanceFormController implements Initializable {
 
     void setEmployeeId(){
         try {
-            ArrayList<String> cmbEmployeeId = EmployeeModel.getCmbEmployeeId();
+            ArrayList<String> cmbEmployeeId = EmployeeModel.getEmployeeId();
             ObservableList<String> observableList = FXCollections.observableArrayList(cmbEmployeeId);
             cmbEId.setItems(observableList);
         } catch (SQLException e) {

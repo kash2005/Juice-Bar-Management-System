@@ -6,12 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.mvcproject.model.OrderModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashboardLoadingController implements Initializable {
@@ -69,6 +76,38 @@ public class DashboardLoadingController implements Initializable {
 
     @FXML
     private ImageView supplierOrangeImg;
+
+    @FXML
+    private LineChart<String, Integer> lineChart;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        menuAnchorpane.setVisible(false);
+        juiceMenuAnchorPane.setVisible(false);
+        snackMenuAnchorPane.setVisible(false);
+
+        try {
+            Integer[] data = OrderModel.lineChart();
+            XYChart.Series<String, Integer> series = new XYChart.Series();
+            series.setName("No. of Orders");
+            series.getData().add(new XYChart.Data("JAN", data[0]));
+            series.getData().add(new XYChart.Data("FEB", data[1]));
+            series.getData().add(new XYChart.Data("MAR", data[2]));
+            series.getData().add(new XYChart.Data("APR", data[3]));
+            series.getData().add(new XYChart.Data("MAY", data[4]));
+            series.getData().add(new XYChart.Data("JUN", data[5]));
+            series.getData().add(new XYChart.Data("JUL", data[6]));
+            series.getData().add(new XYChart.Data("AUG", data[7]));
+            series.getData().add(new XYChart.Data("SEP", data[8]));
+            series.getData().add(new XYChart.Data("OCT", data[9]));
+            series.getData().add(new XYChart.Data("NOV", data[10]));
+            series.getData().add(new XYChart.Data("DEC", data[11]));
+
+            lineChart.getData().addAll(series);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void menuImgOnAction(ActionEvent event) throws IOException {
@@ -144,13 +183,6 @@ public class DashboardLoadingController implements Initializable {
 
     @FXML
     void closeSnackImgOnAction(ActionEvent event) {
-        snackMenuAnchorPane.setVisible(false);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        menuAnchorpane.setVisible(false);
-        juiceMenuAnchorPane.setVisible(false);
         snackMenuAnchorPane.setVisible(false);
     }
 

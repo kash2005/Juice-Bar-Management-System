@@ -51,6 +51,8 @@ public class OrderDetailsTblFormController implements Initializable {
     @FXML
     private TableColumn<String, OrderDetailsTM> colDeliveryStatus;
 
+    ObservableList<OrderDetailsTM> observableList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setValueFactory();
@@ -68,7 +70,7 @@ public class OrderDetailsTblFormController implements Initializable {
         colDeliveryStatus.setCellValueFactory(new PropertyValueFactory<String, OrderDetailsTM>("deliveryStatus"));
     }
     private void getAll() {
-        ObservableList<OrderDetailsTM> observableList = FXCollections.observableArrayList();
+
         String orderId = null;
         String itemId = null;
         int getQty = 0;
@@ -80,43 +82,30 @@ public class OrderDetailsTblFormController implements Initializable {
         OrderDetailsTM orderDetailsTM = null;
         try {
             ArrayList<OrderDetailsDTO> orderDetails = OrderDetailsModel.getOrderDetails();
-            for (OrderDetailsDTO orderDetailsDTO : orderDetails){
+            for (OrderDetailsDTO orderDetailsDTO : orderDetails) {
                 orderId = orderDetailsDTO.getOrderId();
                 itemId = orderDetailsDTO.getItemId();
                 getQty = orderDetailsDTO.getGetQty();
                 amount = orderDetailsDTO.getAmount();
-                try {
-                    OrderDTO orderDTO = OrderModel.searchOrderId(orderId);
-                    date = orderDTO.getDate();
-                    customerId = orderDTO.getCustomerId();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+
+                OrderDTO orderDTO = OrderModel.searchOrderId(orderId);
+                date = orderDTO.getDate();
+                customerId = orderDTO.getCustomerId();
+                ItemDTO itemDTO = ItemModel.searchItem(itemId);
+                description = itemDTO.getDescription();
+                deliveryStatus = DeliveryModel.getAllDelivery(orderId);
+                if (deliveryStatus == null) {
+                    deliveryStatus = "No";
+                } else {
+                    deliveryStatus = "Yes";
                 }
-
-                try {
-                    ItemDTO itemDTO = ItemModel.searchItem(itemId);
-                    description = itemDTO.getDescription();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-                try {
-                    System.out.println(orderId);
-                    String status = DeliveryModel.getAllDelivery(orderId);
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
                 orderDetailsTM = new OrderDetailsTM(orderId,date,customerId,itemId,description,getQty,amount,deliveryStatus);
-
+                observableList.add(orderDetailsTM);
+                orderDetailsTbl.setItems(observableList);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-
-        observableList.add(orderDetailsTM);
-        orderDetailsTbl.setItems(observableList);
     }
 }

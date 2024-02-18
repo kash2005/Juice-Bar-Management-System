@@ -40,13 +40,10 @@ public class DeliveryModel {
             double price = resultSet.getDouble("price");
             String orderId = resultSet.getString("orderId");
             deliveryDTO = new DeliveryDTO(deliveryId,distance,price,orderId);
-            System.out.println(deliveryId+" "+distance+" "+price+" "+orderId);
+            if (id.equals(orderId)){
+                return status;
+            }
         }
-//        if (deliveryDTO==null){
-//            status = "No";
-//        }else {
-//            status= "yes";
-//        }
-        return status;
+        return null;
     }
 }

@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.AdminDashboardLoaderController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebdcc9" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="644.0" />
@@ -75,12 +74,12 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#ebdcc9" height="254.0" layoutX="801.0" layoutY="187.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="311.0" />
-      <Text layoutX="827.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report on this week">
+      <Text layoutX="827.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report on this year">
          <font>
             <Font name="SansSerif Regular" size="23.0" />
          </font>
       </Text>
-      <LineChart layoutX="810.0" layoutY="246.0" prefHeight="190.0" prefWidth="272.0">
+      <LineChart fx:id="lineChart" layoutX="810.0" layoutY="246.0" prefHeight="190.0" prefWidth="272.0" title="Monthly  Orders">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>

@@ -18,5 +18,4 @@ public class OrderDetailsTM {
     private int getQty;
     private double amount;
     private String deliveryStatus;
-
 }
