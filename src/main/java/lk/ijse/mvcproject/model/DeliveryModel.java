@@ -29,4 +29,24 @@ public class DeliveryModel {
         return CrudUtil.execute(sql,deliveryDTO.getDeliveryId(),deliveryDTO.getDistance(),deliveryDTO.getPrice(),deliveryDTO.getOrderId());
     }
 
+    public static String getAllDelivery(String id) throws SQLException {
+        String sql = "select * from delivery where orderId = ?;";
+        DeliveryDTO deliveryDTO = null;
+        String status = "";
+        ResultSet resultSet = CrudUtil.execute(sql,id);
+        if (resultSet.next()){
+            String deliveryId = resultSet.getString("deliveryId");
+            String distance = resultSet.getString("distance");
+            double price = resultSet.getDouble("price");
+            String orderId = resultSet.getString("orderId");
+            deliveryDTO = new DeliveryDTO(deliveryId,distance,price,orderId);
+            System.out.println(deliveryId+" "+distance+" "+price+" "+orderId);
+        }
+//        if (deliveryDTO==null){
+//            status = "No";
+//        }else {
+//            status= "yes";
+//        }
+        return status;
+    }
 }

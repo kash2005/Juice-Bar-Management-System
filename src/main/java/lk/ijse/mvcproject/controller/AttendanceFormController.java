@@ -40,7 +40,7 @@ public class AttendanceFormController implements Initializable {
     private TableColumn<String, AttendanceTM> colEId;
 
     @FXML
-    private ComboBox<?> cmbEId;
+    private ComboBox<String> cmbEId;
 
     @FXML
     private TextField searchId;
@@ -53,9 +53,6 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     private TextField departTime;
-
-    @FXML
-    private TextField eId;
 
     @FXML
     private JFXButton saveBtn;
@@ -92,10 +89,16 @@ public class AttendanceFormController implements Initializable {
     void searchIdOnAction(ActionEvent event) {
         String id = searchId.getText();
         try {
-            AttendanceModel.searchId(id);
+            AttendanceDTO attendanceDTO = AttendanceModel.searchId(id);
+            attendanceId.setText(attendanceDTO.getAttendanceId());
+            entryTime.setText(String.valueOf(attendanceDTO.getEntryTime()));
+            departTime.setText(String.valueOf(attendanceDTO.getDepartTime()));
+            cmbEId.setValue(attendanceDTO.getEId());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        saveBtn.setText("Update");
+        saveBtn.setStyle("-fx-background-color: blue; -fx-background-radius: 10");
     }
 
     @FXML
@@ -111,6 +114,7 @@ public class AttendanceFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateId();
+        setEmployeeId();
         setValueFactory();
         getAll();
     }
@@ -148,14 +152,15 @@ public class AttendanceFormController implements Initializable {
         }
     }
 
-//    void setEmployeeId(){
-//        try {
-//            ArrayList<String> cmbEmployeeId = EmployeeModel.getCmbEmployeeId();
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    void setEmployeeId(){
+        try {
+            ArrayList<String> cmbEmployeeId = EmployeeModel.getCmbEmployeeId();
+            ObservableList<String> observableList = FXCollections.observableArrayList(cmbEmployeeId);
+            cmbEId.setItems(observableList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void cmbEIdeOnAction(ActionEvent event) {

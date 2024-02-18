@@ -102,13 +102,8 @@ public class OrderDetailsTblFormController implements Initializable {
 
                 try {
                     System.out.println(orderId);
-                    DeliveryDTO allDelivery = DeliveryModel.(orderId);
-                    String orderId1 = allDelivery.getOrderId();
-                    if (orderId1.equals(orderId)){
-                        deliveryStatus = "Yes";
-                    }else {
-                        deliveryStatus = "No";
-                    }
+                    String status = DeliveryModel.getAllDelivery(orderId);
+
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
