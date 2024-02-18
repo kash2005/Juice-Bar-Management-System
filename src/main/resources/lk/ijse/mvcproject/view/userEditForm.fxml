@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.mvcproject.controller.UserEditFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="496.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.mvcproject.controller.UserEditFormController">
+   <children>
+      <Text fill="ORANGE" layoutX="49.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
+         <font>
+            <Font name="Algerian" size="51.0" />
+         </font>
+      </Text>
+      <TextField fx:id="userId" layoutX="49.0" layoutY="170.0" onAction="#userIdOnAction" opacity="0.39" promptText="User Id" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="userName" layoutX="49.0" layoutY="277.0" onAction="#userNameOnAction" opacity="0.39" promptText="User Name" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="password" layoutX="49.0" layoutY="384.0" onAction="#passwordOnAction" opacity="0.39" promptText="Password" style="-fx-prompt-text-fill: black; -fx-border-color: black; -fx-background-color: #f4f4f4;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="177.0" fitWidth="212.0" layoutX="323.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orange_logo.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="updateBtn" layoutX="326.0" layoutY="278.0" onAction="#updateBtnOnAction" prefHeight="44.0" prefWidth="145.0" style="-fx-background-color: blue; -fx-background-radius: 10;" text="Update" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <Text layoutX="51.0" layoutY="164.0" opacity="0.51" strokeType="OUTSIDE" strokeWidth="0.0" text="User ID">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="51.0" layoutY="264.0" opacity="0.51" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="51.0" layoutY="374.0" opacity="0.51" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+   </children>
 </AnchorPane>

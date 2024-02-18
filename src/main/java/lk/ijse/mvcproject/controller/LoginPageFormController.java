@@ -105,6 +105,8 @@ public class LoginPageFormController implements Initializable {
                         stage.setTitle("Juice Bar Management System - Dashboard Page");
                         stage.centerOnScreen();
                         stage.show();
+                        UserDTO userDTO = new UserDTO(eId, userName, password);
+                        UserEditFormController.userDTO = userDTO;
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);

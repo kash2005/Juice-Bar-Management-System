@@ -601,5 +601,10 @@
             </ScrollPane>
          </children>
       </AnchorPane>
+      <JFXButton layoutX="1005.0" layoutY="50.0" onAction="#userImgOnAction" opacity="0.0" prefHeight="44.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10;" text="." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

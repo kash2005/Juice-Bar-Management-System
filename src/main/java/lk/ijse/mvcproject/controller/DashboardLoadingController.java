@@ -153,4 +153,13 @@ public class DashboardLoadingController implements Initializable {
         juiceMenuAnchorPane.setVisible(false);
         snackMenuAnchorPane.setVisible(false);
     }
+
+    @FXML
+    void userImgOnAction(ActionEvent event) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/userEditForm.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(anchorPane));
+        stage.show();
+        stage.setTitle("Juice Bar Management System - User Edit Page");
+    }
 }
