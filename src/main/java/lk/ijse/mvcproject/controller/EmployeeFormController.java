@@ -110,7 +110,7 @@ public class EmployeeFormController implements Initializable {
                     generateId();
                     getAll();
                 }else {
-                    new Alert(Alert.AlertType.ERROR,"Employee is not saved !").show();
+                    new Alert(Alert.AlertType.ERROR,"Employee is not saved !!").show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
