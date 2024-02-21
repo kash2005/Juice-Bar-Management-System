@@ -127,6 +127,18 @@ public class DeliveryFormController implements Initializable {
             boolean isSaved = PlaceOrderModel.savePlaceOrderWithDelivery(orderDTO, cartDTOList, orderDetailsDTOList, deliveryDTO);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Place Order Success !").show();
+                deliveryId.clear();
+                orderId.clear();
+                customerId.clear();
+                customerName.clear();
+                customerAddress.clear();
+                customerContact.clear();
+                distance.clear();
+                deliveryTot.clear();
+                subTotal.clear();
+                cashId.clear();
+                balanceId.clear();
+                generateDeliveryId();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
             }
