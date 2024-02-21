@@ -351,6 +351,9 @@ public class OrderFormController implements Initializable {
                 OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO(id,addToCartTM.getItemCode(),addToCartTM.getGetQty(),tot);
                 orderDetailsDTOList.add(orderDetailsDTO);
                 DeliveryFormController.orderDetailsDTOList = orderDetailsDTOList;
+                tblItemDetails.getItems().clear();
+                clear();
+                yesRadioBtn.setSelected(false);
             }
             try {
                 AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/lk/ijse/mvcproject/view/deliveryForm.fxml"));
@@ -391,6 +394,8 @@ public class OrderFormController implements Initializable {
                 generateOrderId();
                 clear();
                 noRadioBtn.setSelected(false);
+                noRadioBtn.setSelected(false);
+                tblItemDetails.getItems().clear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Place Order not Success !").show();
             }
